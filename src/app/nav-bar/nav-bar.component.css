@@ -1,0 +1,63 @@
+img {
+  display: flex;
+  height: 70px;
+  padding: 10px;
+}
+
+.container {
+  background-color: #141414;
+  height: auto;
+  width: auto;
+}
+
+ul {
+  list-style: none;
+  background-color: #141414;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: auto 20px;
+}
+
+a {
+  font-size: 50px;
+  color: #FFF;
+}
+
+.navbar-item-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical-line {
+  border-left: solid;
+  border-radius: 99px;
+  height: 50px;
+  color: #C23350;
+}
+
+#account {
+  margin-left: auto;
+}
+
+@media screen and (max-width: 768px) {
+  img {
+    height: 30px;
+  }
+
+  li {
+    margin: auto 5px;
+  }
+
+  a {
+    font-size: 25px;
+  }
+
+  .vertical-line {
+    height: 30px;
+  }
+}
