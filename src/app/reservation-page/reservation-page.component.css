@@ -1,0 +1,27 @@
+h2 {
+  margin-left: 20px;
+  font-size: 40px;
+  margin-right: 0;
+}
+
+mat-card .mat-focus-indicator .demo-inline-calendar-card {
+  padding: 0;
+}
+
+mat-card {
+  margin: 20px;
+  padding: 0;
+  width: 300px;
+}
+
+mat-calendar.mat-calendar-table-header {
+  background-color: #C23350;
+}
+
+mat-calendar .mat-calendar-header .mat-calendar-header {
+  background-color: #C23350;
+}
+
+mat-card .mat-calendar-header {
+  background-color: #C23350;
+}

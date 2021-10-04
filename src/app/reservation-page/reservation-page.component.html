@@ -1,0 +1,20 @@
+<div>
+  <div>
+    <h2>Selecteer locatie</h2>
+    <br/>
+
+    <form (ngSubmit)="onChange()">
+      <label for="location">Location</label>
+      <select class="form-control" id="location"
+              required>
+        <!--              [(ngModel)]="location" name="location"-->
+        <!--              #location="ngModel">-->
+        <option *ngFor="let loc of locations" [value]="loc">{{loc}}</option>
+      </select>
+    </form>
+
+    <mat-card class="demo-inline-calendar-card">
+      <mat-calendar></mat-calendar>
+    </mat-card>
+  </div>
+</div>
