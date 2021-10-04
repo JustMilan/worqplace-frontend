@@ -26,6 +26,7 @@ li {
 a {
   font-size: 50px;
   color: #FFF;
+  text-decoration: none;
 }
 
 .navbar-item-wrapper {
