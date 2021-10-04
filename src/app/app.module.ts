@@ -6,13 +6,15 @@ import {AppComponent} from './app.component';
 import {NavBarComponent} from "./nav-bar/nav-bar.component";
 import {MyReservationsComponent} from "./my-reservations/my-reservations.component";
 import {OpenWorkplaceCardComponent} from './open-workplace-card/open-workplace-card.component';
+import { ReservationPageComponent } from './reservation-page/reservation-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     MyReservationsComponent,
-    OpenWorkplaceCardComponent
+    OpenWorkplaceCardComponent,
+    ReservationPageComponent
   ],
   imports: [
     BrowserModule,
