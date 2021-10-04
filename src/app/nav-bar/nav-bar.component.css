@@ -29,11 +29,6 @@ a {
   text-decoration: none;
 }
 
-.navbar-item-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
 .vertical-line {
   border-left: solid;
   border-radius: 99px;

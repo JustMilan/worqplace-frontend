@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Workplace} from "../Workplace";
 import {ReservationService} from "../reservation.service";
 import {OpenWorkplace} from "../open-workplace";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-open-workplace-card',
