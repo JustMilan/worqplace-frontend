@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ReservationService} from "../reservation.service";
-import {OpenWorkplace} from "../open-workplace";
+import {OpenWorkplace} from "../interface/open-workplace";
 
 @Component({
   selector: 'app-open-workplace-card',

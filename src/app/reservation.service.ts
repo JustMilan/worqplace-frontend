@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {MockReservations} from "./mockReservations";
-import {OpenWorkplace} from "./open-workplace";
+import {OpenWorkplace} from "./interface/open-workplace";
 
 @Injectable({
   providedIn: 'root'

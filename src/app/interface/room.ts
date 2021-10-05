@@ -1,5 +1,5 @@
 import {Workplace} from "./Workplace";
-import {LocationEnum} from "./locationEnum";
+import {LocationEnum} from "../locationEnum";
 
 export interface Room {
   id: number,

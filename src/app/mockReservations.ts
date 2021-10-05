@@ -1,7 +1,7 @@
-import {Workplace} from "./Workplace";
-import {Room} from "./room";
-import {OpenWorkplace} from "./open-workplace";
-import {TimeSlot} from "./time-slot";
+import {Workplace} from "./interface/Workplace";
+import {Room} from "./interface/room";
+import {OpenWorkplace} from "./interface/open-workplace";
+import {TimeSlot} from "./interface/time-slot";
 import {LocationEnum} from "./locationEnum";
 
 
