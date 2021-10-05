@@ -1,20 +1,54 @@
 <div>
-  <div>
-    <h2>Selecteer locatie</h2>
-    <br/>
+  <div class="container left">
+    <div>
+      <div class="option-header">
+        <h2>Selecteer locatie</h2>
+      </div>
 
-    <form (ngSubmit)="onChange()">
-      <label for="location">Location</label>
-      <select class="form-control" id="location"
-              required>
-        <!--              [(ngModel)]="location" name="location"-->
-        <!--              #location="ngModel">-->
-        <option *ngFor="let loc of locations" [value]="loc">{{loc}}</option>
-      </select>
-    </form>
+      <mat-form-field appearance="fill">
+        <mat-label>Locatie</mat-label>
+        <mat-select [formControl]="locationsControl" required>
+          <mat-option *ngFor="let loc of locations" [value]="loc">
+            {{loc}}
+          </mat-option>
+        </mat-select>
 
-    <mat-card class="demo-inline-calendar-card">
-      <mat-calendar></mat-calendar>
-    </mat-card>
+        <mat-error *ngIf="locationsControl.hasError('required')">Kies een locatie</mat-error>
+      </mat-form-field>
+
+      <h2>Selecteer datum:</h2>
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar (selectedChange)="onSelect($event)"
+                      [selected]="selectedDate"
+                      [maxDate]="maxDate"
+                      [minDate]="minDate">
+        </mat-calendar>
+      </mat-card>
+
+      <h2>Selecteer tijden</h2>
+      <div class="time-container">
+        <div class="time time-1">
+          <div class="triangle-up"></div>
+          <div class="time">
+            09:00
+          </div>
+          <div class="triangle-down"></div>
+        </div>
+
+        <div class="divider">-</div>
+
+        <div class="time time-2">
+          <div class="triangle-up"></div>
+          <div class="time">
+            16:30
+          </div>
+          <div class="triangle-down"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container left">
+    <app-open-workplace-card></app-open-workplace-card>
   </div>
 </div>

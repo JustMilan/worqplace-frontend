@@ -1,7 +1,28 @@
+:root {
+  --widget-width: 300px;
+}
+
+.container {
+  width: fit-content;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;;
+}
+
 h2 {
   margin-left: 20px;
   font-size: 40px;
   margin-right: 0;
+  color: white;
+}
+
+mat-form-field {
+  width: var(--widget-width);
 }
 
 mat-card .mat-focus-indicator .demo-inline-calendar-card {
@@ -14,14 +35,99 @@ mat-card {
   width: 300px;
 }
 
-mat-calendar.mat-calendar-table-header {
+mat-card.mat-card.mat-focus-indicator.demo-inline-calendar-card {
+  padding: 0;
+}
+
+.mat-calendar-header {
   background-color: #C23350;
 }
 
-mat-calendar .mat-calendar-header .mat-calendar-header {
+.mat-calendar-body-selected {
   background-color: #C23350;
 }
 
-mat-card .mat-calendar-header {
+.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+  background-color: #FFFFFF;
+}
+
+mat-form-field {
+  margin-left: 20px;
+}
+
+.ng-tns-c83-1 {
+  color: #C23350;
+}
+
+.mat-select-arrow.ng-tns-c83-1 {
+  color: #C23350;
+}
+
+.mat-option-text {
+  color: #000000;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+  display: none;
+}
+
+.ng-star-inserted {
+  color: black;
+}
+
+.time-container {
+  border-width: 1px;
+  border-color: #FFFFFF;
+  border-style: solid;
+  width: var(--widget-width);
   background-color: #C23350;
+  color: #FFFFFF;
+  display: inline-flex;
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.divider {
+  margin: auto;
+  font-size: 60px;
+  text-align: center;
+}
+
+.time {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.time-1 {
+  margin-right: auto;
+  margin-left: 25px;
+}
+
+.time-2 {
+  margin-left: auto;
+  margin-right: 25px;
+}
+
+.triangle-up {
+  margin-left: auto;
+  margin-right: auto;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 30px solid #FFFFFF;
+}
+
+.triangle-down {
+  margin-left: auto;
+  margin-right: auto;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #FFFFFF;
+}
+
+.option-header {
+  width: fit-content;
 }

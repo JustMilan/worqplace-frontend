@@ -8,13 +8,14 @@ import {MyReservationsComponent} from "./my-reservations/my-reservations.compone
 import {OpenWorkplaceCardComponent} from './open-workplace-card/open-workplace-card.component';
 import {ReservationPageComponent} from './reservation-page/reservation-page.component';
 import {ReservationFilterFormComponent} from './reservation-filter-form/reservation-filter-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -35,7 +36,10 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
