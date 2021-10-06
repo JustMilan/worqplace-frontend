@@ -7,7 +7,7 @@
 
 img {
   display: flex;
-  height: 70px;
+  height: 40px;
   padding: 10px;
 }
 
@@ -25,7 +25,7 @@ li {
 }
 
 a {
-  font-size: 50px;
+  font-size: 20px;
   color: #FFF;
   text-decoration: none;
 }
