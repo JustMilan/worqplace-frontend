@@ -1,14 +1,12 @@
-<div *ngFor="let workplace of workplaces" class="container">
+<div *ngFor="let wok of openWorkplaces" class="container">
   <ul>
-    <li>Verdieping:</li>
     <li>Ruimte:</li>
     <li>Werkplek:</li>
   </ul>
 
   <ul>
-    <li>{{workplace.floor}}</li>
-    <li>{{workplace.roomNumber}}</li>
-    <li>{{workplace.workplaceNumber}}</li>
+    <li>{{wok.roomId}}</li>
+    <li>{{wok.workPlaceNumber}}</li>
   </ul>
 
   <div class="container__button">

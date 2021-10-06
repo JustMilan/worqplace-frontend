@@ -16,6 +16,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     ReactiveFormsModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

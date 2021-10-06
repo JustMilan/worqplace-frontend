@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ReservationService} from "../reservation.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OpenWorkplace} from "../interface/open-workplace";
+
 
 @Component({
   selector: 'app-open-workplace-card',
@@ -8,17 +8,11 @@ import {OpenWorkplace} from "../interface/open-workplace";
   styleUrls: ['./open-workplace-card.component.css']
 })
 export class OpenWorkplaceCardComponent implements OnInit {
-  workplaces: OpenWorkplace[] = [];
+  @Input() openWorkplaces!: OpenWorkplace[] | null;
 
-  constructor(private reservationService: ReservationService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.getOpenReservations();
   }
-
-  getOpenReservations(): void {
-    this.reservationService.getOpenReservations().subscribe(openReservations => this.workplaces = openReservations);
-  }
-
 }
