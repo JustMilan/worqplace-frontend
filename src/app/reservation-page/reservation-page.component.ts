@@ -59,5 +59,7 @@ export class ReservationPageComponent implements OnInit {
   book(event: Event) {
     let workplace: OpenWorkplace = JSON.parse(JSON.stringify(event));
     this.reservationService.reserve(workplace);
+    this.getOpenReservations();
+    window.location.reload();
   }
 }
