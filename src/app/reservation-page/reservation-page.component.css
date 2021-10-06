@@ -3,88 +3,55 @@
 }
 
 .container {
+  margin: 0 20px 0 20px;
   width: fit-content;
 }
 
-.left {
-  float: left;
-}
-
-.right {
-  float: right;;
-}
-
 h2 {
-  margin-left: 20px;
   font-size: 40px;
   margin-right: 0;
-  color: white;
+  color: var(--primary-white);
 }
 
 mat-form-field {
   width: var(--widget-width);
 }
 
-mat-card .mat-focus-indicator .demo-inline-calendar-card {
-  padding: 0;
+.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+  background-color: var(--primary-white);
 }
 
-mat-card {
-  margin: 20px;
+mat-card.mat-card {
+  margin: 0;
   padding: 0;
-  width: 300px;
-}
-
-mat-card.mat-card.mat-focus-indicator.demo-inline-calendar-card {
-  padding: 0;
+  width: var(--widget-width);
 }
 
 .mat-calendar-header {
-  background-color: #C23350;
+  background-color: var(--quintor-red);
 }
 
 .mat-calendar-body-selected {
-  background-color: #C23350;
+  background-color: var(--quintor-red);
 }
 
-.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
-  background-color: #FFFFFF;
-}
-
-mat-form-field {
-  margin-left: 20px;
-}
-
-.ng-tns-c83-1 {
-  color: #C23350;
-}
-
-.mat-select-arrow.ng-tns-c83-1 {
-  color: #C23350;
+.mat-select-arrow {
+  color: var(--quintor-red);
 }
 
 .mat-option-text {
-  color: #000000;
-}
-
-.mat-form-field.mat-focused .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
-  display: none;
-}
-
-.ng-star-inserted {
-  color: black;
+  color: var(--primary-black);
 }
 
 .time-container {
   border-width: 1px;
-  border-color: #FFFFFF;
+  border-color: var(--primary-white);
   border-style: solid;
   width: var(--widget-width);
-  background-color: #C23350;
-  color: #FFFFFF;
+  background-color: var(--quintor-red);
+  color: var(--primary-white);
   display: inline-flex;
   font-size: 30px;
-  margin-left: 20px;
 }
 
 .divider {
@@ -94,8 +61,7 @@ mat-form-field {
 }
 
 .time {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .time-1 {
@@ -115,7 +81,7 @@ mat-form-field {
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-bottom: 30px solid #FFFFFF;
+  border-bottom: 30px solid var(--primary-white);
 }
 
 .triangle-down {
@@ -125,7 +91,7 @@ mat-form-field {
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-top: 30px solid #FFFFFF;
+  border-top: 30px solid var(--primary-white);
 }
 
 .option-header {

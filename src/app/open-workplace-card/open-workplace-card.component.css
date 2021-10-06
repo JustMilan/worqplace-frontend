@@ -1,12 +1,17 @@
 .container {
   margin: 30px;
-  background-color: #C23350;
-  color: #FFFFFF;
+  background-color: var(--quintor-red);
+  color: var(--primary-white);
   border-width: 1px;
   border-style: solid;
   border-color: #707070;
   width: fit-content;
   border-radius: 5px;
+}
+
+.container__button {
+  display: flex;
+  justify-content: center;
 }
 
 ul {
@@ -16,11 +21,6 @@ ul {
   list-style: none;
   display: inline-block;
   margin-right: 20px;
-}
-
-.container__button {
-  display: flex;
-  justify-content: center;
 }
 
 button {

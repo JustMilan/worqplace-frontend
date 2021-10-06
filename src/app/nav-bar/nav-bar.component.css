@@ -1,13 +1,14 @@
+.container {
+  background-color: #141414;
+  height: auto;
+  width: 100%;
+  margin: 0;
+}
+
 img {
   display: flex;
   height: 70px;
   padding: 10px;
-}
-
-.container {
-  background-color: #141414;
-  height: auto;
-  width: auto;
 }
 
 ul {
@@ -33,7 +34,7 @@ a {
   border-left: solid;
   border-radius: 99px;
   height: 50px;
-  color: #C23350;
+  color: var(--quintor-red);
 }
 
 #account {
