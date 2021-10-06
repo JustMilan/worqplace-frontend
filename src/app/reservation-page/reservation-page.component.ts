@@ -55,4 +55,8 @@ export class ReservationPageComponent implements OnInit {
       this.openWorkplaces = openReservations;
     })
   }
+
+  book(event: Event) {
+    console.log(event)
+  }
 }

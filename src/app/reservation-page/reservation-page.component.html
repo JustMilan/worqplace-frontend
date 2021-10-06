@@ -50,6 +50,7 @@
   </div>
 
   <div class="container left">
-    <app-open-workplace-card [openWorkplaces]="openWorkplaces"></app-open-workplace-card>
+    <app-open-workplace-card [openWorkplaces]="openWorkplaces"
+                             (book)="book($event)"></app-open-workplace-card>
   </div>
 </div>

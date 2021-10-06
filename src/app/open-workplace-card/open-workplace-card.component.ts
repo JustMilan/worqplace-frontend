@@ -9,6 +9,7 @@ import {OpenWorkplace} from "../interface/open-workplace";
 })
 export class OpenWorkplaceCardComponent implements OnInit {
   @Input() openWorkplaces!: OpenWorkplace[] | null;
+  @Output() book = new EventEmitter();
 
   constructor() {
   }
