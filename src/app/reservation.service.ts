@@ -26,7 +26,7 @@ export class ReservationService {
 
   reserve(workplace: OpenWorkplace) {
 
-    this.http.post<OpenWorkplace>("http://localhost:8080/workplaces/book/" + workplace.id.toString(), {observe: 'response'})
+    this.http.put<OpenWorkplace>("http://localhost:8080/reservations/workplaces/" + workplace.id.toString(), {observe: 'response'})
       .subscribe(resp => {
         alert(resp)
       })
