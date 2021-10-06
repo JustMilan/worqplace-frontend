@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Location} from "./interface/location";
 import {OpenWorkplace} from "./interface/open-workplace";
 
@@ -22,5 +22,13 @@ export class ReservationService {
 
   getAllAvailableWorkplaces(): Observable<OpenWorkplace[]> {
     return this.http.get<OpenWorkplace[]>(this.availableWorkplacesURL, this.httpOptions);
+  }
+
+  reserve(workplace: OpenWorkplace) {
+
+    this.http.post<OpenWorkplace>("http://localhost:8080/workplaces/book/" + workplace.id.toString(), {observe: 'response'})
+      .subscribe(resp => {
+        alert(resp)
+      })
   }
 }
