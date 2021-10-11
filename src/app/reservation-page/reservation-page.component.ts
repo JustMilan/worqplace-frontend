@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {ReservationService} from "../reservation.service";
-import {Location} from "../interface/location";
-import {OpenWorkplace} from "../interface/open-workplace";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, Validators } from "@angular/forms";
+import { ReservationService } from "../reservation.service";
+import { Location } from "../interface/location";
+import { OpenWorkplace } from "../interface/open-workplace";
 
 @Component({
   selector: 'app-reservation-page',
