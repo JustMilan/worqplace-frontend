@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
-import { ReservationService } from "../reservation.service";
-import { Location } from "../interface/location";
-import { OpenWorkplace } from "../interface/open-workplace";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
+import {ReservationService} from "../reservation.service";
+import {Location} from "../interface/location";
+import {OpenWorkplace} from "../interface/open-workplace";
 
 @Component({
   selector: 'app-reservation-page',
@@ -58,8 +58,10 @@ export class ReservationPageComponent implements OnInit {
 
   book(event: Event) {
     let workplace: OpenWorkplace = JSON.parse(JSON.stringify(event));
-    this.reservationService.reserve(workplace);
-    this.getOpenReservations();
-    window.location.reload();
+    this.reservationService.reserve(workplace).subscribe((data) => {
+      data.successful ? window.alert("Reservation was succesful") : window.alert("Reservation was not succesful")
+      this.getOpenReservations();
+      window.location.reload(true);
+    });
   }
 }
