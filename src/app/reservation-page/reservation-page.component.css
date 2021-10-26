@@ -48,3 +48,20 @@ mat-card.mat-card {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.error-message-container {
+  display: flex;
+  justify-content: center;
+}
+
+.error-message {
+  display: inline-block;
+  border: 1px solid #f8d7da;
+  background-color: #f8d7da;
+  color: #721c24;
+
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem
+}
