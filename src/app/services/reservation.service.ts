@@ -25,4 +25,8 @@ export class ReservationService {
   reserveRoom(reservation: Reservation): Observable<Reservation> {
     return this.http.post<Reservation>(`${this.apiUrl}/rooms`, reservation, this.httpOptions);
   }
+
+  getAllReservationsByEmployeeId(employeeId: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}/${employeeId}/all`, this.httpOptions);
+  }
 }

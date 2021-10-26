@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ReservationService} from "../services/reservation.service";
+import {Reservation} from "../interface/reservation";
 
 @Component({
   selector: 'app-my-reservations',
@@ -6,9 +8,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./my-reservations.component.css']
 })
 export class MyReservationsComponent implements OnInit {
+  allMyReservations: Reservation[];
+  columnsToDisplay = ['id', 'date', 'start time', 'end time', 'workplace', 'room'];
 
+  constructor(private reservationService: ReservationService) {
+  }
 
-  constructor() {
+  getAllReservationsByEmployeeId(employeeId: number){
+    employeeId = 1;
+
+    this.reservationService.getAllReservationsByEmployeeId(employeeId).subscribe(reservations => this.allMyReservations = reservations);
   }
 
   ngOnInit(): void {
