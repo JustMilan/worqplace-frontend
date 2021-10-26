@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Workplace } from "../interface/workplace";
+import { catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ export class WorkplaceService {
   constructor(private httpClient: HttpClient) { }
 
   getAvailableWorkplaces(locationId: number, date: string, start: string, end: string): Observable<Workplace[]> {
-    const url = `${this.apiUrl}/availability?locationId=${locationId}&date=${date}&start=${start}&end=${end}`;
+    const url = `${this.apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${start}&end=${end}`;
 
-    return this.httpClient.get<Workplace[]>(url);
+    return this.httpClient.get<Workplace[]>(url).pipe(catchError(error => throwError(error)));
   }
 
 }

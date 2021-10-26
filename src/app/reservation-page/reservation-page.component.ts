@@ -19,6 +19,8 @@ export class ReservationPageComponent implements OnInit {
   workplaces: Workplace[];
   reservationType: string[] = ['Ruimte', 'Werkplek'];
 
+  minDate: Date = new Date(Date.now());
+
   selectedLocationId: number;
   selectedDate: string;
   selectedStartTime: string;
@@ -28,6 +30,8 @@ export class ReservationPageComponent implements OnInit {
   reservationTypeControl = new FormControl('', Validators.required);
   locationsControl = new FormControl('', Validators.required);
   floatLabelControl = new FormControl('auto');
+
+  errorMessage: string;
 
   constructor(private workplaceService: WorkplaceService, private locationService: LocationService,
               private reservationService: ReservationService) {
@@ -56,38 +60,43 @@ export class ReservationPageComponent implements OnInit {
         this.locations = locations
       },
         error => {
-        console.log(error.errorMessage)
+        console.log()
         });
   }
 
   getAvailableWorkplaces(locationId: number, date: string, start: string, end: string): void {
     this.workplaceService.getAvailableWorkplaces(locationId, date, start, end)
-      .subscribe(workplaces => this.workplaces = workplaces)
+      .subscribe(workplaces => {
+        this.workplaces = workplaces
+        this.errorMessage = "";
+      }, error => {
+        if (error.status == 422) {
+          this.errorMessage = error.error;
+        }
+      })
   }
 
   onSubmit() {
     this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
   }
 
-  selectedReservation(workplaceId: number): Reservation {
+  selectedReservation(workplace: Workplace): Reservation {
     return {
       date: this.selectedDate,
       startTime: this.selectedStartTime,
       endTime: this.selectedEndTime,
       employeeId: 1,
-      workplaceId: workplaceId
+      workplaceId: workplace.id
     };
   }
 
   book(event: Event) {
-    const workplaceId: number = JSON.parse(JSON.stringify(event));
-    const reservation: Reservation = this.selectedReservation(workplaceId);
+    const workplace: Workplace = JSON.parse(JSON.stringify(event));
+    const reservation: Reservation = this.selectedReservation(workplace);
 
-    console.log("-----------------------------------------------------------")
-    console.log(workplaceId);
-    console.log(reservation);
-    this.reservationService.reserveWorkplace(reservation).subscribe((data) => {
-
+    this.reservationService.reserveWorkplace(reservation).subscribe(data => {
+      window.alert("Reservatie is geboekt!")
+      this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
     });
   }
 

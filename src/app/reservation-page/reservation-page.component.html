@@ -19,7 +19,8 @@
   <mat-step label="Datum">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar (selectedChange)="onSelect($event)"
-                    [selected]="selectedDate">
+                    [selected]="selectedDate"
+                    [minDate]="minDate">
       </mat-calendar>
     </mat-card>
 
@@ -67,6 +68,8 @@
   </mat-step>
 </mat-stepper>
 
-
+<div class="error-message-container">
+  <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
+</div>
 
 <app-open-workplace-card class="workplace-cards container" [workplaces]="workplaces" (book)="book($event)"></app-open-workplace-card>
