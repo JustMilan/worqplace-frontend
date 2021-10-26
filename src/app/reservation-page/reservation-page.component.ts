@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { ReservationService } from "../services/reservation.service";
-import { Location } from "../interface/location";
-import { Workplace } from "../interface/workplace";
-import { LocationService } from "../services/location.service";
-import { WorkplaceService } from "../services/workplace.service";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
+import {ReservationService} from "../services/reservation.service";
+import {Location} from "../interface/location";
+import {Workplace} from "../interface/workplace";
+import {Reservation} from "../interface/reservation";
+import {LocationService} from "../services/location.service";
+import {WorkplaceService} from "../services/workplace.service";
 
 @Component({
   selector: 'app-reservation-page',
@@ -53,7 +54,10 @@ export class ReservationPageComponent implements OnInit {
     this.locationService.getLocations()
       .subscribe(locations => {
         this.locations = locations
-      });
+      },
+        error => {
+        console.log(error.errorMessage)
+        });
   }
 
   getAvailableWorkplaces(locationId: number, date: string, start: string, end: string): void {
@@ -65,12 +69,25 @@ export class ReservationPageComponent implements OnInit {
     this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
   }
 
+  selectedReservation(workplaceId: number): Reservation {
+    return {
+      date: this.selectedDate,
+      startTime: this.selectedStartTime,
+      endTime: this.selectedEndTime,
+      employeeId: 1,
+      workplaceId: workplaceId
+    };
+  }
+
   book(event: Event) {
-    let workplace: Workplace = JSON.parse(JSON.stringify(event));
-    this.reservationService.reserve(workplace).subscribe((data) => {
-      data.successful ? window.alert("Reservation was succesful") : window.alert("Reservation was not succesful")
-      this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      window.location.reload(true);
+    const workplaceId: number = JSON.parse(JSON.stringify(event));
+    const reservation: Reservation = this.selectedReservation(workplaceId);
+
+    console.log("-----------------------------------------------------------")
+    console.log(workplaceId);
+    console.log(reservation);
+    this.reservationService.reserveWorkplace(reservation).subscribe((data) => {
+
     });
   }
 

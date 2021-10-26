@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from "rxjs";
+import {Observable, throwError} from "rxjs";
 import { Location } from "../interface/location";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,16 @@ export class LocationService {
   constructor(private httpClient: HttpClient) { }
 
   getLocations(): Observable<Location[]> {
-    return this.httpClient.get<Location[]>(this.apiUrl);
+    return this.httpClient.get<Location[]>(this.apiUrl).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+
+        //Handle the error here
+
+        return throwError(err);    //Rethrow it back to component
+      })
+    )
   }
 
 }

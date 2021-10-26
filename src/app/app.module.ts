@@ -19,7 +19,7 @@ import {ReservationPageComponent} from './reservation-page/reservation-page.comp
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatStepperModule } from "@angular/material/stepper";
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -46,6 +46,7 @@ import { MatStepperModule } from "@angular/material/stepper";
         MatIconModule,
         MatButtonModule,
         MatStepperModule,
+        MatGridListModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
