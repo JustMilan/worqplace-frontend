@@ -97,3 +97,15 @@ mat-card.mat-card {
 .option-header {
   width: fit-content;
 }
+
+.mat-step-header .mat-step-icon-selected {
+  background-color: var(--quintor-red);
+}
+
+.mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: grey;
+}
+
+.mat-horizontal-stepper-content.ng-trigger.ng-trigger-horizontalStepTransition.ng-tns-c84-0.ng-star-inserted {
+  text-align: center;
+}

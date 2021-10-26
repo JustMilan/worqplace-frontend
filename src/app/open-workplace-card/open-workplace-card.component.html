@@ -1,15 +1,10 @@
-<div *ngFor="let wok of openWorkplaces" class="container">
+<div *ngFor="let workplace of workplaces " class="container">
+  <h4 class="card-title">Werkplek</h4>
   <ul>
-    <li>Ruimte:</li>
-    <li>Werkplek:</li>
-  </ul>
-
-  <ul>
-    <li>{{wok.roomId}}</li>
-    <li>{{wok.workPlaceNumber}}</li>
+    <li>Verdieping: {{workplace.floor}}</li>
   </ul>
 
   <div class="container__button">
-    <Button class="quintor" (click)="book.emit(wok)">Boek</Button>
+    <Button class="quintor" (click)="book.emit(workplace)">Boek</Button>
   </div>
 </div>

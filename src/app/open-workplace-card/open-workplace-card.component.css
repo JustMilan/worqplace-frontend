@@ -29,3 +29,8 @@ button {
   height: 30px;
   background-color: white;
 }
+
+.card-title{
+  text-align: center;
+  padding-top: 5px;
+}

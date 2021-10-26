@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OpenWorkplace} from "../interface/open-workplace";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Workplace }  from "../interface/workplace";
 
 
 @Component({
@@ -8,7 +8,7 @@ import {OpenWorkplace} from "../interface/open-workplace";
   styleUrls: ['./open-workplace-card.component.css']
 })
 export class OpenWorkplaceCardComponent implements OnInit {
-  @Input() openWorkplaces!: OpenWorkplace[] | null;
+  @Input() workplaces!: Workplace[] | null;
   @Output() book = new EventEmitter();
 
   constructor() {
