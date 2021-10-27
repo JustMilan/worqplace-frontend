@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { Room } from "../interface/room";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RoomService {
+  private apiUrl = 'http://localhost:8080/rooms';
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
+  constructor(private httpClient: HttpClient) { }
+
+  getAvailableRooms(locationId: number, date: string, start: string, end: string): Observable<Room[]> {
+    const url = `${this.apiUrl}/availability?locationId=${locationId}&date=${date}&start=${start}&end=${end}`;
+
+    return this.httpClient.get<Room[]>(url).pipe(catchError(error => throwError(error)));
+  }
+}

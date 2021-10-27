@@ -7,12 +7,6 @@
   width: fit-content;
 }
 
-h2 {
-  font-size: 40px;
-  margin-right: 0;
-  color: var(--primary-white);
-}
-
 mat-form-field {
   width: var(--widget-width);
 }
@@ -35,65 +29,43 @@ mat-card.mat-card {
   background-color: var(--quintor-red);
 }
 
-.mat-select-arrow {
-  color: var(--quintor-red);
-}
-
-.mat-option-text {
-  color: var(--primary-black);
-}
-
-.time-container {
-  border-width: 1px;
-  border-color: var(--primary-white);
-  border-style: solid;
-  width: var(--widget-width);
+.mat-step-header .mat-step-icon-selected {
   background-color: var(--quintor-red);
-  color: var(--primary-white);
-  display: inline-flex;
-  font-size: 30px;
 }
 
-.divider {
-  margin: auto;
-  font-size: 60px;
+.mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: var(--primary-grey);
+}
+
+.mat-step-text-label {
+  color: white;
+}
+
+.mat-horizontal-stepper-content.ng-trigger.ng-trigger-horizontalStepTransition.ng-tns-c84-0.ng-star-inserted {
+  display: grid;
   text-align: center;
+  justify-content: center;
 }
 
-.time {
-  margin: 10px 0;
+.reservation-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.time-1 {
-  margin-right: auto;
-  margin-left: 25px;
+.error-message-container {
+  display: flex;
+  justify-content: center;
 }
 
-.time-2 {
-  margin-left: auto;
-  margin-right: 25px;
-}
+.error-message {
+  display: inline-block;
+  border: 1px solid #f8d7da;
+  background-color: #f8d7da;
+  color: #721c24;
 
-.triangle-up {
-  margin-left: auto;
-  margin-right: auto;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 30px solid var(--primary-white);
-}
-
-.triangle-down {
-  margin-left: auto;
-  margin-right: auto;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid var(--primary-white);
-}
-
-.option-header {
-  width: fit-content;
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem
 }

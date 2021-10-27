@@ -5,9 +5,9 @@ import {ReservationPageComponent} from "./reservation-page/reservation-page.comp
 
 
 const routes: Routes = [
-  {path: 'home', component: MyReservationsComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'reserve', component: ReservationPageComponent}
+  {path: '', redirectTo: '/reserve', pathMatch: 'full'},
+  {path: 'reserve', component: ReservationPageComponent},
+  {path: 'my-reservations', component: MyReservationsComponent}
 ];
 
 @NgModule({
