@@ -7,14 +7,16 @@
       <i></i>
     </div>
   </div>
-  <table mat-table [dataSource]="allMyReservations" >
-    <mat-text-column name="id"></mat-text-column>
-    <mat-text-column name="date"></mat-text-column>
-    <mat-text-column name="start time"></mat-text-column>
-    <mat-text-column name="end time"></mat-text-column>
-    <mat-text-column name="room"></mat-text-column>
-    <mat-text-column name="workplace"></mat-text-column>
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-  </table>
+  <div>
+    <table mat-table [dataSource]="allMyReservations" >
+      <mat-text-column name="id"></mat-text-column>
+      <mat-text-column name="date"></mat-text-column>
+      <mat-text-column name="start time"></mat-text-column>
+      <mat-text-column name="end time"></mat-text-column>
+      <mat-text-column name="room"></mat-text-column>
+      <mat-text-column name="workplace"></mat-text-column>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+  </div>
 </div>
