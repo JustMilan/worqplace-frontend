@@ -6,6 +6,8 @@ import {Workplace} from "../interface/workplace";
 import {Reservation} from "../interface/reservation";
 import {LocationService} from "../services/location.service";
 import {WorkplaceService} from "../services/workplace.service";
+import { Room } from "../interface/room";
+import { RoomService } from "../services/room.service";
 
 @Component({
   selector: 'app-reservation-page',
@@ -17,6 +19,7 @@ import {WorkplaceService} from "../services/workplace.service";
 export class ReservationPageComponent implements OnInit {
   locations: Location[];
   workplaces: Workplace[];
+  rooms: Room[];
   reservationType: string[] = ['Ruimte', 'Werkplek'];
 
   minDate: Date = new Date(Date.now());
@@ -33,8 +36,8 @@ export class ReservationPageComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor(private workplaceService: WorkplaceService, private locationService: LocationService,
-              private reservationService: ReservationService) {
+  constructor(private workplaceService: WorkplaceService, private roomService: RoomService,
+              private locationService: LocationService, private reservationService: ReservationService) {
   }
 
   ngOnInit(): void {
@@ -50,8 +53,6 @@ export class ReservationPageComponent implements OnInit {
     let year = date.getFullYear();
 
     this.selectedDate = `${year}-${month}-${day}`;
-
-    console.log(this.selectedDate);
   }
 
   getLocations(): void {
@@ -76,11 +77,30 @@ export class ReservationPageComponent implements OnInit {
       })
   }
 
-  onSubmit() {
-    this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+  getAvailableRooms(locationId: number, date: string, start: string, end: string): void {
+    this.roomService.getAvailableRooms(locationId, date, start, end)
+      .subscribe(rooms => {
+        this.rooms = rooms
+        this.errorMessage = "";
+      }, error => {
+        if (error.status == 422) {
+          this.errorMessage = error.error;
+        }
+      })
   }
 
-  selectedReservation(workplace: Workplace): Reservation {
+  onSubmit() {
+    if (this.selectedReservationType === 'Ruimte') {
+      this.workplaces = [];
+      this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+    }
+    if (this.selectedReservationType === 'Werkplek'){
+      this.rooms = [];
+      this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+    }
+  }
+
+  selectedWorkplaceReservation(workplace: Workplace): Reservation {
     return {
       date: this.selectedDate,
       startTime: this.selectedStartTime,
@@ -90,14 +110,35 @@ export class ReservationPageComponent implements OnInit {
     };
   }
 
-  book(event: Event) {
-    const workplace: Workplace = JSON.parse(JSON.stringify(event));
-    const reservation: Reservation = this.selectedReservation(workplace);
+  selectedRoomReservation(room: Room): Reservation {
+    return {
+      date: this.selectedDate,
+      startTime: this.selectedStartTime,
+      endTime: this.selectedEndTime,
+      employeeId: 1,
+      roomId: room.id
+    };
+  }
 
-    this.reservationService.reserveWorkplace(reservation).subscribe(data => {
-      window.alert("Reservatie is geboekt!")
-      this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-    });
+  book(event: Event) {
+
+    if (this.selectedReservationType === "Ruimte") {
+      const room: Room = JSON.parse(JSON.stringify(event));
+      const reservation = this.selectedRoomReservation(room);
+
+      this.reservationService.reserveRoom(reservation).subscribe(data => {
+        window.alert("Reservatie voor een ruimte is geboekt!")
+        this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+      });
+    } else {
+      const workplace: Workplace = JSON.parse(JSON.stringify(event));
+      const reservation: Reservation = this.selectedWorkplaceReservation(workplace);
+
+      this.reservationService.reserveWorkplace(reservation).subscribe(data => {
+        window.alert("Reservatie voor een werkplek is geboekt!")
+        this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+      });
+    }
   }
 
 }

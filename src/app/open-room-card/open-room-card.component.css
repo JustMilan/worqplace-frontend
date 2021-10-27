@@ -1,16 +1,14 @@
-.card-container {
+.container {
   margin: 30px;
   background-color: var(--quintor-red);
   color: var(--primary-white);
   border: 1px none #707070;
   width: fit-content;
   border-radius: 5px;
-
-  flex: 0 15%;
-  text-align: center;
 }
 
-.container-button {
+.container__button {
+  display: flex;
   justify-content: center;
 }
 
@@ -30,7 +28,6 @@ button {
   font-weight: bold;
   height: 30px;
   background-color: white;
-  cursor: pointer;
 }
 
 .card-title{

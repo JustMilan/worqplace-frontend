@@ -20,6 +20,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatStepperModule } from "@angular/material/stepper";
 import {MatGridListModule} from '@angular/material/grid-list';
+import { OpenRoomCardComponent } from './open-room-card/open-room-card.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     NavBarComponent,
     MyReservationsComponent,
     OpenWorkplaceCardComponent,
-    ReservationPageComponent
+    ReservationPageComponent,
+    OpenRoomCardComponent
   ],
     imports: [
         BrowserModule,

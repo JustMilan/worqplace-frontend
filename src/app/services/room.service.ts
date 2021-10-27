@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Workplace } from "../interface/workplace";
 import { catchError } from "rxjs/operators";
+import { Room } from "../interface/room";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkplaceService {
-  private apiUrl = 'http://localhost:8080/workplaces';
+export class RoomService {
+  private apiUrl = 'http://localhost:8080/rooms';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -18,10 +18,9 @@ export class WorkplaceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAvailableWorkplaces(locationId: number, date: string, start: string, end: string): Observable<Workplace[]> {
+  getAvailableRooms(locationId: number, date: string, start: string, end: string): Observable<Room[]> {
     const url = `${this.apiUrl}/availability?locationId=${locationId}&date=${date}&start=${start}&end=${end}`;
 
-    return this.httpClient.get<Workplace[]>(url).pipe(catchError(error => throwError(error)));
+    return this.httpClient.get<Room[]>(url).pipe(catchError(error => throwError(error)));
   }
-
 }

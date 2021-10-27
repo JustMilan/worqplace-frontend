@@ -1,16 +1,11 @@
-<div *ngFor="let workplace of workplaces " class="container">
+<div *ngFor="let workplace of workplaces" class="card-container">
     <h4 class="card-title">Werkplek</h4>
     <ul>
-      <li>ID: </li>
-      <li>Verdieping: </li>
+      <li>ID: {{workplace.id}}</li>
+      <li>Verdieping: {{workplace.floor}}</li>
     </ul>
 
-  <ul>
-    <li>{{workplace.id}}</li>
-    <li>{{workplace.floor}}</li>
-  </ul>
-
-    <div class="container__button">
+    <div class="container-button">
       <Button class="quintor" (click)="book.emit(workplace)">Boek</Button>
     </div>
 </div>

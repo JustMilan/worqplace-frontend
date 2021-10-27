@@ -37,13 +37,17 @@ mat-card.mat-card {
   background-color: var(--primary-grey);
 }
 
+.mat-step-text-label {
+  color: white;
+}
+
 .mat-horizontal-stepper-content.ng-trigger.ng-trigger-horizontalStepTransition.ng-tns-c84-0.ng-star-inserted {
   display: grid;
   text-align: center;
   justify-content: center;
 }
 
-.workplace-cards {
+.reservation-cards {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

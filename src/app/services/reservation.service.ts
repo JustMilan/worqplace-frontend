@@ -21,4 +21,8 @@ export class ReservationService {
   reserveWorkplace(reservation: Reservation): Observable<Reservation> {
     return this.http.post<Reservation>(`${this.apiUrl}/workplaces`, reservation, this.httpOptions);
   }
+
+  reserveRoom(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<Reservation>(`${this.apiUrl}/rooms`, reservation, this.httpOptions);
+  }
 }
