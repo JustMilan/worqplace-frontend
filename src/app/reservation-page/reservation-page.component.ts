@@ -90,13 +90,20 @@ export class ReservationPageComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.selectedLocationId == undefined || this.selectedDate == undefined ||
+      this.selectedStartTime == undefined || this.selectedEndTime == undefined || this.selectedReservationType == undefined) {
+      this.errorMessage = "Niet alle velden zijn ingevuld!";
+    }
+
     if (this.selectedReservationType === 'Ruimte') {
       this.workplaces = [];
       this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+      this.errorMessage = "";
     }
     if (this.selectedReservationType === 'Werkplek'){
       this.rooms = [];
       this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+      this.errorMessage = "";
     }
   }
 
