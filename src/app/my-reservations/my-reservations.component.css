@@ -65,4 +65,31 @@ img {
   flex-direction: row;
 }
 
+.mat-table.cdk-table {
+  width: fit-content;
+  min-width: 60%;
+}
 
+@media screen and (max-width: 800px) {
+  .mat-table.cdk-table {
+    width: fit-content;
+    min-width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mat-table.cdk-table {
+    display: block;
+    width: auto;
+    max-width: none;
+    min-width: 100%;
+    table-layout: fixed;
+  }
+
+  .my-reservations-wrapper {
+    width: auto;
+    max-width: none;
+    min-width: 100%;
+    table-layout: fixed;
+  }
+}

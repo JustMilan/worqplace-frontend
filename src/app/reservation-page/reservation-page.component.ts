@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {ReservationService} from "../services/reservation.service";
-import {Location} from "../interface/location";
-import {Workplace} from "../interface/workplace";
-import {Reservation} from "../interface/reservation";
-import {LocationService} from "../services/location.service";
-import {WorkplaceService} from "../services/workplace.service";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, Validators } from "@angular/forms";
+import { ReservationService } from "../services/reservation.service";
+import { Location } from "../interface/location";
+import { Workplace } from "../interface/workplace";
+import { Reservation } from "../interface/reservation";
+import { LocationService } from "../services/location.service";
+import { WorkplaceService } from "../services/workplace.service";
 import { Room } from "../interface/room";
 import { RoomService } from "../services/room.service";
 
@@ -58,10 +58,10 @@ export class ReservationPageComponent implements OnInit {
   getLocations(): void {
     this.locationService.getLocations()
       .subscribe(locations => {
-        this.locations = locations
-      },
+          this.locations = locations
+        },
         error => {
-        console.log()
+          console.log()
         });
   }
 
@@ -100,7 +100,7 @@ export class ReservationPageComponent implements OnInit {
       this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
       this.errorMessage = "";
     }
-    if (this.selectedReservationType === 'Werkplek'){
+    if (this.selectedReservationType === 'Werkplek') {
       this.rooms = [];
       this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
       this.errorMessage = "";
@@ -136,7 +136,7 @@ export class ReservationPageComponent implements OnInit {
       const reservation = this.selectedRoomReservation(room);
 
       this.reservationService.reserveRoom(reservation).subscribe(data => {
-        window.alert("Reservatie voor een ruimte is geboekt!")
+        window.alert("reservering voor een ruimte is geboekt!")
         this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
       });
     } else {
@@ -144,7 +144,7 @@ export class ReservationPageComponent implements OnInit {
       const reservation: Reservation = this.selectedWorkplaceReservation(workplace);
 
       this.reservationService.reserveWorkplace(reservation).subscribe(data => {
-        window.alert("Reservatie voor een werkplek is geboekt!")
+        window.alert("reservering voor een werkplek is geboekt!")
         this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
       });
     }

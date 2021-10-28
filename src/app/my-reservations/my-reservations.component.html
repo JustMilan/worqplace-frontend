@@ -8,3 +8,16 @@
     </div>
   </div>
 </div>
+
+<div class="my-reservations-wrapper">
+  <table mat-table [dataSource]="allMyReservations">
+    <mat-text-column name="id"></mat-text-column>
+    <mat-text-column name="date"></mat-text-column>
+    <mat-text-column name="startTime"></mat-text-column>
+    <mat-text-column name="endTime"></mat-text-column>
+    <mat-text-column name="roomId"></mat-text-column>
+    <mat-text-column name="workplaceId"></mat-text-column>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  </table>
+</div>

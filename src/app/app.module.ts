@@ -10,6 +10,7 @@ import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {HttpClientModule} from "@angular/common/http";
+import {MatTableModule} from '@angular/material/table';
 
 import {AppComponent} from './app.component';
 import {NavBarComponent} from "./nav-bar/nav-bar.component";
@@ -32,6 +33,7 @@ import { OpenRoomCardComponent } from './open-room-card/open-room-card.component
     OpenRoomCardComponent
   ],
     imports: [
+        MatTableModule,
         BrowserModule,
         AppRoutingModule,
         FormsModule,
