@@ -113,7 +113,8 @@ export class ReservationPageComponent implements OnInit {
       startTime: this.selectedStartTime,
       endTime: this.selectedEndTime,
       employeeId: 1,
-      workplaceId: workplace.id
+      workplaceId: workplace.id,
+      recurring: (<HTMLInputElement> document.getElementById('check-' + workplace.id)).checked
     };
   }
 
@@ -123,7 +124,8 @@ export class ReservationPageComponent implements OnInit {
       startTime: this.selectedStartTime,
       endTime: this.selectedEndTime,
       employeeId: 1,
-      roomId: room.id
+      roomId: room.id,
+      recurring: (<HTMLInputElement> document.getElementById('check-' + room.id)).checked
     };
   }
 
