@@ -1,58 +1,10 @@
+div {
+  margin-left: 70px;
+}
+
 h2 {
-  margin-left: 20px;
-  font-size: 40px;
+  font-size: 20px;
   margin-right: 0;
-}
-
-.tooltip {
-  display: inline-block;
-  position: relative;
-  text-align: left;
-}
-
-.tooltip .right {
-  top: 35%;
-  margin-left: 33px;
-  transform: translate(0, -50%);
-  padding: 10px 20px;
-  color: var(--primary-white);
-  background-color: var(--primary-black);
-  font-weight: normal;
-  font-size: 13px;
-  border-radius: 8px;
-  position: absolute;
-  box-sizing: border-box;
-  border: 1px solid var(--primary-white);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.8s;
-}
-
-.tooltip:hover .right {
-  visibility: visible;
-  opacity: 1;
-}
-
-.tooltip .right i {
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -12px;
-  width: 12px;
-  height: 24px;
-  overflow: hidden;
-}
-
-.tooltip .right i::after {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  left: 0;
-  top: 50%;
-  transform: translate(50%, -50%) rotate(-45deg);
-  background-color: var(--primary-black);
-  border: 1px solid var(--primary-white);
 }
 
 img {
@@ -60,14 +12,25 @@ img {
   margin-top: 30px;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-}
-
 .mat-table.cdk-table {
+  margin-bottom: 20px;
   width: fit-content;
   min-width: 60%;
+  border: solid 2px white;
+  background-color: var(--primary-background-dark);
+  border-collapse: collapse;
+}
+
+tr.mat-row {
+  border: 2px solid white;
+}
+
+th {
+  color: white;
+}
+
+td {
+  color: white;
 }
 
 @media screen and (max-width: 800px) {
