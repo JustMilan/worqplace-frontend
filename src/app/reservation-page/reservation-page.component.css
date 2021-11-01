@@ -7,6 +7,27 @@
   width: fit-content;
 }
 
+/*Custom class*/
+.mat-form-field-time {
+  color: white;
+  width: 140px;
+  text-align: center;
+}
+
+.mat-form-field input {
+  justify-content: center;
+}
+
+/*Mat stepper*/
+mat-stepper.ng-tns-c128-0 {
+  background-color: #2A2A2A;
+  padding: 0 5%;
+}
+
+.submit-button {
+  background-color: #C23350;
+}
+
 mat-form-field {
   width: var(--widget-width);
 }
@@ -68,4 +89,14 @@ mat-card.mat-card {
   padding: .75rem 1.25rem;
   margin-bottom: 1rem;
   border-radius: 0.25rem
+}
+
+.mat-stepper-horizontal-line {
+  background-color: white;
+}
+
+@media screen and (max-width: 450px) {
+  .mat-step-text-label {
+    visibility: hidden;
+  }
 }
