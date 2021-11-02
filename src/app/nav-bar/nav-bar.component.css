@@ -11,6 +11,10 @@ img {
   padding: 10px;
 }
 
+#account {
+  margin-left: auto;
+}
+
 ul {
   list-style: none;
   background-color: #141414;
@@ -37,10 +41,6 @@ a {
   color: var(--quintor-red);
 }
 
-#account {
-  margin-left: auto;
-}
-
 @media screen and (max-width: 768px) {
   img {
     height: 30px;
@@ -51,10 +51,6 @@ a {
   }
 
   a {
-    font-size: 25px;
-  }
-
-  .vertical-line {
-    height: 30px;
+    font-size: 20px;
   }
 }

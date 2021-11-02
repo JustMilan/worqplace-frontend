@@ -1,6 +1,8 @@
 <app-my-reservations></app-my-reservations>
 
-<mat-stepper [linear]="false" style="background-color: #2A2A2A; padding: 0% 5%;">
+<mat-stepper [linear]="false">
+
+  <!-- Location Step-->
   <mat-step label="Locatie">
     <mat-form-field appearance="fill">
       <mat-label>Locatie</mat-label>
@@ -18,6 +20,7 @@
     </div>
   </mat-step>
 
+  <!-- Date Step-->
   <mat-step label="Datum">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar (selectedChange)="onSelect($event)"
@@ -32,17 +35,20 @@
     </div>
   </mat-step>
 
+  <!-- Time Step-->
   <mat-step label="Tijden">
-    <mat-form-field appearance="outline" style="width: 140px; text-align: center;" [floatLabel]="floatLabelControl.value">
-      <mat-label style="color: white">Start Tijd</mat-label>
-      <input [(ngModel)]="selectedStartTime" name="selectedStartTime" style="justify-content: center;" matInput type="time" required>
+    <mat-form-field appearance="outline" class="mat-form-field-time"
+                    [floatLabel]="floatLabelControl.value">
+      <mat-label>Start Tijd</mat-label>
+      <input [(ngModel)]="selectedStartTime" name="selectedStartTime" matInput type="time" required>
       <mat-icon matPrefix>access_time</mat-icon>
       <mat-error>Kies een start tijd</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" style="width: 140px; text-align: center;" [floatLabel]="floatLabelControl.value">
-      <mat-label style="color: white;">Eind Tijd</mat-label>
-      <input [(ngModel)]="selectedEndTime" name="selectedEndTime" style="justify-content: center;" matInput type="time" required>
+    <mat-form-field appearance="outline" class="mat-form-field-time"
+                    [floatLabel]="floatLabelControl.value">
+      <mat-label>Eind Tijd</mat-label>
+      <input [(ngModel)]="selectedEndTime" name="selectedEndTime" matInput type="time" required>
       <mat-icon matPrefix>timelapse</mat-icon>
       <mat-error>Kies een eind tijd</mat-error>
     </mat-form-field>
@@ -53,6 +59,7 @@
     </div>
   </mat-step>
 
+  <!-- Type Step-->
   <mat-step label="Type">
     <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>
@@ -67,7 +74,7 @@
 
     <div>
       <button mat-button matStepperPrevious type="button">Back</button>
-      <button mat-flat-button style="background-color: #C23350;" (click)="onSubmit()">Zoek</button>
+      <button mat-flat-button class="submit-button" (click)="onSubmit()">Zoek</button>
     </div>
   </mat-step>
 </mat-stepper>
@@ -76,5 +83,6 @@
   <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
 </div>
 
-<app-open-workplace-card class="reservation-cards container" [workplaces]="workplaces" (book)="book($event)"></app-open-workplace-card>
+<app-open-workplace-card class="reservation-cards container" [workplaces]="workplaces"
+                         (book)="book($event)"></app-open-workplace-card>
 <app-open-room-card class="reservation-cards container" [rooms]="rooms" (book)="book($event)"></app-open-room-card>

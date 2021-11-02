@@ -13,9 +13,8 @@ img {
 }
 
 .mat-table.cdk-table {
-  margin-bottom: 20px;
   width: fit-content;
-  min-width: 60%;
+  margin-bottom: 20px;
   border: solid 2px white;
   background-color: var(--primary-background-dark);
   border-collapse: collapse;
@@ -31,28 +30,19 @@ th {
 
 td {
   color: white;
+  white-space: nowrap;
 }
 
-@media screen and (max-width: 800px) {
-  .mat-table.cdk-table {
-    width: fit-content;
-    min-width: 100%;
-  }
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 @media screen and (max-width: 500px) {
-  .mat-table.cdk-table {
-    display: block;
-    width: auto;
-    max-width: none;
-    min-width: 100%;
-    table-layout: fixed;
-  }
-
-  .my-reservations-wrapper {
-    width: auto;
-    max-width: none;
-    min-width: 100%;
-    table-layout: fixed;
+  div {
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow-x: auto;
   }
 }
