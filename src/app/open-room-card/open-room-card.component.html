@@ -1,14 +1,12 @@
 <div *ngFor="let room of rooms" class="container">
   <h4 class="card-title">Ruimte</h4>
   <ul>
-    <li>ID: </li>
     <li>Verdieping: </li>
     <li>Capaciteit: </li>
     <li>Herhaling: </li>
   </ul>
 
   <ul>
-    <li>{{room.id}}</li>
     <li>{{room.floor}}</li>
     <li>{{room.capacity}}</li>
     <li><input type="checkbox" id="check-{{room.id}}"></li>

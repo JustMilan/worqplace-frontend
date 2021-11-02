@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
 import { ReservationService } from "../services/reservation.service";
-import { Location } from "../interface/location";
-import { Workplace } from "../interface/workplace";
-import { Reservation } from "../interface/reservation";
+import { Location } from "../interface/Location";
+import { Reservation } from "../interface/Reservation";
 import { LocationService } from "../services/location.service";
-import { WorkplaceService } from "../services/workplace.service";
-import { Room } from "../interface/room";
+import { Room } from "../interface/Room";
 import { RoomService } from "../services/room.service";
+import { MatDialog } from "@angular/material/dialog";
+import { ReservationDialogComponent } from "../reservation-dialog/reservation-dialog.component";
 
 @Component({
   selector: 'app-reservation-page',
@@ -18,7 +18,6 @@ import { RoomService } from "../services/room.service";
 
 export class ReservationPageComponent implements OnInit {
   locations: Location[];
-  workplaces: Workplace[];
   rooms: Room[];
   reservationType: string[] = ['Ruimte', 'Werkplek'];
 
@@ -36,13 +35,23 @@ export class ReservationPageComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor(private workplaceService: WorkplaceService, private roomService: RoomService,
-              private locationService: LocationService, private reservationService: ReservationService) {
+  constructor(private roomService: RoomService, private locationService: LocationService,
+              private reservationService: ReservationService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getLocations();
+  }
 
+  openDialog(room: Room): void {
+    const dialogRef = this.dialog.open(ReservationDialogComponent, {
+      width: '300px',
+      data: {room: room}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   onSelect(event: any) {
@@ -59,22 +68,7 @@ export class ReservationPageComponent implements OnInit {
     this.locationService.getLocations()
       .subscribe(locations => {
           this.locations = locations
-        },
-        error => {
-          console.log()
         });
-  }
-
-  getAvailableWorkplaces(locationId: number, date: string, start: string, end: string): void {
-    this.workplaceService.getAvailableWorkplaces(locationId, date, start, end)
-      .subscribe(workplaces => {
-        this.workplaces = workplaces
-        this.errorMessage = "";
-      }, error => {
-        if (error.status == 422) {
-          this.errorMessage = error.error;
-        }
-      })
   }
 
   getAvailableRooms(locationId: number, date: string, start: string, end: string): void {
@@ -96,26 +90,13 @@ export class ReservationPageComponent implements OnInit {
     }
 
     if (this.selectedReservationType === 'Ruimte') {
-      this.workplaces = [];
       this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
       this.errorMessage = "";
     }
     if (this.selectedReservationType === 'Werkplek') {
       this.rooms = [];
-      this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
       this.errorMessage = "";
     }
-  }
-
-  selectedWorkplaceReservation(workplace: Workplace): Reservation {
-    return {
-      date: this.selectedDate,
-      startTime: this.selectedStartTime,
-      endTime: this.selectedEndTime,
-      employeeId: 1,
-      workplaceId: workplace.id,
-      recurring: (<HTMLInputElement> document.getElementById('check-' + workplace.id)).checked
-    };
   }
 
   selectedRoomReservation(room: Room): Reservation {
@@ -130,23 +111,16 @@ export class ReservationPageComponent implements OnInit {
   }
 
   book(event: Event) {
-
     if (this.selectedReservationType === "Ruimte") {
       const room: Room = JSON.parse(JSON.stringify(event));
       const reservation = this.selectedRoomReservation(room);
 
-      this.reservationService.reserveRoom(reservation).subscribe(data => {
+      this.openDialog(room);
+
+      /* this.reservationService.reserveRoom(reservation).subscribe(data => {
         window.alert("reservering voor een ruimte is geboekt!")
         this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      });
-    } else {
-      const workplace: Workplace = JSON.parse(JSON.stringify(event));
-      const reservation: Reservation = this.selectedWorkplaceReservation(workplace);
-
-      this.reservationService.reserveWorkplace(reservation).subscribe(data => {
-        window.alert("reservering voor een werkplek is geboekt!")
-        this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      });
+      }); */
     }
   }
 

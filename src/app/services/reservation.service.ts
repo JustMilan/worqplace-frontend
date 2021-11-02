@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Reservation} from "../interface/reservation";
+import { Injectable } from '@angular/core';
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Reservation } from "../interface/Reservation";
 
 @Injectable({
   providedIn: 'root'

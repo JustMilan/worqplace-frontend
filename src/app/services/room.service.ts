@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Room } from "../interface/room";
+import { Room } from "../interface/Room";
 
 @Injectable({
   providedIn: 'root'

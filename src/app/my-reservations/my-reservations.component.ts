@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ReservationService} from "../services/reservation.service";
-import {Reservation} from "../interface/reservation";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ReservationService } from "../services/reservation.service";
+import { Reservation } from "../interface/Reservation";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
 
 @Component({
   selector: 'app-my-reservations',
@@ -24,11 +24,11 @@ export class MyReservationsComponent implements OnInit {
     this.reservationService.getAllReservationsByEmployeeId(employeeId).subscribe(reservations => this.allMyReservations = reservations);
   }
 
-  OnPageChange(event: PageEvent){
+  OnPageChange(event: PageEvent) {
     console.log(event)
     const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize;
-    if (endIndex > this.allMyReservations.length){
+    if (endIndex > this.allMyReservations.length) {
       endIndex = this.allMyReservations.length;
     }
     this.allMyReservationsSlice = this.allMyReservations.slice(startIndex, endIndex)
@@ -36,8 +36,8 @@ export class MyReservationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllReservationsByEmployeeId(1);
-    setTimeout(()=>{
-      this.allMyReservationsSlice = this.allMyReservations.slice(0,3);
+    setTimeout(() => {
+      this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
       console.log(this.allMyReservationsSlice);
     }, 50);
   }
