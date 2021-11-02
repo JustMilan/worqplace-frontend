@@ -1,6 +1,8 @@
 <app-my-reservations></app-my-reservations>
 
 <mat-stepper [linear]="false">
+
+  <!-- Location Step-->
   <mat-step label="Locatie">
     <mat-form-field appearance="fill">
       <mat-label>Locatie</mat-label>
@@ -18,6 +20,7 @@
     </div>
   </mat-step>
 
+  <!-- Date Step-->
   <mat-step label="Datum">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar (selectedChange)="onSelect($event)"
@@ -32,6 +35,7 @@
     </div>
   </mat-step>
 
+  <!-- Time Step-->
   <mat-step label="Tijden">
     <mat-form-field appearance="outline" class="mat-form-field-time"
                     [floatLabel]="floatLabelControl.value">
@@ -55,6 +59,7 @@
     </div>
   </mat-step>
 
+  <!-- Type Step-->
   <mat-step label="Type">
     <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>
