@@ -1,6 +1,5 @@
 div {
   margin-left: 70px;
-  overflow-x: scroll;
 }
 
 h2 {
@@ -44,5 +43,6 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   div {
     margin-left: 10px;
     margin-right: 10px;
+    overflow-x: auto;
   }
 }
