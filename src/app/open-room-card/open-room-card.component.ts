@@ -7,12 +7,15 @@ import { Room } from "../interface/Room";
   styleUrls: ['./open-room-card.component.css']
 })
 export class OpenRoomCardComponent implements OnInit {
-  @Input() rooms: Room[] | null;
+  @Input() rooms: Room[];
+  @Input() selectedReservationType: string;
   @Output() book = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
+  
 }

@@ -83,4 +83,4 @@
   <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
 </div>
 
-<app-open-room-card class="reservation-cards container" [rooms]="rooms" (book)="book($event)"></app-open-room-card>
+<app-open-room-card class="reservation-cards container" [selectedReservationType]="selectedReservationType" [rooms]="rooms" (book)="book($event)"></app-open-room-card>

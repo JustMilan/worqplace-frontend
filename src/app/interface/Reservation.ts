@@ -5,5 +5,5 @@ export interface Reservation {
   endTime: string,
   employeeId: number,
   roomId?: number,
-  recurring: boolean
+  recurring?: boolean
 }

@@ -45,8 +45,8 @@ export class ReservationPageComponent implements OnInit {
 
   openDialog(room: Room): void {
     const dialogRef = this.dialog.open(ReservationDialogComponent, {
-      width: '300px',
-      data: {room: room}
+      width: '500px',
+      data: {room: room, reservationType: this.selectedReservationType}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -89,14 +89,8 @@ export class ReservationPageComponent implements OnInit {
       this.errorMessage = "Niet alle velden zijn ingevuld!";
     }
 
-    if (this.selectedReservationType === 'Ruimte') {
-      this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      this.errorMessage = "";
-    }
-    if (this.selectedReservationType === 'Werkplek') {
-      this.rooms = [];
-      this.errorMessage = "";
-    }
+    this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+    this.errorMessage = "";
   }
 
   selectedRoomReservation(room: Room): Reservation {
@@ -105,13 +99,11 @@ export class ReservationPageComponent implements OnInit {
       startTime: this.selectedStartTime,
       endTime: this.selectedEndTime,
       employeeId: 1,
-      roomId: room.id,
-      recurring: (<HTMLInputElement> document.getElementById('check-' + room.id)).checked
+      roomId: room.id
     };
   }
 
   book(event: Event) {
-    if (this.selectedReservationType === "Ruimte") {
       const room: Room = JSON.parse(JSON.stringify(event));
       const reservation = this.selectedRoomReservation(room);
 
@@ -121,7 +113,6 @@ export class ReservationPageComponent implements OnInit {
         window.alert("reservering voor een ruimte is geboekt!")
         this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
       }); */
-    }
   }
 
 }
