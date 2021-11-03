@@ -3,8 +3,8 @@
 </div>
 
 
-<div>
-  <table mat-table [dataSource]="allMyReservations">
+<div class="my-reservations-wrapper">
+  <table mat-table [dataSource]="allMyReservations" matSort aria-label="Elements">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -22,16 +22,17 @@
     </ng-container>
 
     <!-- Start time Column -->
-    <ng-container matColumnDef="startTime">
-      <th mat-header-cell *matHeaderCellDef>Start tijd</th>
-      <td mat-cell *matCellDef="let element"> {{element.startTime}} </td>
+    <ng-container matColumnDef="tijd">
+      <th mat-header-cell *matHeaderCellDef>Tijd</th>
+      <td mat-cell *matCellDef="let element">{{element.startTime}} - {{element.endTime}} </td>
     </ng-container>
 
-    <!-- End time Column -->
-    <ng-container matColumnDef="endTime">
-      <th mat-header-cell *matHeaderCellDef>Eind tijd</th>
-      <td mat-cell *matCellDef="let element"> {{element.endTime}} </td>
+    <!-- Start time Column -->
+    <ng-container matColumnDef="workplaceAmount">
+      <th mat-header-cell *matHeaderCellDef>hoeveelheid werkplekken</th>
+      <td mat-cell *matCellDef="let element">{{element.workplaceAmount}} </td>
     </ng-container>
+
 
     <!-- Room id Column -->
     <ng-container matColumnDef="roomId">
@@ -39,14 +40,13 @@
       <td mat-cell *matCellDef="let element"> {{element.roomId}} </td>
     </ng-container>
 
-    <!-- Workplace id Column -->
-    <ng-container matColumnDef="workplaceId">
-      <th mat-header-cell *matHeaderCellDef>Werkplek</th>
-      <td mat-cell *matCellDef="let element">{{element.workplaceId}}</td>
-    </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
   </table>
+  <mat-paginator
+                 [pageSize]="3"
+                 [pageSizeOptions]="[3,10,20,40,50,100]"
+                 aria-label="Select page">
+  </mat-paginator>
 
 </div>

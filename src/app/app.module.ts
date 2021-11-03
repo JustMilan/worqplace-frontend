@@ -22,6 +22,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatStepperModule } from "@angular/material/stepper";
 import {MatGridListModule} from '@angular/material/grid-list';
 import { OpenRoomCardComponent } from './open-room-card/open-room-card.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { OpenRoomCardComponent } from './open-room-card/open-room-card.component
     MyReservationsComponent,
     OpenWorkplaceCardComponent,
     ReservationPageComponent,
-    OpenRoomCardComponent
+    OpenRoomCardComponent,
   ],
     imports: [
         MatTableModule,
@@ -51,6 +53,8 @@ import { OpenRoomCardComponent } from './open-room-card/open-room-card.component
         MatButtonModule,
         MatStepperModule,
         MatGridListModule,
+        MatPaginatorModule,
+        MatSortModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
