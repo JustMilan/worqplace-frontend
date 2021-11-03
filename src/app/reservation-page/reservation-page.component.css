@@ -104,6 +104,14 @@ mat-label.ng-tns-c138-3, mat-label.ng-tns-c138-4 {
   color: white;
 }
 
+.reservation-dialog {
+  text-align: center;
+}
+
+div.mat-dialog-actions {
+  justify-content: center;
+}
+
 @media screen and (max-width: 450px) {
   mat-stepper {
     margin: 0;

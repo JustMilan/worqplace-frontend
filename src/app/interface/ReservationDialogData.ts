@@ -2,6 +2,7 @@ import { Room } from "./Room";
 
 export interface ReservationDialogData {
   room: Room,
-  recurringIntervalInDays?: number
-  reservationType: string
+  reservationType: string,
+  recurringPattern?: string
+  workplaceAmount?: number,
 }
