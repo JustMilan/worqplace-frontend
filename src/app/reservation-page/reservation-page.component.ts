@@ -68,8 +68,8 @@ export class ReservationPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // check if the confirmation button is clicked
-      if (result != undefined && result.isConfirmation) {
-
+      if (result != undefined) {
+        console.log("test test test")
         const recurrence = {
           active: result.recurringPattern != undefined,
           recurrencePattern: result.recurringPattern != undefined? this.convertRecurringPatternToEnumLiteral(result.recurringPattern): null
@@ -135,6 +135,10 @@ export class ReservationPageComponent implements OnInit {
   }
 
   checkAvailability(type: string): void {
+      setTimeout(function () {
+        console.log("timer")
+      }, 5000);
+
     switch (type) {
       case 'Ruimte':
         this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);

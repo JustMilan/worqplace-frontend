@@ -23,6 +23,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { OpenRoomCardComponent } from './open-room-card/open-room-card.component';
 import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
@@ -55,6 +56,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatButtonModule,
     MatStepperModule,
     MatGridListModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,

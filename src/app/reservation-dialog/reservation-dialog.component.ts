@@ -9,11 +9,11 @@ import { Room } from "../interface/Room";
   styleUrls: ['./reservation-dialog.component.css']
 })
 export class ReservationDialogComponent {
-  repeatOptions: string[] = ['Dagelijks', 'Wekelijks', '2 Wekelijks', 'Maandelijks'];
+  repeatOptions: string[] = ['Geen', 'Dagelijks', 'Wekelijks', '2 Wekelijks', 'Maandelijks'];
   room: Room;
 
   selectedWorkplaceAmount: number;
-  selectedRecurringPattern: string;
+  selectedRecurringPattern: string = 'Geen';
 
   constructor(public dialogRef: MatDialogRef<ReservationDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: ReservationDialogData) {
@@ -26,9 +26,8 @@ export class ReservationDialogComponent {
 
   confirmBooking() {
     this.dialogRef.close({
-      isConfirmation: true,
       workplaceAmount: this.selectedWorkplaceAmount,
-      recurringPattern: this.selectedRecurringPattern
+      recurringPattern: this.selectedRecurringPattern != 'Geen'? this.selectedRecurringPattern: undefined
     });
   }
 }

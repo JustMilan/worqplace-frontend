@@ -11,7 +11,7 @@
     <li>
       <mat-form-field appearance="fill">
         <mat-label>Herhaling</mat-label>
-        <mat-select [(ngModel)]="selectedRecurringPattern">
+        <mat-select [(ngModel)]="selectedRecurringPattern" [placeholder]="selectedRecurringPattern">
           <mat-option *ngFor="let option of repeatOptions" [value]="option">
             {{option}}
           </mat-option>
@@ -23,5 +23,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuleer</button>
-  <button mat-button (click)="confirmBooking()" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="confirmBooking()" cdkFocusInitial>Bevestig</button>
 </div>
