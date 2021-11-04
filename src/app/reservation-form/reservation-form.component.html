@@ -1,0 +1,21 @@
+<form [formGroup]="reservationForm">
+  <mat-stepper linear style="background-color: #2A2A2A; padding: 0 5%;">
+    <mat-step formGroupName="locationDetails"
+              [stepControl]="reservationForm.get([0])" label="Locatie">
+      <mat-form-field appearance="fill">
+        <mat-label>Locatie</mat-label>
+        <mat-select formControlName="locationFormCtrl" required>
+          <mat-option *ngFor="let loc of locations" [value]="loc.id">
+            {{loc.name}}
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="locationsControl.hasError('required')">Kies een locatie</mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</form>

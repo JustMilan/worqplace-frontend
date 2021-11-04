@@ -78,9 +78,13 @@
     </div>
   </mat-step>
 </mat-stepper>
+-->
+
+<app-reservation-form></app-reservation-form>
 
 <div class="error-message-container">
   <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
 </div>
 
-<app-open-room-card class="reservation-cards container" [selectedReservationType]="selectedReservationType" [rooms]="rooms" (book)="book($event)"></app-open-room-card>
+<app-open-reservation-card class="reservation-cards container" [selectedReservationType]="selectedReservationType"
+                           [rooms]="rooms" (book)="book($event)"></app-open-reservation-card>
