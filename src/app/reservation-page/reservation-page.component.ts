@@ -9,6 +9,8 @@ import { RoomService } from "../services/room.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ReservationDialogComponent } from "../reservation-dialog/reservation-dialog.component";
 import { Recurrence } from "../interface/Recurrence";
+import { ReservationResponse } from "../interface/ReservationResponse";
+import { Event } from "@angular/router";
 
 @Component({
   selector: 'app-reservation-page',
@@ -20,19 +22,7 @@ import { Recurrence } from "../interface/Recurrence";
 export class ReservationPageComponent implements OnInit {
   locations: Location[];
   rooms: Room[];
-  reservationType: string[] = ['Ruimte', 'Werkplek'];
-
-  minDate: Date = new Date(Date.now());
-
-  selectedLocationId: number;
-  selectedDate: string;
-  selectedStartTime: string;
-  selectedEndTime: string;
-  selectedReservationType: string;
-
-  reservationTypeControl = new FormControl('', Validators.required);
-  locationsControl = new FormControl('', Validators.required);
-  floatLabelControl = new FormControl('auto');
+  reservationResponse: ReservationResponse;
 
   errorMessage: string;
 
@@ -62,7 +52,7 @@ export class ReservationPageComponent implements OnInit {
   openDialog(room: Room): void {
     const dialogRef = this.dialog.open(ReservationDialogComponent, {
       width: '500px',
-      data: {room: room, reservationType: this.selectedReservationType},
+      data: {room: room, reservationType: this.reservationResponse.type},
       panelClass: 'reservation-dialog'
     });
 
@@ -78,29 +68,19 @@ export class ReservationPageComponent implements OnInit {
         console.log(recurrence.active + " active");
         console.log(recurrence.recurrencePattern + " recurrence");
 
-        if (this.selectedReservationType == 'Ruimte') {
+        if (this.reservationResponse.type == 'Ruimte') {
           this.reservationService.reserveRoom(this.selectedRoomReservation(room, recurrence)).subscribe(data => {
-            this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+            this.getAvailableRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
           });
         }
 
-        if (this.selectedReservationType == 'Werkplek') {
+        if (this.reservationResponse.type == 'Werkplek') {
           this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(data => {
-            this.getAvailableWorkplacesInRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+            this.getAvailableWorkplacesInRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
           })
         }
       }
     });
-  }
-
-  onSelect(event: any) {
-    let date = new Date(event);
-
-    let day = ('0' + date.getDate()).slice(-2);
-    let month = ('0' + (date.getMonth() + 1)).slice(-2);
-    let year = date.getFullYear();
-
-    this.selectedDate = `${year}-${month}-${day}`;
   }
 
   getLocations(): void {
@@ -134,37 +114,35 @@ export class ReservationPageComponent implements OnInit {
       })
   }
 
-  checkAvailability(type: string): void {
-      setTimeout(function () {
-        console.log("timer")
-      }, 5000);
-
-    switch (type) {
+  checkAvailability(reservationResponse: ReservationResponse): void {
+    switch (reservationResponse.type) {
       case 'Ruimte':
-        this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+        this.getAvailableRooms(reservationResponse.locationId, reservationResponse.date, reservationResponse.time.start, reservationResponse.time.end);
         break
       case 'Werkplek':
-        this.getAvailableWorkplacesInRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
+        this.getAvailableWorkplacesInRooms(reservationResponse.locationId, reservationResponse.date, reservationResponse.time.start, reservationResponse.time.end);
         break
     }
 
     this.errorMessage = '';
   }
 
-  onSubmit() {
-    if (this.selectedLocationId == undefined || this.selectedDate == undefined ||
-      this.selectedStartTime == undefined || this.selectedEndTime == undefined || this.selectedReservationType == undefined) {
+  onSubmit(reservationResponse: ReservationResponse) {
+    this.reservationResponse = reservationResponse;
+
+    if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
+      reservationResponse.time.start == undefined || reservationResponse.time.end == undefined || reservationResponse.type == undefined) {
       this.errorMessage = "Niet alle velden zijn ingevuld!";
     }
 
-    this.checkAvailability(this.selectedReservationType);
+    this.checkAvailability(reservationResponse);
   }
 
   selectedRoomReservation(room: Room, roomRecurrence: Recurrence): Reservation {
     return {
-      date: this.selectedDate,
-      startTime: this.selectedStartTime,
-      endTime: this.selectedEndTime,
+      date: this.reservationResponse.date,
+      startTime: this.reservationResponse.time.start,
+      endTime: this.reservationResponse.time.end,
       employeeId: 1,
       roomId: room.id,
       recurrence: roomRecurrence
@@ -173,9 +151,9 @@ export class ReservationPageComponent implements OnInit {
 
   selectedWorkplacesReservation(room: Room, workplaceAmount: number, roomRecurrence: Recurrence): Reservation {
     return {
-      date: this.selectedDate,
-      startTime: this.selectedStartTime,
-      endTime: this.selectedEndTime,
+      date: this.reservationResponse.date,
+      startTime: this.reservationResponse.time.start,
+      endTime: this.reservationResponse.time.end,
       employeeId: 1,
       roomId: room.id,
       workplaceAmount: workplaceAmount,

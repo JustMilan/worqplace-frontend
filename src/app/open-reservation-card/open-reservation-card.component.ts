@@ -8,7 +8,8 @@ import { Room } from "../interface/Room";
 })
 export class OpenReservationCardComponent implements OnInit {
   @Input() rooms: Room[];
-  @Input() selectedReservationType: string;
+  @Input() reservationResponse: any;
+
   @Output() book = new EventEmitter();
 
   constructor() { }
