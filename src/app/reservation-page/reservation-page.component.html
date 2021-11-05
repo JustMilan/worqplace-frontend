@@ -1,7 +1,10 @@
+<app-my-reservations></app-my-reservations>
+
 <app-reservation-form [locations]="locations" (submit)="onSubmit($event)"></app-reservation-form>
 
 <div class="message-container">
   <div *ngIf="message" [class]="colorClass" class="message">{{message}}</div>
 </div>
 
-<app-open-reservation-card class="reservation-cards container" [reservationResponse]= "reservationResponse" [rooms]="rooms" (book)="book($event)"></app-open-reservation-card>
+<app-open-reservation-card class="reservation-cards container" [reservationResponse]="reservationResponse"
+                           [rooms]="rooms" (book)="book($event)"></app-open-reservation-card>

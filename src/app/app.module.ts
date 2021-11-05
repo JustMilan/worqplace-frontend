@@ -15,6 +15,8 @@ import { MatTableModule } from '@angular/material/table';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from "./nav-bar/nav-bar.component";
 import { MyReservationsComponent } from "./my-reservations/my-reservations.component";
+import { OpenReservationCardComponent } from "./open-reservation-card/open-reservation-card.component";
+import { ReservationFormComponent } from "./reservation-form/reservation-form.component";
 import { ReservationPageComponent } from './reservation-page/reservation-page.component';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
