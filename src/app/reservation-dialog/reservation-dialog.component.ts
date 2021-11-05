@@ -20,7 +20,7 @@ export class ReservationDialogComponent {
     this.room = data.room;
   }
 
-  onNoClick(): void {
+  onCancel(): void {
     this.dialogRef.close();
   }
 
