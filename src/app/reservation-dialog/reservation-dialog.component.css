@@ -6,3 +6,15 @@ ul {
   display: inline-block;
   margin-right: 20px;
 }
+
+li {
+  margin-bottom: 20px;
+}
+
+#cancel-button {
+  background-color: white;
+}
+
+#confirm-booking {
+  background-color: white;
+}

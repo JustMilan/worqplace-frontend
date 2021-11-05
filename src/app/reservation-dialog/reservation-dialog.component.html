@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>{{data.reservationType}}</h1>
 <div mat-dialog-content>
   <ul>
-    <li *ngIf="data.reservationType == 'Werkplek'">Beschikbaarheid: {{data.room.available}}/{{data.room.capacity}}</li>
+    <li *ngIf="data.reservationType == 'Werkplek'" id="availability-item">Beschikbaarheid: {{data.room.available}}/{{data.room.capacity}}</li>
     <li>
       <mat-form-field *ngIf="data.reservationType == 'Werkplek'" appearance="fill">
       <mat-label>Aantal</mat-label>
@@ -22,6 +22,6 @@
   </ul>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Annuleer</button>
-  <button mat-button (click)="confirmBooking()" cdkFocusInitial>Bevestig</button>
+  <button mat-button (click)="onNoClick()" id="cancel-button">Annuleer</button>
+  <button mat-button (click)="confirmBooking()" cdkFocusInitial id="confirm-booking">Bevestig</button>
 </div>
