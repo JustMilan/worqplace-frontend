@@ -95,6 +95,10 @@ mat-card.mat-card {
   border-radius: 0.25rem
 }
 
+.mat-stepper-horizontal {
+  background-color: var(--primary-background-dark);
+}
+
 /*Starttime and EndTime label from timepicker*/
 mat-label.ng-tns-c138-3, mat-label.ng-tns-c138-4 {
   color: white;
