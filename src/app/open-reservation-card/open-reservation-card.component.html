@@ -1,17 +1,15 @@
 <div *ngFor="let room of rooms" class="container">
-  <h4 class="card-title">Ruimte</h4>
+  <h4 class="card-title">{{reservationResponse.type}}</h4>
   <ul>
-    <li>ID: </li>
     <li>Verdieping: </li>
+    <li *ngIf="reservationResponse.type == 'Werkplek'">Available: </li>
     <li>Capaciteit: </li>
-    <li>Herhaling: </li>
   </ul>
 
   <ul>
-    <li>{{room.id}}</li>
     <li>{{room.floor}}</li>
+    <li *ngIf="reservationResponse.type == 'Werkplek'">{{room.available}}</li>
     <li>{{room.capacity}}</li>
-    <li><input type="checkbox" id="check-{{room.id}}"></li>
   </ul>
 
   <div class="container__button">

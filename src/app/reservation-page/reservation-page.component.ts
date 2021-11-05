@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
 import { ReservationService } from "../services/reservation.service";
-import { Location } from "../interface/location";
-import { Workplace } from "../interface/workplace";
-import { Reservation } from "../interface/reservation";
+import { Location } from "../interface/Location";
+import { Reservation } from "../interface/Reservation";
 import { LocationService } from "../services/location.service";
-import { WorkplaceService } from "../services/workplace.service";
-import { Room } from "../interface/room";
+import { Room } from "../interface/Room";
 import { RoomService } from "../services/room.service";
+import { MatDialog } from "@angular/material/dialog";
+import { ReservationDialogComponent } from "../reservation-dialog/reservation-dialog.component";
+import { Recurrence } from "../interface/Recurrence";
+import { ReservationResponse } from "../interface/ReservationResponse";
+import { Event } from "@angular/router";
 
 @Component({
   selector: 'app-reservation-page',
@@ -18,136 +20,164 @@ import { RoomService } from "../services/room.service";
 
 export class ReservationPageComponent implements OnInit {
   locations: Location[];
-  workplaces: Workplace[];
   rooms: Room[];
-  reservationType: string[] = ['Ruimte', 'Werkplek'];
+  reservationResponse: ReservationResponse;
 
-  minDate: Date = new Date(Date.now());
+  message: string;
+  colorClass: string;
 
-  selectedLocationId: number;
-  selectedDate: string;
-  selectedStartTime: string;
-  selectedEndTime: string;
-  selectedReservationType: string;
-
-  reservationTypeControl = new FormControl('', Validators.required);
-  locationsControl = new FormControl('', Validators.required);
-  floatLabelControl = new FormControl('auto');
-
-  errorMessage: string;
-
-  constructor(private workplaceService: WorkplaceService, private roomService: RoomService,
-              private locationService: LocationService, private reservationService: ReservationService) {
+  constructor(private roomService: RoomService, private locationService: LocationService,
+              private reservationService: ReservationService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getLocations();
-
   }
 
-  onSelect(event: any) {
-    let date = new Date(event);
+  convertRecurringPatternToEnumLiteral(recurringPattern: string): string {
+    switch (recurringPattern) {
+      case 'Dagelijks':
+        return 'DAILY';
+      case 'Wekelijks':
+        return 'WEEKLY';
+      case '2 Wekelijks':
+        return 'BIWEEKLY';
+      case 'Maandelijks':
+        return 'MONTHLY';
+    }
 
-    let day = ('0' + date.getDate()).slice(-2);
-    let month = ('0' + (date.getMonth() + 1)).slice(-2);
-    let year = date.getFullYear();
+    return '';
+  }
 
-    this.selectedDate = `${year}-${month}-${day}`;
+  openDialog(room: Room): void {
+    const dialogRef = this.dialog.open(ReservationDialogComponent, {
+      width: '500px',
+      data: {room: room, reservationType: this.reservationResponse.type},
+      panelClass: 'reservation-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // check if the confirmation button is clicked in dialog
+      if (result != undefined) {
+        const recurrence = {
+          active: result.recurringPattern != undefined,
+          recurrencePattern: result.recurringPattern != undefined? this.convertRecurringPatternToEnumLiteral(result.recurringPattern): null
+        }
+
+        if (this.reservationResponse.type == 'Ruimte') {
+          this.reservationService.reserveRoom(this.selectedRoomReservation(room, recurrence)).subscribe(data => {
+            this.getAvailableRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
+          });
+        }
+
+        if (this.reservationResponse.type == 'Werkplek') {
+          this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(data => {
+            this.getAvailableWorkplacesInRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
+          })
+        }
+
+        this.message = 'The reservation is confirmed';
+        this.colorClass= 'success';
+      }
+    });
   }
 
   getLocations(): void {
     this.locationService.getLocations()
       .subscribe(locations => {
           this.locations = locations
-        },
-        error => {
-          console.log()
         });
   }
 
-  getAvailableWorkplaces(locationId: number, date: string, start: string, end: string): void {
-    this.workplaceService.getAvailableWorkplaces(locationId, date, start, end)
-      .subscribe(workplaces => {
-        this.workplaces = workplaces
-        this.errorMessage = "";
-      }, error => {
-        if (error.status == 422) {
-          this.errorMessage = error.error;
-        }
-      })
-  }
-
   getAvailableRooms(locationId: number, date: string, start: string, end: string): void {
-    this.roomService.getAvailableRooms(locationId, date, start, end)
+    this.roomService.getAvailableFullRooms(locationId, date, start, end)
       .subscribe(rooms => {
         this.rooms = rooms
-        this.errorMessage = "";
+        this.message = "";
+        this.colorClass ="";
+
+        if (this.rooms.length == 0) {
+          this.message = "There are no rooms available";
+          this.colorClass = 'warning';
+        }
       }, error => {
         if (error.status == 422) {
-          this.errorMessage = error.error;
+          this.message = error.error;
+          this.colorClass = 'error';
         }
       })
   }
 
-  onSubmit() {
-    if (this.selectedLocationId == undefined || this.selectedDate == undefined ||
-      this.selectedStartTime == undefined || this.selectedEndTime == undefined || this.selectedReservationType == undefined) {
-      this.errorMessage = "Niet alle velden zijn ingevuld!";
-    }
+  getAvailableWorkplacesInRooms(locationId: number, date: string, start: string, end: string): void {
+    this.roomService.getAvailableWorkplacesInRooms(locationId, date, start, end)
+      .subscribe(rooms => {
+        this.rooms = rooms
+        this.message = "";
+        this.colorClass ="";
 
-    if (this.selectedReservationType === 'Ruimte') {
-      this.workplaces = [];
-      this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      this.errorMessage = "";
-    }
-    if (this.selectedReservationType === 'Werkplek') {
-      this.rooms = [];
-      this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      this.errorMessage = "";
-    }
+        if (this.rooms.length == 0) {
+          this.message = "There are no rooms available";
+          this.colorClass = 'warning';
+        }
+      }, error => {
+        if (error.status == 422) {
+          this.message = error.error;
+          this.colorClass = 'error';
+        }
+      })
   }
 
-  selectedWorkplaceReservation(workplace: Workplace): Reservation {
+  checkAvailability(reservationResponse: ReservationResponse): void {
+    switch (reservationResponse.type) {
+      case 'Ruimte':
+        this.getAvailableRooms(reservationResponse.locationId, reservationResponse.date, reservationResponse.time.start, reservationResponse.time.end);
+        break
+      case 'Werkplek':
+        this.getAvailableWorkplacesInRooms(reservationResponse.locationId, reservationResponse.date, reservationResponse.time.start, reservationResponse.time.end);
+        break
+    }
+
+    this.message = '';
+  }
+
+  onSubmit(reservationResponse: ReservationResponse) {
+    this.reservationResponse = reservationResponse;
+
+    if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
+      reservationResponse.time.start == undefined || reservationResponse.time.end == undefined || reservationResponse.type == undefined) {
+      this.message = "Niet alle velden zijn ingevuld!";
+    }
+
+    this.checkAvailability(reservationResponse);
+  }
+
+  selectedRoomReservation(room: Room, roomRecurrence: Recurrence): Reservation {
     return {
-      date: this.selectedDate,
-      startTime: this.selectedStartTime,
-      endTime: this.selectedEndTime,
+      date: this.reservationResponse.date,
+      startTime: this.reservationResponse.time.start,
+      endTime: this.reservationResponse.time.end,
       employeeId: 1,
-      workplaceId: workplace.id,
-      recurring: (<HTMLInputElement> document.getElementById('check-' + workplace.id)).checked
+      roomId: room.id,
+      recurrence: roomRecurrence
     };
   }
 
-  selectedRoomReservation(room: Room): Reservation {
+  selectedWorkplacesReservation(room: Room, workplaceAmount: number, roomRecurrence: Recurrence): Reservation {
     return {
-      date: this.selectedDate,
-      startTime: this.selectedStartTime,
-      endTime: this.selectedEndTime,
+      date: this.reservationResponse.date,
+      startTime: this.reservationResponse.time.start,
+      endTime: this.reservationResponse.time.end,
       employeeId: 1,
       roomId: room.id,
-      recurring: (<HTMLInputElement> document.getElementById('check-' + room.id)).checked
+      workplaceAmount: workplaceAmount,
+      recurrence: roomRecurrence
     };
   }
 
   book(event: Event) {
-
-    if (this.selectedReservationType === "Ruimte") {
       const room: Room = JSON.parse(JSON.stringify(event));
-      const reservation = this.selectedRoomReservation(room);
 
-      this.reservationService.reserveRoom(reservation).subscribe(data => {
-        window.alert("reservering voor een ruimte is geboekt!")
-        this.getAvailableRooms(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      });
-    } else {
-      const workplace: Workplace = JSON.parse(JSON.stringify(event));
-      const reservation: Reservation = this.selectedWorkplaceReservation(workplace);
-
-      this.reservationService.reserveWorkplace(reservation).subscribe(data => {
-        window.alert("reservering voor een werkplek is geboekt!")
-        this.getAvailableWorkplaces(this.selectedLocationId, this.selectedDate, this.selectedStartTime, this.selectedEndTime);
-      });
-    }
+      this.openDialog(room);
   }
 
 }

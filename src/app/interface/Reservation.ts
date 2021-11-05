@@ -1,10 +1,12 @@
+import { Recurrence } from "./Recurrence";
+
 export interface Reservation {
   id?: number,
   date:string,
   startTime: string,
   endTime: string,
   employeeId: number,
-  roomId?: number,
-  workplaceId?: number,
-  recurring: boolean
+  roomId: number,
+  workplaceAmount?: number,
+  recurrence: Recurrence
 }
