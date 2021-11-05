@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
 import { ReservationService } from "../services/reservation.service";
 import { Location } from "../interface/Location";
 import { Reservation } from "../interface/Reservation";
@@ -24,7 +23,8 @@ export class ReservationPageComponent implements OnInit {
   rooms: Room[];
   reservationResponse: ReservationResponse;
 
-  errorMessage: string;
+  message: string;
+  colorClass: string;
 
   constructor(private roomService: RoomService, private locationService: LocationService,
               private reservationService: ReservationService, public dialog: MatDialog) {
@@ -57,16 +57,12 @@ export class ReservationPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // check if the confirmation button is clicked
+      // check if the confirmation button is clicked in dialog
       if (result != undefined) {
-        console.log("test test test")
         const recurrence = {
           active: result.recurringPattern != undefined,
           recurrencePattern: result.recurringPattern != undefined? this.convertRecurringPatternToEnumLiteral(result.recurringPattern): null
         }
-
-        console.log(recurrence.active + " active");
-        console.log(recurrence.recurrencePattern + " recurrence");
 
         if (this.reservationResponse.type == 'Ruimte') {
           this.reservationService.reserveRoom(this.selectedRoomReservation(room, recurrence)).subscribe(data => {
@@ -79,6 +75,9 @@ export class ReservationPageComponent implements OnInit {
             this.getAvailableWorkplacesInRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
           })
         }
+
+        this.message = 'The reservation is confirmed';
+        this.colorClass= 'success';
       }
     });
   }
@@ -94,10 +93,17 @@ export class ReservationPageComponent implements OnInit {
     this.roomService.getAvailableFullRooms(locationId, date, start, end)
       .subscribe(rooms => {
         this.rooms = rooms
-        this.errorMessage = "";
+        this.message = "";
+        this.colorClass ="";
+
+        if (this.rooms.length == 0) {
+          this.message = "There are no rooms available";
+          this.colorClass = 'warning';
+        }
       }, error => {
         if (error.status == 422) {
-          this.errorMessage = error.error;
+          this.message = error.error;
+          this.colorClass = 'error';
         }
       })
   }
@@ -106,10 +112,17 @@ export class ReservationPageComponent implements OnInit {
     this.roomService.getAvailableWorkplacesInRooms(locationId, date, start, end)
       .subscribe(rooms => {
         this.rooms = rooms
-        this.errorMessage = "";
+        this.message = "";
+        this.colorClass ="";
+
+        if (this.rooms.length == 0) {
+          this.message = "There are no rooms available";
+          this.colorClass = 'warning';
+        }
       }, error => {
         if (error.status == 422) {
-          this.errorMessage = error.error;
+          this.message = error.error;
+          this.colorClass = 'error';
         }
       })
   }
@@ -124,7 +137,7 @@ export class ReservationPageComponent implements OnInit {
         break
     }
 
-    this.errorMessage = '';
+    this.message = '';
   }
 
   onSubmit(reservationResponse: ReservationResponse) {
@@ -132,7 +145,7 @@ export class ReservationPageComponent implements OnInit {
 
     if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
       reservationResponse.time.start == undefined || reservationResponse.time.end == undefined || reservationResponse.type == undefined) {
-      this.errorMessage = "Niet alle velden zijn ingevuld!";
+      this.message = "Niet alle velden zijn ingevuld!";
     }
 
     this.checkAvailability(reservationResponse);

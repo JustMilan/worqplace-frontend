@@ -1,7 +1,7 @@
 <app-reservation-form [locations]="locations" (submit)="onSubmit($event)"></app-reservation-form>
 
-<div class="error-message-container">
-  <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
+<div class="message-container">
+  <div *ngIf="message" [class]="colorClass" class="message">{{message}}</div>
 </div>
 
 <app-open-reservation-card class="reservation-cards container" [reservationResponse]= "reservationResponse" [rooms]="rooms" (book)="book($event)"></app-open-reservation-card>
