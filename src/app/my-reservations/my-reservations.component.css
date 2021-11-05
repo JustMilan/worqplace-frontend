@@ -26,8 +26,9 @@ img {
   width: fit-content;
   min-width: 60%;
   height: 50px;
-  border: solid 2px white;
   border-collapse: collapse;
+}
+.not-empty-select.mat-selected {
   color: white;
 }
 

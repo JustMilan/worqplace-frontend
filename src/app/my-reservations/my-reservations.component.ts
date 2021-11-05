@@ -1,8 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReservationService} from "../services/reservation.service";
 import {Reservation} from "../interface/reservation";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-my-reservations',
@@ -12,9 +11,9 @@ import {MatTableDataSource} from '@angular/material/table';
 export class MyReservationsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  allMyReservations: Reservation[];
+  public allMyReservations: Reservation[];
+  public allMyReservationsSlice: Reservation[];
   columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount'];
-  dataSource: MatTableDataSource<Reservation> = new MatTableDataSource();
 
   constructor(private reservationService: ReservationService) {
   }
@@ -25,9 +24,21 @@ export class MyReservationsComponent implements OnInit {
     this.reservationService.getAllReservationsByEmployeeId(employeeId).subscribe(reservations => this.allMyReservations = reservations);
   }
 
+  OnPageChange(event: PageEvent){
+    console.log(event)
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.allMyReservations.length){
+      endIndex = this.allMyReservations.length;
+    }
+    this.allMyReservationsSlice = this.allMyReservations.slice(startIndex, endIndex)
+  }
+
   ngOnInit(): void {
     this.getAllReservationsByEmployeeId(1);
-    this.dataSource = new MatTableDataSource(this.allMyReservations);
-    console.log(this.dataSource)
+    setTimeout(()=>{
+      this.allMyReservationsSlice = this.allMyReservations.slice(0,3);
+      console.log(this.allMyReservationsSlice);
+    }, 50);
   }
 }
