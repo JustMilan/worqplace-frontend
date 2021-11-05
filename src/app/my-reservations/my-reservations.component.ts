@@ -25,7 +25,6 @@ export class MyReservationsComponent implements OnInit {
   }
 
   OnPageChange(event: PageEvent) {
-    console.log(event)
     const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize;
     if (endIndex > this.allMyReservations.length) {
@@ -38,7 +37,6 @@ export class MyReservationsComponent implements OnInit {
     this.getAllReservationsByEmployeeId(1);
     setTimeout(() => {
       this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
-      console.log(this.allMyReservationsSlice);
     }, 50);
   }
 }
