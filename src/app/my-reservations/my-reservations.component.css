@@ -28,6 +28,7 @@ img {
   height: 50px;
   border-collapse: collapse;
 }
+
 .not-empty-select.mat-selected {
   color: white;
 }
