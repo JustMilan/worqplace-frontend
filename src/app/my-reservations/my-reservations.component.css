@@ -13,7 +13,6 @@ img {
 }
 
 .mat-table.cdk-table {
-  margin-bottom: 20px;
   width: fit-content;
   min-width: 60%;
   border: solid 2px white;
