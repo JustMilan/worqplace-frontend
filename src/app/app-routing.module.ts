@@ -6,7 +6,9 @@ import { ReservationComponent } from "./modules/reservation/page/reservation.com
 const routes: Routes = [
   { path: '', redirectTo: '/reserve', pathMatch: 'full' },
   { path: 'reserve', component: ReservationComponent },
-  { path: 'my-reservations', loadChildren: () => import('./modules/my-reservations/my-reservations.module').then(m => m.MyReservationsModule)},
+  { path: 'my-reservations',
+    loadChildren: () => import('./modules/my-reservations/my-reservations.module').then(m => m.MyReservationsModule)
+  },
   { path: '**', component: ReservationComponent }
 ];
 
