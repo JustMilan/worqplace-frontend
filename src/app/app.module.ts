@@ -9,6 +9,8 @@ import { SharedModule } from "./shared/shared.module";
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from "./layout/nav-bar/nav-bar.component";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { CustomHttpInterceptor } from "./core/interceptor/custom-http.interceptor";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,13 @@ import { NavBarComponent } from "./layout/nav-bar/nav-bar.component";
     DataModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
