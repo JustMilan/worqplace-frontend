@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MyReservationsComponent } from "./my-reservations/my-reservations.component";
-import { ReservationPageComponent } from "./reservation-page/reservation-page.component";
-
+import { MyReservationsComponent } from "./modules/my-reservations/page/my-reservations.component";
+import { ReservationComponent } from "./modules/reservation/page/reservation.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/reserve', pathMatch: 'full'},
-  {path: 'reserve', component: ReservationPageComponent},
+  {path: 'reserve', component: ReservationComponent},
   {path: 'my-reservations', component: MyReservationsComponent}
 ];
 
@@ -16,4 +15,5 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule {
+
 }
