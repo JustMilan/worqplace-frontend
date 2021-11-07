@@ -32,7 +32,6 @@ export class ReservationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLocations();
-    console.log(JSON.parse(JSON.stringify(this.locations)));
   }
 
   convertRecurringPatternToEnumLiteral(recurringPattern: string): string {
@@ -147,6 +146,8 @@ export class ReservationComponent implements OnInit {
     if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
       reservationResponse.time.start == undefined || reservationResponse.time.end == undefined || reservationResponse.type == undefined) {
       this.message = "Niet alle velden zijn ingevuld!";
+      this.colorClass = 'error';
+      return;
     }
 
     this.checkAvailability(reservationResponse);
