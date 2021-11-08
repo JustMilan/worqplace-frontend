@@ -1,6 +1,6 @@
 export interface Room {
-    id: number,
-    floor: number,
-    capacity: number,
-    available: number
+	id: number,
+	floor: number,
+	capacity: number,
+	available: number
 }

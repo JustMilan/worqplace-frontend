@@ -5,13 +5,13 @@ import { MyReservationsRoutingModule } from "./my-reservations-routing.module";
 import { MyReservationsComponent } from "./page/my-reservations.component";
 
 @NgModule({
-    declarations: [
-        MyReservationsComponent,
-    ],
-    imports: [
-        SharedModule,
-        MyReservationsRoutingModule
-    ]
+	declarations: [
+		MyReservationsComponent,
+	],
+	imports: [
+		SharedModule,
+		MyReservationsRoutingModule
+	]
 })
 export class MyReservationsModule {
 }

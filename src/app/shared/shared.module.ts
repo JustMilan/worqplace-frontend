@@ -5,18 +5,18 @@ import { MyReservationsTableComponent } from "./component/my-reservations-table/
 import { MaterialModule } from "./material.module";
 
 @NgModule({
-    declarations: [
-        MyReservationsTableComponent,
-    ],
-    imports: [
-        CommonModule,
-        MaterialModule
-    ],
-    exports: [
-        CommonModule,
-        MyReservationsTableComponent,
-        MaterialModule
-    ]
+	declarations: [
+		MyReservationsTableComponent,
+	],
+	imports: [
+		CommonModule,
+		MaterialModule
+	],
+	exports: [
+		CommonModule,
+		MyReservationsTableComponent,
+		MaterialModule
+	]
 })
 export class SharedModule {
 }

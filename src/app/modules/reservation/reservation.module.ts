@@ -9,18 +9,18 @@ import { OpenCardComponent } from "./components/open-card/open-card.component";
 import { ReservationComponent } from "./page/reservation.component";
 
 @NgModule({
-    declarations: [
-        OpenCardComponent,
-        FormComponent,
-        ReservationComponent,
-        DialogComponent
-    ],
-    imports: [
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule
-    ]
+	declarations: [
+		OpenCardComponent,
+		FormComponent,
+		ReservationComponent,
+		DialogComponent
+	],
+	imports: [
+		SharedModule,
+		FormsModule,
+		ReactiveFormsModule,
+		RouterModule
+	]
 })
 export class ReservationModule {
 }

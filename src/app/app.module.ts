@@ -13,26 +13,26 @@ import { ReservationModule } from "./modules/reservation/reservation.module";
 import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavBarComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ReservationModule,
-        DataModule,
-        SharedModule
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: CustomHttpInterceptor,
-            multi: true
-        }
-    ],
-    bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavBarComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		ReservationModule,
+		DataModule,
+		SharedModule
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: CustomHttpInterceptor,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule {
 }
