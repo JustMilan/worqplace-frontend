@@ -8,9 +8,9 @@ describe('OpenRoomCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OpenCardComponent ]
+      declarations: [OpenCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

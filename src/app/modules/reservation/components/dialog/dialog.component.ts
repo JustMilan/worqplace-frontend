@@ -27,7 +27,7 @@ export class DialogComponent {
   confirmBooking() {
     this.dialogRef.close({
       workplaceAmount: this.selectedWorkplaceAmount,
-      recurringPattern: this.selectedRecurringPattern != 'Geen'? this.selectedRecurringPattern: undefined
+      recurringPattern: this.selectedRecurringPattern != 'Geen' ? this.selectedRecurringPattern : undefined
     });
   }
 }

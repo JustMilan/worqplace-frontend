@@ -1,11 +1,13 @@
 <h1 mat-dialog-title>{{data.reservationType}}</h1>
 <div mat-dialog-content>
   <ul>
-    <li *ngIf="data.reservationType == 'Werkplek'" id="availability-item">Beschikbaarheid: {{data.room.available}}/{{data.room.capacity}}</li>
+    <li *ngIf="data.reservationType == 'Werkplek'" id="availability-item">
+      Beschikbaarheid: {{data.room.available}}/{{data.room.capacity}}
+    </li>
     <li>
       <mat-form-field *ngIf="data.reservationType == 'Werkplek'" appearance="fill">
-      <mat-label>Aantal</mat-label>
-      <input [(ngModel)]="selectedWorkplaceAmount" matInput type="number">
+        <mat-label>Aantal</mat-label>
+        <input [(ngModel)]="selectedWorkplaceAmount" matInput type="number">
       </mat-form-field>
     </li>
     <li>

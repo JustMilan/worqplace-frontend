@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { MatStepperModule } from "@angular/material/stepper";
-import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { MatGridListModule } from "@angular/material/grid-list";
+import { MatCardModule } from "@angular/material/card";
+import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
-import { MatCardModule } from "@angular/material/card";
-import { MatSelectModule } from "@angular/material/select";
-import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   declarations: [],
@@ -51,4 +51,5 @@ import { MatSortModule } from "@angular/material/sort";
     MatSortModule
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {
+}

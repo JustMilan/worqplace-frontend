@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from "./material.module";
+import { NgModule } from '@angular/core';
 
 import { MyReservationsTableComponent } from "./component/my-reservations-table/my-reservations-table.component";
+import { MaterialModule } from "./material.module";
 
 @NgModule({
   declarations: [
@@ -18,4 +18,5 @@ import { MyReservationsTableComponent } from "./component/my-reservations-table/
     MaterialModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

@@ -37,16 +37,20 @@
     <mat-step formGroupName="timeDetails"
               [stepControl]="reservationForm?.get('timeDetails')!"
               label="Tijden">
-      <mat-form-field appearance="outline" style="width: 140px; text-align: center;" [floatLabel]="floatLabelControl.value">
+      <mat-form-field appearance="outline" style="width: 140px; text-align: center;"
+                      [floatLabel]="floatLabelControl.value">
         <mat-label style="color: white">Start Tijd</mat-label>
-        <input formControlName="startTimeFormCtrl" name="selectedStartTime" style="justify-content: center;" matInput type="time" required>
+        <input formControlName="startTimeFormCtrl" name="selectedStartTime" style="justify-content: center;" matInput
+               type="time" required>
         <mat-icon matPrefix>access_time</mat-icon>
         <mat-error>Kies een start tijd</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 140px; text-align: center;" [floatLabel]="floatLabelControl.value">
+      <mat-form-field appearance="outline" style="width: 140px; text-align: center;"
+                      [floatLabel]="floatLabelControl.value">
         <mat-label style="color: white;">Eind Tijd</mat-label>
-        <input formControlName="endTimeFormCtrl" name="selectedEndTime" style="justify-content: center;" matInput type="time" required>
+        <input formControlName="endTimeFormCtrl" name="selectedEndTime" style="justify-content: center;" matInput
+               type="time" required>
         <mat-icon matPrefix>timelapse</mat-icon>
         <mat-error>Kies een eind tijd</mat-error>
       </mat-form-field>

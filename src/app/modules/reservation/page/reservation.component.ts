@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
-import { Location } from "../../../data/interface/Location";
-import { Reservation } from "../../../data/interface/Reservation";
-import { LocationService } from "../../../data/service/location/location.service";
-import { Room } from "../../../data/interface/Room";
-import { RoomService } from "../../../data/service/room/room.service";
 import { MatDialog } from "@angular/material/dialog";
-import { DialogComponent } from "../components/dialog/dialog.component";
-import { Recurrence } from "../../../data/interface/Recurrence";
-import { ReservationResponse } from "../../../data/interface/ReservationResponse";
 import { Event } from "@angular/router";
+import { Location } from "../../../data/interface/Location";
+import { Recurrence } from "../../../data/interface/Recurrence";
+import { Reservation } from "../../../data/interface/Reservation";
+import { ReservationResponse } from "../../../data/interface/ReservationResponse";
+import { Room } from "../../../data/interface/Room";
+import { LocationService } from "../../../data/service/location/location.service";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
+import { RoomService } from "../../../data/service/room/room.service";
+import { DialogComponent } from "../components/dialog/dialog.component";
 
 @Component({
   selector: 'app-reservation-page',
@@ -61,7 +61,7 @@ export class ReservationComponent implements OnInit {
       if (result != undefined) {
         const recurrence = {
           active: result.recurringPattern != undefined,
-          recurrencePattern: result.recurringPattern != undefined? this.convertRecurringPatternToEnumLiteral(result.recurringPattern): null
+          recurrencePattern: result.recurringPattern != undefined ? this.convertRecurringPatternToEnumLiteral(result.recurringPattern) : null
         }
 
         if (this.reservationResponse.type == 'Ruimte') {
@@ -77,7 +77,7 @@ export class ReservationComponent implements OnInit {
         }
 
         this.message = 'The reservation is confirmed';
-        this.colorClass= 'success';
+        this.colorClass = 'success';
       }
     });
   }
@@ -85,8 +85,8 @@ export class ReservationComponent implements OnInit {
   getLocations(): void {
     this.locationService.getLocations()
       .subscribe(locations => {
-          this.locations = locations
-        });
+        this.locations = locations
+      });
   }
 
   getAvailableRooms(locationId: number, date: string, start: string, end: string): void {
@@ -94,7 +94,7 @@ export class ReservationComponent implements OnInit {
       .subscribe(rooms => {
         this.rooms = rooms
         this.message = "";
-        this.colorClass ="";
+        this.colorClass = "";
 
         if (this.rooms.length == 0) {
           this.message = "There are no rooms available";
@@ -113,7 +113,7 @@ export class ReservationComponent implements OnInit {
       .subscribe(rooms => {
         this.rooms = rooms
         this.message = "";
-        this.colorClass ="";
+        this.colorClass = "";
 
         if (this.rooms.length == 0) {
           this.message = "There are no rooms available";
@@ -177,9 +177,8 @@ export class ReservationComponent implements OnInit {
   }
 
   book(event: Event) {
-      const room: Room = JSON.parse(JSON.stringify(event));
+    const room: Room = JSON.parse(JSON.stringify(event));
 
-      this.openDialog(room);
+    this.openDialog(room);
   }
-
 }

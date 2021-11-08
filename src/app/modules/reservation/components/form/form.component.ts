@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Location } from "../../../../data/interface/Location";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Location } from "../../../../data/interface/Location";
 import { ReservationResponse } from "../../../../data/interface/ReservationResponse";
 
 @Component({
@@ -65,5 +65,4 @@ export class FormComponent implements OnInit {
 
     this.submit.emit(reservation);
   }
-
 }

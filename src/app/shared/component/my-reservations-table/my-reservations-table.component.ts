@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
-import { Reservation } from "../../../data/interface/Reservation";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { Reservation } from "../../../data/interface/Reservation";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
 
 @Component({
   selector: 'app-my-reservations-table',
