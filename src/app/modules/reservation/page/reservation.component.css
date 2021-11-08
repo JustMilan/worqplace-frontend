@@ -1,170 +1,160 @@
 :root {
-  --widget-width: 300px;
+    --widget-width: 300px;
 }
 
 .container {
-  margin: 0 20px 0 20px;
-  width: fit-content;
+    margin: 0 20px 0 20px;
+    width: fit-content;
 }
 
 /*Custom class*/
 .mat-form-field-time {
-  color: white;
-  width: 140px;
-  text-align: center;
+    color: white;
+    width: 140px;
+    text-align: center;
 }
 
 .mat-paginator-container {
-  flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important;
 }
 
 .mat-form-field input {
-  justify-content: center;
-}
-
-/*Mat stepper*/
-mat-stepper.ng-tns-c128-0 {
-  background-color: #2A2A2A;
-  padding: 0 5%;
+    justify-content: center;
 }
 
 .submit-button {
-  background-color: #C23350;
+    background-color: #C23350;
 }
 
 mat-form-field {
-  width: var(--widget-width);
+    width: var(--widget-width);
 }
 
 .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
-  background-color: var(--primary-white);
+    background-color: var(--primary-white);
 }
 
 mat-card.mat-card {
-  margin: 0;
-  padding: 0;
-  width: var(--widget-width);
+    margin: 0;
+    padding: 0;
+    width: var(--widget-width);
 }
 
 .mat-calendar-header {
-  background-color: var(--quintor-red);
+    background-color: var(--quintor-red);
 }
 
 .mat-calendar-body-selected {
-  background-color: var(--quintor-red);
+    background-color: var(--quintor-red);
 }
 
 .mat-step-header .mat-step-icon-selected {
-  background-color: var(--quintor-red);
+    background-color: var(--quintor-red);
 }
 
 .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
-  background-color: var(--primary-grey);
+    background-color: var(--primary-grey);
 }
 
 .mat-step-text-label {
-  color: white;
+    color: white;
 }
 
 .mat-horizontal-stepper-content.ng-trigger.ng-trigger-horizontalStepTransition.ng-tns-c84-0.ng-star-inserted {
-  display: grid;
-  text-align: center;
-  justify-content: center;
+    display: grid;
+    text-align: center;
+    justify-content: center;
 }
 
 .reservation-cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .message-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .message.error {
-  display: inline-block;
-  border: 1px solid #f8d7da;
-  background-color: #f8d7da;
-  color: #721c24;
+    display: inline-block;
+    border: 1px solid #f8d7da;
+    background-color: #f8d7da;
+    color: #721c24;
 
-  position: relative;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem
 }
 
 .message.warning {
-  display: inline-block;
-  border: 1px solid #fff3cd;
-  background-color: #fff3cd;
-  color: #856404;
+    display: inline-block;
+    border: 1px solid #fff3cd;
+    background-color: #fff3cd;
+    color: #856404;
 
-  position: relative;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem
 }
 
 .message.success {
-  display: inline-block;
-  border: 1px solid #d4edda;
-  background-color: #d4edda;
-  color: #155724;
+    display: inline-block;
+    border: 1px solid #d4edda;
+    background-color: #d4edda;
+    color: #155724;
 
-  position: relative;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem
-}
-
-.mat-stepper-horizontal {
-  background-color: var(--primary-background-dark);
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem
 }
 
 /*Starttime and EndTime label from timepicker*/
 mat-label.ng-tns-c138-3, mat-label.ng-tns-c138-4 {
-  color: white;
+    color: white;
 }
 
 .reservation-dialog {
-  text-align: center;
+    text-align: center;
 }
 
 div.mat-dialog-actions {
-  justify-content: center;
+    justify-content: center;
 }
 
 .mat-dialog-container {
-  background-color: var(--quintor-red);
-  border: solid 1px pink;
+    background-color: var(--quintor-red);
+    border: solid 1px pink;
 }
 
 .mat-dialog-container div.mat-form-field-flex {
-  background-color: white;
+    background-color: white;
 }
 
 @media screen and (max-width: 450px) {
-  mat-stepper {
-    margin: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+    mat-stepper {
+        margin: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
-  .mat-step-text-label {
-    visibility: hidden;
-  }
+    .mat-step-text-label {
+        visibility: hidden;
+    }
 
-  mat-form-field {
-    width: 100%;
-  }
+    mat-form-field {
+        width: 100%;
+    }
 
-  mat-card.mat-card {
-    width: fit-content;
-  }
+    mat-card.mat-card {
+        width: fit-content;
+    }
 
-  .mat-calendar-header {
-    border-radius: 4px 4px 0 0;
-  }
+    .mat-calendar-header {
+        border-radius: 4px 4px 0 0;
+    }
 }

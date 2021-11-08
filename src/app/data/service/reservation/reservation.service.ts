@@ -4,29 +4,29 @@ import { Observable } from "rxjs";
 import { Reservation } from "../../interface/Reservation";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ReservationService {
-  private apiUrl = 'http://localhost:8080/reservations';
+    private apiUrl = 'http://localhost:8080/reservations';
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    }
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  reserveWorkplace(reservation: Reservation): Observable<Reservation> {
-    return this.http.post<Reservation>(`${this.apiUrl}/workplaces`, reservation, this.httpOptions);
-  }
+    reserveWorkplace(reservation: Reservation): Observable<Reservation> {
+        return this.http.post<Reservation>(`${ this.apiUrl }/workplaces`, reservation, this.httpOptions);
+    }
 
-  reserveRoom(reservation: Reservation): Observable<Reservation> {
-    return this.http.post<Reservation>(`${this.apiUrl}/rooms`, reservation, this.httpOptions);
-  }
+    reserveRoom(reservation: Reservation): Observable<Reservation> {
+        return this.http.post<Reservation>(`${ this.apiUrl }/rooms`, reservation, this.httpOptions);
+    }
 
-  getAllReservationsByEmployeeId(employeeId: number): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiUrl}/${employeeId}/all`, this.httpOptions);
-  }
+    getAllReservationsByEmployeeId(employeeId: number): Observable<Reservation[]> {
+        return this.http.get<Reservation[]>(`${ this.apiUrl }/${ employeeId }/all`, this.httpOptions);
+    }
 }

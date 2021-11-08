@@ -1,18 +1,18 @@
 :root {
-  --quintor-red: #C23350;
-  --primary-background-dark: #2A2A2A;
-  --primary-black: #000000;
-  --primary-white: #FFFFFF;
-  --primary-grey: grey;
+    --quintor-red: #C23350;
+    --primary-background-dark: #2A2A2A;
+    --primary-black: #000000;
+    --primary-white: #FFFFFF;
+    --primary-grey: grey;
 }
 
 body {
-  background-color: var(--primary-background-dark);
-  color: var(--primary-white);
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  margin: 0;
+    background-color: var(--primary-background-dark);
+    color: var(--primary-white);
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
 }
 
 .left {
-  float: left;
+    float: left;
 }

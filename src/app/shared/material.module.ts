@@ -15,41 +15,41 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
-  declarations: [],
-  imports: [
-    MatStepperModule,
-    MatIconModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatOptionModule,
-    MatCardModule,
-    MatSelectModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
-  ],
-  exports: [
-    MatStepperModule,
-    MatIconModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatOptionModule,
-    MatCardModule,
-    MatSelectModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
-  ]
+    declarations: [],
+    imports: [
+        MatStepperModule,
+        MatIconModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatOptionModule,
+        MatCardModule,
+        MatSelectModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
+    ],
+    exports: [
+        MatStepperModule,
+        MatIconModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatOptionModule,
+        MatCardModule,
+        MatSelectModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
+    ]
 })
 export class MaterialModule {
 }

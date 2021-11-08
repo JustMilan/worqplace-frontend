@@ -1,0 +1,27 @@
+mat-stepper {
+    background-color: var(--primary-background-dark);
+    padding: 0 5%;
+}
+
+/* color the labels */
+.location-label {
+    color: black;
+}
+
+.time-label {
+    color: white;
+}
+
+.type-label {
+    color: black;
+}
+
+/* mat form field */
+.mat-form-field-flex.ng-tns-c52-1 {
+    width: 140px;
+    text-align: center;
+}
+
+.search-button {
+    background-color: var(--quintor-red);
+}

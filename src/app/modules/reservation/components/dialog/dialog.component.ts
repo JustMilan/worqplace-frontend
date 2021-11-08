@@ -4,30 +4,30 @@ import { ReservationDialogData } from "../../../../data/interface/ReservationDia
 import { Room } from "../../../../data/interface/Room";
 
 @Component({
-  selector: 'app-reservation-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+    selector: 'app-reservation-dialog',
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent {
-  repeatOptions: string[] = ['Geen', 'Dagelijks', 'Wekelijks', '2 Wekelijks', 'Maandelijks'];
-  room: Room;
+    repeatOptions: string[] = ['Geen', 'Dagelijks', 'Wekelijks', '2 Wekelijks', 'Maandelijks'];
+    room: Room;
 
-  selectedWorkplaceAmount: number;
-  selectedRecurringPattern: string = 'Geen';
+    selectedWorkplaceAmount: number;
+    selectedRecurringPattern: string = 'Geen';
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: ReservationDialogData) {
-    this.room = data.room;
-  }
+    constructor(public dialogRef: MatDialogRef<DialogComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: ReservationDialogData) {
+        this.room = data.room;
+    }
 
-  onCancel(): void {
-    this.dialogRef.close();
-  }
+    onCancel(): void {
+        this.dialogRef.close();
+    }
 
-  confirmBooking() {
-    this.dialogRef.close({
-      workplaceAmount: this.selectedWorkplaceAmount,
-      recurringPattern: this.selectedRecurringPattern != 'Geen' ? this.selectedRecurringPattern : undefined
-    });
-  }
+    confirmBooking() {
+        this.dialogRef.close({
+            workplaceAmount: this.selectedWorkplaceAmount,
+            recurringPattern: this.selectedRecurringPattern != 'Geen' ? this.selectedRecurringPattern : undefined
+        });
+    }
 }

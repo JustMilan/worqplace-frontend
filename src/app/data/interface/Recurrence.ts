@@ -1,4 +1,4 @@
 export interface Recurrence {
-  active: boolean,
-  recurrencePattern?: string | null
+    active: boolean,
+    recurrencePattern?: string | null
 }
