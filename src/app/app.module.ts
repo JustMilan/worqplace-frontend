@@ -1,71 +1,38 @@
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatNativeDateModule, MatOptionModule } from "@angular/material/core";
-import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { HttpClientModule } from "@angular/common/http";
-import { MatTableModule } from '@angular/material/table';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { NavBarComponent } from "./nav-bar/nav-bar.component";
-import { MyReservationsComponent } from "./my-reservations/my-reservations.component";
-import { OpenReservationCardComponent } from "./open-reservation-card/open-reservation-card.component";
-import { ReservationFormComponent } from "./reservation-form/reservation-form.component";
-import { ReservationPageComponent } from './reservation-page/reservation-page.component';
-import { MatIconModule } from "@angular/material/icon";
-import { MatButtonModule } from "@angular/material/button";
-import { MatStepperModule } from "@angular/material/stepper";
-import { MatGridListModule } from '@angular/material/grid-list';
-import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+import { CustomHttpInterceptor } from "./core/interceptor/custom-http.interceptor";
+import { DataModule } from "./data/data.module";
+import { NavBarComponent } from "./layout/nav-bar/nav-bar.component";
+
+import { ReservationModule } from "./modules/reservation/reservation.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    MyReservationsComponent,
-    ReservationPageComponent,
-    ReservationDialogComponent,
-    OpenReservationCardComponent,
-    ReservationDialogComponent,
-    ReservationFormComponent
-  ],
-  imports: [
-    MatTableModule,
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatOptionModule,
-    MatSelectModule,
-    HttpClientModule,
-    MatIconModule,
-    MatButtonModule,
-    MatStepperModule,
-    MatGridListModule,
-    MatDialogModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavBarComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReservationModule,
+        DataModule,
+        SharedModule
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: CustomHttpInterceptor,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
