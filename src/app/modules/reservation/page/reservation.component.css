@@ -77,42 +77,6 @@ mat-card.mat-card {
 	justify-content: center;
 }
 
-.message.error {
-	display: inline-block;
-	border: 1px solid #f8d7da;
-	background-color: #f8d7da;
-	color: #721c24;
-
-	position: relative;
-	padding: .75rem 1.25rem;
-	margin-bottom: 1rem;
-	border-radius: 0.25rem
-}
-
-.message.warning {
-	display: inline-block;
-	border: 1px solid #fff3cd;
-	background-color: #fff3cd;
-	color: #856404;
-
-	position: relative;
-	padding: .75rem 1.25rem;
-	margin-bottom: 1rem;
-	border-radius: 0.25rem
-}
-
-.message.success {
-	display: inline-block;
-	border: 1px solid #d4edda;
-	background-color: #d4edda;
-	color: #155724;
-
-	position: relative;
-	padding: .75rem 1.25rem;
-	margin-bottom: 1rem;
-	border-radius: 0.25rem
-}
-
 /*Starttime and EndTime label from timepicker*/
 mat-label.ng-tns-c138-3, mat-label.ng-tns-c138-4 {
 	color: white;

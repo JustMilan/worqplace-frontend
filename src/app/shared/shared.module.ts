@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { MyReservationsTableComponent } from "./component/my-reservations-table/my-reservations-table.component";
 import { MaterialModule } from "./material.module";
+import { NotificationComponent } from './component/notification/notification.component';
+import { NotificationService } from "./service/notification.service";
 
 @NgModule({
 	declarations: [
 		MyReservationsTableComponent,
+  		NotificationComponent,
 	],
 	imports: [
 		CommonModule,
@@ -15,8 +18,10 @@ import { MaterialModule } from "./material.module";
 	exports: [
 		CommonModule,
 		MyReservationsTableComponent,
-		MaterialModule
-	]
+		MaterialModule,
+		NotificationComponent
+	],
+	providers: [ NotificationService, NotificationComponent ],
 })
 export class SharedModule {
 }

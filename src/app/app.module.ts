@@ -30,7 +30,7 @@ import { SharedModule } from "./shared/shared.module";
 			provide: HTTP_INTERCEPTORS,
 			useClass: CustomHttpInterceptor,
 			multi: true
-		}
+		},
 	],
 	bootstrap: [AppComponent]
 })

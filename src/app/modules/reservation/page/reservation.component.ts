@@ -10,6 +10,7 @@ import { LocationService } from "../../../data/service/location/location.service
 import { ReservationService } from "../../../data/service/reservation/reservation.service";
 import { RoomService } from "../../../data/service/room/room.service";
 import { DialogComponent } from "../components/dialog/dialog.component";
+import { NotificationService } from "../../../shared/service/notification.service";
 
 @Component({
 	selector: 'app-reservation-page',
@@ -23,11 +24,9 @@ export class ReservationComponent implements OnInit {
 	rooms: Room[];
 	reservationResponse: ReservationResponse;
 
-	message: string;
-	colorClass: string;
-
 	constructor(private roomService: RoomService, private locationService: LocationService,
-				private reservationService: ReservationService, public dialog: MatDialog) {
+				private reservationService: ReservationService, public dialog: MatDialog,
+				private notificationService: NotificationService) {
 	}
 
 	ngOnInit(): void {
@@ -73,11 +72,10 @@ export class ReservationComponent implements OnInit {
 				if (this.reservationResponse.type == 'Werkplek') {
 					this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(data => {
 						this.getAvailableWorkplacesInRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
-					})
+					});
 				}
 
-				this.message = 'The reservation is confirmed';
-				this.colorClass = 'success';
+				this.notificationService.handleSucces("The reservation has been placed!");
 			}
 		});
 	}
@@ -93,17 +91,9 @@ export class ReservationComponent implements OnInit {
 		this.roomService.getAvailableFullRooms(locationId, date, start, end)
 			.subscribe(rooms => {
 				this.rooms = rooms
-				this.message = "";
-				this.colorClass = "";
 
 				if (this.rooms.length == 0) {
-					this.message = "There are no rooms available";
-					this.colorClass = 'warning';
-				}
-			}, error => {
-				if (error.status == 422) {
-					this.message = error.error;
-					this.colorClass = 'error';
+					this.notificationService.handleWarning("There are no rooms available!")
 				}
 			})
 	}
@@ -112,17 +102,9 @@ export class ReservationComponent implements OnInit {
 		this.roomService.getAvailableWorkplacesInRooms(locationId, date, start, end)
 			.subscribe(rooms => {
 				this.rooms = rooms
-				this.message = "";
-				this.colorClass = "";
 
 				if (this.rooms.length == 0) {
-					this.message = "There are no rooms available";
-					this.colorClass = 'warning';
-				}
-			}, error => {
-				if (error.status == 422) {
-					this.message = error.error;
-					this.colorClass = 'error';
+					this.notificationService.handleWarning("There are no workplaces available!")
 				}
 			})
 	}
@@ -137,7 +119,6 @@ export class ReservationComponent implements OnInit {
 				break
 		}
 
-		this.message = '';
 	}
 
 	onSubmit(reservationResponse: ReservationResponse) {
@@ -145,8 +126,6 @@ export class ReservationComponent implements OnInit {
 
 		if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
 			reservationResponse.time.start == undefined || reservationResponse.time.end == undefined || reservationResponse.type == undefined) {
-			this.message = "Niet alle velden zijn ingevuld!";
-			this.colorClass = 'error';
 			return;
 		}
 
