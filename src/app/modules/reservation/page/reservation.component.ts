@@ -10,6 +10,7 @@ import { LocationService } from "../../../data/service/location/location.service
 import { ReservationService } from "../../../data/service/reservation/reservation.service";
 import { RoomService } from "../../../data/service/room/room.service";
 import { DialogComponent } from "../components/dialog/dialog.component";
+import { NotificationService } from "../../../shared/service/notification.service";
 
 @Component({
 	selector: 'app-reservation-page',
@@ -24,7 +25,8 @@ export class ReservationComponent implements OnInit {
 	reservationResponse: ReservationResponse;
 
 	constructor(private roomService: RoomService, private locationService: LocationService,
-				private reservationService: ReservationService, public dialog: MatDialog) {
+				private reservationService: ReservationService, public dialog: MatDialog,
+				private notificationService: NotificationService) {
 	}
 
 	ngOnInit(): void {
@@ -70,8 +72,10 @@ export class ReservationComponent implements OnInit {
 				if (this.reservationResponse.type == 'Werkplek') {
 					this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(data => {
 						this.getAvailableWorkplacesInRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
-					})
+					});
 				}
+
+				this.notificationService.handleSucces("The reservation has been placed!");
 			}
 		});
 	}
@@ -89,9 +93,7 @@ export class ReservationComponent implements OnInit {
 				this.rooms = rooms
 
 				if (this.rooms.length == 0) {
-				}
-			}, error => {
-				if (error.status == 422) {
+					this.notificationService.handleWarning("There are no rooms available!")
 				}
 			})
 	}
@@ -102,9 +104,7 @@ export class ReservationComponent implements OnInit {
 				this.rooms = rooms
 
 				if (this.rooms.length == 0) {
-				}
-			}, error => {
-				if (error.status == 422) {
+					this.notificationService.handleWarning("There are no workplaces available!")
 				}
 			})
 	}

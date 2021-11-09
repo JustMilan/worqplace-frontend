@@ -1,14 +1,27 @@
 import { Injectable } from '@angular/core';
-import { NotificationComponent } from "../component/notification/notification.component";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
+	private subject = new Subject<any>();
 
-  constructor(private notificationComponent: NotificationComponent) { }
+	constructor() { }
+
+	onNotification(): Observable<any> {
+		return this.subject.asObservable();
+	}
 
 	handleError(errorMessage: string) {
-	  this.notificationComponent.setErrorMessage(errorMessage, 'error');
+		this.subject.next({ message: errorMessage, colorClass: 'error' });
+	}
+
+	handleWarning(warningMessage: string) {
+		this.subject.next({ message: warningMessage, colorClass: 'warning' });
+	}
+
+	handleSucces(successMessage: string) {
+		this.subject.next({ message: successMessage, colorClass: 'success' });
 	}
 }

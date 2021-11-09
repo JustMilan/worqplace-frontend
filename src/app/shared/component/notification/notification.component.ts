@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from "../../service/notification.service";
 
 @Component({
     selector: 'app-notification',
@@ -9,15 +10,17 @@ export class NotificationComponent implements OnInit {
     message: string;
     colorClass: string;
 
-    constructor() { }
-
-    setErrorMessage(message: string, colorClass: string): void {
-        this.message = message;
-        this.colorClass = colorClass;
-        console.log(message + " " + colorClass + " test")
-    }
+    constructor(private notificationService: NotificationService) { }
 
     ngOnInit(): void {
-    }
+        this.notificationService.onNotification().subscribe( notificationData => {
+            this.message = notificationData.message;
+            this.colorClass = notificationData.colorClass;
 
+            setTimeout( () => {
+                this.message = '';
+                this.colorClass = '';
+            }, 3000);
+        })
+    }
 }
