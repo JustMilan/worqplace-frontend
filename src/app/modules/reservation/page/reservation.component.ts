@@ -64,14 +64,31 @@ export class ReservationComponent implements OnInit {
 				}
 
 				if (this.reservationResponse.type == 'Ruimte') {
-					this.reservationService.reserveRoom(this.selectedRoomReservation(room, recurrence)).subscribe(data => {
-						this.getAvailableRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
+					this.reservationService.reserveRoom(this.selectedRoomReservation(room, recurrence)).subscribe(() => {
+						this.rooms = this.rooms.filter(r => room.id !== r.id);
 					});
 				}
 
 				if (this.reservationResponse.type == 'Werkplek') {
-					this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(data => {
-						this.getAvailableWorkplacesInRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
+					this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(() => {
+						if (result.workplaceAmount <= 0)
+							this.notificationService.handleError("The workplace amount is not valid!");
+
+						const index = this.rooms.findIndex(r => room.id == r.id);
+
+						this.rooms = this.rooms.filter(r => room.id !== r.id);
+
+						// create new room object
+						const newRoom: Room = {
+							id: room.id,
+							floor: room.floor,
+							capacity: room.capacity,
+							available: room.available -= result.workplaceAmount
+						};
+
+						// check if room has enough workplaces
+						if (newRoom.available > 0)
+							this.rooms.splice(index,0,newRoom); // add it to the exact position of the array
 					});
 				}
 
@@ -125,7 +142,9 @@ export class ReservationComponent implements OnInit {
 		this.reservationResponse = reservationResponse;
 
 		if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
-			reservationResponse.time.start == undefined || reservationResponse.time.end == undefined || reservationResponse.type == undefined) {
+			reservationResponse.time.start == undefined || reservationResponse.time.end == undefined ||
+			reservationResponse.type == undefined) {
+			this.notificationService.handleError("Niet alle velden zijn ingevuld!");
 			return;
 		}
 
