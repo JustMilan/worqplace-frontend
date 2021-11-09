@@ -10,14 +10,15 @@ export class NotificationComponent implements OnInit {
     message: string;
     colorClass: string;
 
-    constructor(private notificationService: NotificationService) { }
+    constructor(private notificationService: NotificationService) {
+    }
 
     ngOnInit(): void {
-        this.notificationService.onNotification().subscribe( notificationData => {
+        this.notificationService.onNotification().subscribe(notificationData => {
             this.message = notificationData.message;
             this.colorClass = notificationData.colorClass;
 
-            setTimeout( () => {
+            setTimeout(() => {
                 this.message = '';
                 this.colorClass = '';
             }, 3000);
