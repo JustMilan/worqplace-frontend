@@ -2,11 +2,16 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { NotificationService } from "../../shared/service/notification.service";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CustomHttpInterceptor implements HttpInterceptor {
+
+	constructor(private notificationService: NotificationService) {
+	}
+
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		// TODO: Here goes the modification of the request (e.g. add bearer token for auth)
 
@@ -16,7 +21,9 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 				catchError((error: HttpErrorResponse) => {
 					// TODO: Add error handling logic here
 					const errorMessage = this.setError(error);
-					alert(errorMessage);
+
+					this.notificationService.handleError(errorMessage);
+
 					return throwError(errorMessage);
 				})
 			)

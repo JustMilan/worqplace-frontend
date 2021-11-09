@@ -11,6 +11,7 @@ import { NavBarComponent } from "./layout/nav-bar/nav-bar.component";
 
 import { ReservationModule } from "./modules/reservation/reservation.module";
 import { SharedModule } from "./shared/shared.module";
+import { NotificationService } from "./shared/service/notification.service";
 
 @NgModule({
 	declarations: [
@@ -30,7 +31,7 @@ import { SharedModule } from "./shared/shared.module";
 			provide: HTTP_INTERCEPTORS,
 			useClass: CustomHttpInterceptor,
 			multi: true
-		}
+		},
 	],
 	bootstrap: [AppComponent]
 })

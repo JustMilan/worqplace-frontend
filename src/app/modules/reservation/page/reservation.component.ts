@@ -23,9 +23,6 @@ export class ReservationComponent implements OnInit {
 	rooms: Room[];
 	reservationResponse: ReservationResponse;
 
-	message: string;
-	colorClass: string;
-
 	constructor(private roomService: RoomService, private locationService: LocationService,
 				private reservationService: ReservationService, public dialog: MatDialog) {
 	}
@@ -75,9 +72,6 @@ export class ReservationComponent implements OnInit {
 						this.getAvailableWorkplacesInRooms(this.reservationResponse.locationId, this.reservationResponse.date, this.reservationResponse.time.start, this.reservationResponse.time.end);
 					})
 				}
-
-				this.message = 'The reservation is confirmed';
-				this.colorClass = 'success';
 			}
 		});
 	}
@@ -93,17 +87,11 @@ export class ReservationComponent implements OnInit {
 		this.roomService.getAvailableFullRooms(locationId, date, start, end)
 			.subscribe(rooms => {
 				this.rooms = rooms
-				this.message = "";
-				this.colorClass = "";
 
 				if (this.rooms.length == 0) {
-					this.message = "There are no rooms available";
-					this.colorClass = 'warning';
 				}
 			}, error => {
 				if (error.status == 422) {
-					this.message = error.error;
-					this.colorClass = 'error';
 				}
 			})
 	}
@@ -112,17 +100,11 @@ export class ReservationComponent implements OnInit {
 		this.roomService.getAvailableWorkplacesInRooms(locationId, date, start, end)
 			.subscribe(rooms => {
 				this.rooms = rooms
-				this.message = "";
-				this.colorClass = "";
 
 				if (this.rooms.length == 0) {
-					this.message = "There are no rooms available";
-					this.colorClass = 'warning';
 				}
 			}, error => {
 				if (error.status == 422) {
-					this.message = error.error;
-					this.colorClass = 'error';
 				}
 			})
 	}
@@ -137,7 +119,6 @@ export class ReservationComponent implements OnInit {
 				break
 		}
 
-		this.message = '';
 	}
 
 	onSubmit(reservationResponse: ReservationResponse) {
@@ -145,8 +126,6 @@ export class ReservationComponent implements OnInit {
 
 		if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
 			reservationResponse.time.start == undefined || reservationResponse.time.end == undefined || reservationResponse.type == undefined) {
-			this.message = "Niet alle velden zijn ingevuld!";
-			this.colorClass = 'error';
 			return;
 		}
 
