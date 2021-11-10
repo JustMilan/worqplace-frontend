@@ -11,6 +11,8 @@ import { ReservationService } from "../../../data/service/reservation/reservatio
 import { RoomService } from "../../../data/service/room/room.service";
 import { DialogComponent } from "../components/dialog/dialog.component";
 import { NotificationService } from "../../../shared/service/notification.service";
+import { Subscription } from "rxjs";
+import { UiService } from "../service/ui.service";
 
 @Component({
 	selector: 'app-reservation-page',
@@ -24,9 +26,18 @@ export class ReservationComponent implements OnInit {
 	rooms: Room[];
 	reservationResponse: ReservationResponse;
 
+	showTable: boolean = false;
+	subscription: Subscription;
+
 	constructor(private roomService: RoomService, private locationService: LocationService,
 				private reservationService: ReservationService, public dialog: MatDialog,
-				private notificationService: NotificationService) {
+				private notificationService: NotificationService, private uiService: UiService) {
+
+		this.subscription = this.uiService.onToggle().subscribe(value => { this.showTable = value});
+	}
+
+	toggleTable() {
+		this.uiService.toggleTable();
 	}
 
 	ngOnInit(): void {
