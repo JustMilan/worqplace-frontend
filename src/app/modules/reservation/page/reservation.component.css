@@ -92,7 +92,6 @@ div.mat-dialog-actions {
 
 .mat-dialog-container {
 	background-color: var(--quintor-red);
-	border: solid 1px pink;
 }
 
 .mat-dialog-container div.mat-form-field-flex {
@@ -121,4 +120,19 @@ div.mat-dialog-actions {
 	.mat-calendar-header {
 		border-radius: 4px 4px 0 0;
 	}
+}
+
+.recente-reserveringen-button.close {
+	background-color: firebrick;
+}
+
+.recente-reserveringen-button.open {
+	background-color: lightslategray;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
 }
