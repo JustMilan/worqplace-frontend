@@ -82,8 +82,10 @@ export class ReservationComponent implements OnInit {
 
 				if (this.reservationResponse.type == 'Werkplek') {
 					this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(() => {
-						if (result.workplaceAmount <= 0)
+						if (result.workplaceAmount <= 0) {
 							this.notificationService.handleError("The workplace amount is not valid!");
+							return;
+						}
 
 						const index = this.rooms.findIndex(r => room.id == r.id);
 
