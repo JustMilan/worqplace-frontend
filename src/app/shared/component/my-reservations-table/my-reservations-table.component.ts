@@ -16,7 +16,7 @@ export class MyReservationsTableComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	public allMyReservations: Reservation[];
 	public allMyReservationsSlice: Reservation[];
-	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount'];
+	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence'];
 
 	showAddTask: boolean;
 	subscription: Subscription;

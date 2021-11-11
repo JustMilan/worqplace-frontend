@@ -39,6 +39,11 @@
 				<td mat-cell *matCellDef="let element"> {{element.roomId}} </td>
 			</ng-container>
 
+			<ng-container matColumnDef="recurrence">
+				<th mat-header-cell *matHeaderCellDef>herhaling</th>
+				<td mat-cell *matCellDef="let element"> {{element.recurrence.recurrencePattern}} </td>
+			</ng-container>
+
 			<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
 			<tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
 		</table>
