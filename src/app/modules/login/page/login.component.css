@@ -1,0 +1,28 @@
+:root {
+	--widget-width: 300px;
+}
+
+.container {
+	margin: 0 20px 0 20px;
+	width: fit-content;
+}
+
+/*Custom class*/
+.center {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.mat-form-field-flex {
+	background: white;
+}
+
+.email-label {
+	color: black;
+}
+
+.submit-button {
+	background-color: firebrick;
+}

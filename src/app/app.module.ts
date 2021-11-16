@@ -11,6 +11,7 @@ import { NavBarComponent } from "./layout/nav-bar/nav-bar.component";
 
 import { ReservationModule } from "./modules/reservation/reservation.module";
 import { SharedModule } from "./shared/shared.module";
+import { LoginModule } from "./modules/login/login.module";
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import { SharedModule } from "./shared/shared.module";
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		ReservationModule,
+		LoginModule,
 		DataModule,
 		SharedModule
 	],
