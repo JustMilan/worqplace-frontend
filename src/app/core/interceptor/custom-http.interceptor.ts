@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { NotificationService } from "../../shared/service/notification.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
 	providedIn: 'root'
@@ -13,7 +14,15 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 	}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		// TODO: Here goes the modification of the request (e.g. add bearer token for auth)
+		// Check if a session is set and if the end-point of the request is our API.
+		if (req.url.startsWith(environment.baseUrl) && sessionStorage.getItem('username') && sessionStorage.getItem('token')) {
+			// Add session header to the request.
+			req = req.clone({
+				setHeaders: {
+					Authorization: sessionStorage.getItem('token') ?? ''
+				}
+			})
+		}
 
 		return next.handle(req)
 			.pipe(

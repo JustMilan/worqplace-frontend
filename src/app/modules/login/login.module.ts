@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { LoginComponent } from "./page/login.component";
-import {SharedModule} from "../../shared/shared.module";
+import { SharedModule } from "../../shared/shared.module";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
 	imports: [
-		SharedModule
+		SharedModule,
+		FormsModule
 	],
 	declarations: [
 		LoginComponent
