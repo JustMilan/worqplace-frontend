@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import {environment} from "../../../environments/environment";
+import {SourceCode} from "eslint";
+import Config = SourceCode.Config;
 
 export class User {
 	constructor(public status: string) {}
@@ -12,19 +14,11 @@ export class User {
 })
 export class AuthenticationService {
 	constructor(private httpClient: HttpClient) {}
-	// Provide username and password for authentication, and once authentication is successful,
-	// store JWT token in session
+
+	// Provide username and password for authentication
 	authenticate(email: string, password: string) {
 		return this.httpClient
-			.post<any>(environment.baseUrl + "/login", { email, password })
-			.pipe(
-				map(userData => {
-					sessionStorage.setItem("username", email);
-					let tokenStr = "Bearer " + userData.token;
-					sessionStorage.setItem("token", tokenStr);
-					return userData;
-				})
-			);
+			.post<any>(environment.baseUrl + "/login", { username: email, password }, {observe: "response"})
 	}
 
 	isUserLoggedIn() {
