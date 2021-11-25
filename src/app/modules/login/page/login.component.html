@@ -19,5 +19,5 @@
 		<input type="password" matInput [(ngModel)]="password" name="password">
 	</mat-form-field>
 
-	<button mat-button class="submit-button" type="button" (click)="login()">Login</button>
+	<button mat-button class="submit-button" type="button" (keydown.enter)="login()" (click)="login()">Login</button>
 </form>
