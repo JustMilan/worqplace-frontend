@@ -8,6 +8,13 @@ mat-stepper {
 	color: black;
 }
 
+.timepicker-overlay {
+	z-index: 10000000 !important;
+}
+.timepicker-backdrop-overlay{
+	z-index: 10000000 !important;
+}
+
 .time-label {
 	color: white;
 }
