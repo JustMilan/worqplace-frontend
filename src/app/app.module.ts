@@ -11,6 +11,7 @@ import { NavBarComponent } from "./layout/nav-bar/nav-bar.component";
 
 import { ReservationModule } from "./modules/reservation/reservation.module";
 import { SharedModule } from "./shared/shared.module";
+import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,8 @@ import { SharedModule } from "./shared/shared.module";
 		BrowserAnimationsModule,
 		ReservationModule,
 		DataModule,
-		SharedModule
+		SharedModule,
+		NgxMaterialTimepickerModule
 	],
 	providers: [
 		{
