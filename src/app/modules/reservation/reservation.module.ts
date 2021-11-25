@@ -7,6 +7,7 @@ import { FormComponent } from "./components/form/form.component";
 
 import { OpenCardComponent } from "./components/open-card/open-card.component";
 import { ReservationComponent } from "./page/reservation.component";
+import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 
 @NgModule({
 	declarations: [
@@ -15,12 +16,13 @@ import { ReservationComponent } from "./page/reservation.component";
 		ReservationComponent,
 		DialogComponent
 	],
-	imports: [
-		SharedModule,
-		FormsModule,
-		ReactiveFormsModule,
-		RouterModule
-	]
+    imports: [
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        NgxMaterialTimepickerModule
+    ]
 })
 export class ReservationModule {
 }
