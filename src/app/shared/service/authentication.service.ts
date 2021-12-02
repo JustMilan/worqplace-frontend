@@ -31,4 +31,8 @@ export class AuthenticationService {
 		sessionStorage.removeItem("username");
 		sessionStorage.removeItem("token");
 	}
+
+	getRole() {
+		return "ROLE_ADMIN";
+	}
 }

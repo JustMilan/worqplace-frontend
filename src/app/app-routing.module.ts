@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReservationComponent } from "./modules/reservation/page/reservation.component";
 import { LoginComponent } from "./modules/login/page/login.component";
 import { LoginActivate } from "./core/injectable/login-activate.injectable";
+import { AdminLoginActivate } from "./core/injectable/admin-login-activate.injectable";
 
 const routes: Routes = [
 	{path: '', redirectTo: '/reserve', pathMatch: 'full'},
@@ -13,6 +14,11 @@ const routes: Routes = [
 		loadChildren: () => import('./modules/my-reservations/my-reservations.module').then(m => m.MyReservationsModule),
 		canActivate: [LoginActivate]
 	},
+	{
+		path: 'admin',
+		loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+	 	canActivate: [AdminLoginActivate]
+	},
 	{path: 'login', component: LoginComponent},
 	{path: '**', component: ReservationComponent, canActivate: [LoginActivate]}
 ];
@@ -20,7 +26,7 @@ const routes: Routes = [
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],
-	providers: [LoginActivate]
+	providers: [LoginActivate, AdminLoginActivate]
 })
 
 export class AppRoutingModule {
