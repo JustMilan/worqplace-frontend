@@ -5,7 +5,6 @@ import { MyReservationsTableComponent } from "./component/my-reservations-table/
 import { MaterialModule } from "./material.module";
 import { NotificationComponent } from './component/notification/notification.component';
 import { NotificationService } from "./service/notification.service";
-import { AuthenticationService } from "./service/authentication.service";
 
 @NgModule({
 	declarations: [
@@ -22,7 +21,7 @@ import { AuthenticationService } from "./service/authentication.service";
 		MaterialModule,
 		NotificationComponent
 	],
-	providers: [ NotificationService, NotificationComponent, AuthenticationService ],
+	providers: [ NotificationService, NotificationComponent ],
 })
 export class SharedModule {
 }

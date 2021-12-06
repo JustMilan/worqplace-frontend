@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AuthenticationService } from "../../../shared/service/authentication.service";
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {NotificationService} from "../../../shared/service/notification.service";
+import { AuthenticationService } from "../../../core/service/authentication.service";
+import { Router } from '@angular/router';
+import { NotificationService } from "../../../shared/service/notification.service";
 
 
 @Component({
@@ -12,7 +12,7 @@ import {NotificationService} from "../../../shared/service/notification.service"
 })
 
 export class LoginComponent implements OnInit {
-	email: string = '';
+	username: string = '';
 	password: string = '';
 
 	constructor(private authenticationService: AuthenticationService, private router: Router,
@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		this.authenticationService.authenticate(this.email, this.password).subscribe(
+		this.authenticationService.authenticate(this.username, this.password).subscribe(
 			(data) => {
-				sessionStorage.setItem("token", <string>data.headers.get("authorization"));
-				sessionStorage.setItem("username", this.email);
+				localStorage.setItem("token", <string>data.headers.get("authorization"));
+				localStorage.setItem("username", this.username);
 
 				this.router.navigateByUrl("/");
-			}, (error) => {
+			}, () => {
 				this.notificationService.handleError("Verkeerd email of wachtwoord")
 			}
 		);

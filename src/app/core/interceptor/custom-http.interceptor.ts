@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { NotificationService } from "../../shared/service/notification.service";
-import {environment} from "../../../environments/environment";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
 	providedIn: 'root'
@@ -15,11 +15,11 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		// Check if a session is set and if the end-point of the request is our API.
-		if (req.url.startsWith(environment.baseUrl) && sessionStorage.getItem('username') && sessionStorage.getItem('token')) {
+		if (req.url.startsWith(environment.baseUrl) && (localStorage.getItem('token') !== null)) {
 			// Add session header to the request.
 			req = req.clone({
 				setHeaders: {
-					Authorization: sessionStorage.getItem('token') ?? ''
+					Authorization: localStorage.getItem('token') ?? ''
 				}
 			})
 		}
@@ -28,7 +28,6 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 			.pipe(
 				// Handle errors
 				catchError((error: HttpErrorResponse) => {
-					// TODO: Add error handling logic here
 					const errorMessage = this.setError(error);
 
 					this.notificationService.handleError(errorMessage);
