@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthenticationService } from "../../../core/service/authentication.service";
 import { Router } from '@angular/router';
 import { NotificationService } from "../../../shared/service/notification.service";
+import { DOCUMENT } from "@angular/common";
 
 
 @Component({
@@ -11,16 +12,21 @@ import { NotificationService } from "../../../shared/service/notification.servic
 	encapsulation: ViewEncapsulation.None
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 	username: string = '';
 	password: string = '';
 
 	constructor(private authenticationService: AuthenticationService, private router: Router,
-				private notificationService: NotificationService) {
+				private notificationService: NotificationService, @Inject(DOCUMENT) private document: any) {
 
 	}
 
 	ngOnInit(): void {
+		this.document.body.classList.add('login-body');
+	}
+
+	ngOnDestroy(): void {
+		this.document.body.classList.remove('login-body');
 	}
 
 	login() {

@@ -5,7 +5,7 @@ app-notification {
 	justify-content: center;
 }
 
-body{
+body.login-body {
 	margin: 0;
 	padding: 0;
 	background: linear-gradient(120deg, #ca4a5a, #840424);
@@ -13,7 +13,7 @@ body{
 	overflow: hidden;
 }
 
-img {
+.login-box img {
 	width:20%;
 	height:20%;
 	padding-top: 10px;
@@ -26,7 +26,7 @@ app-notification{
 	text-align: center;
 }
 
-.center{
+.login-box{
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -36,13 +36,13 @@ app-notification{
 	border-radius: 10px;
 	box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
-.center h1{
+.login-box h1{
 	text-align: center;
 	padding-bottom: 20px;
 	border-bottom: 1px solid silver;
 	color: black;
 }
-.center form{
+.login-box form{
 	padding: 0 40px;
 	box-sizing: border-box;
 }
