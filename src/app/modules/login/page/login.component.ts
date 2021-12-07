@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 				this.router.navigateByUrl("/");
 			}, () => {
-				this.notificationService.handleError("Verkeerd email of wachtwoord")
+				this.notificationService.handleError("Verkeerde gebruikersnaam of wachtwoord");
 			}
 		);
 	}
