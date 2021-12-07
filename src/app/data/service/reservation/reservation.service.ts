@@ -30,4 +30,8 @@ export class ReservationService {
 	getAllReservationsByEmployeeId(employeeId: number): Observable<Reservation[]> {
 		return this.http.get<Reservation[]>(`${this.apiUrl}/${employeeId}/all`, this.httpOptions);
 	}
+
+	deleteReservationById(reservationId: number): Observable<Object> {
+		return this.http.delete(`${this.apiUrl}/${reservationId}`, this.httpOptions)
+	}
 }

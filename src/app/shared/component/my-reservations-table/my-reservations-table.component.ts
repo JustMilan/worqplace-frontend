@@ -16,7 +16,7 @@ export class MyReservationsTableComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	public allMyReservations: Reservation[];
 	public allMyReservationsSlice: Reservation[];
-	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence'];
+	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'actions'];
 
 	showAddTask: boolean;
 	subscription: Subscription;
@@ -32,9 +32,11 @@ export class MyReservationsTableComponent implements OnInit {
 	}
 
 	getAllReservationsByEmployeeId(employeeId: number) {
-		employeeId = 1;
-
 		this.reservationService.getAllReservationsByEmployeeId(employeeId).subscribe(reservations => this.allMyReservations = reservations);
+	}
+
+	deleteReservationByReservationId(reservationId: number){
+		this.reservationService.deleteReservationById(reservationId)
 	}
 
 	OnPageChange(event: PageEvent) {
