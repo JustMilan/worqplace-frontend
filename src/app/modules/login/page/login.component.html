@@ -1,23 +1,21 @@
-<div class="center">
-	<h2>Inloggen</h2>
-</div>
-
-<div class="center">
+<div class="login-box">
+	<img src="../../../../assets/images/QuintorLogo.png">
+	<h1>Login</h1>
 	<app-notification></app-notification>
+	<form>
+		<div class="input_field">
+			<input class="input-username" type="username" name="username"
+				   [(ngModel)]="username" required>
+			<span></span>
+			<label>Username</label>
+		</div>
+		<div class="input_field">
+			<input class="input-password" type="password" name="password"
+				   [(ngModel)]="password" required>
+			<span></span>
+			<label>Password</label>
+		</div>
+
+		<button mat-button class="submit-button" type="submit" (keydown.enter)="login()" (click)="login()">Login</button>
+	</form>
 </div>
-
-<form class="center">
-
-	<mat-form-field class="mat-form-field-username" appearance="fill">
-		<mat-label class="username-label">Username</mat-label>
-		<input type="username" matInput
-					 placeholder="example" class="input-username" [(ngModel)]="username" name="username">
-	</mat-form-field>
-
-	<mat-form-field class="mat-form-field-password" color="white" appearance="fill">
-		<mat-label>Password</mat-label>
-		<input type="password" matInput [(ngModel)]="password" name="password">
-	</mat-form-field>
-
-	<button mat-button class="submit-button" type="button" (keydown.enter)="login()" (click)="login()">Login</button>
-</form>

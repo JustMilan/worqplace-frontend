@@ -21,6 +21,10 @@ export class AuthenticationService {
 
 	isAuthenticated(): boolean {
 		let token = localStorage.getItem("token");
+		let username = localStorage.getItem('username');
+
+		if (username === null)
+			return false;
 
 		if (token !== null) {
 			token = this.splitToken(token);
