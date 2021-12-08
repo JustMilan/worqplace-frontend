@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="my-reservations-wrapper">
-		<table mat-table [dataSource]="allMyReservationsSlice" matSort aria-label="Elements">
+		<table mat-table [dataSource]="allMyReservationsSlice" #myTable matSort aria-label="Elements">
 
 			<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->

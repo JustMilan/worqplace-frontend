@@ -33,6 +33,6 @@ export class ReservationService {
 
 	deleteReservationById(reservation: Reservation): Observable<Reservation> {
 		console.log("stap 2/2 deleteReservationById " + `${this.apiUrl}/${reservation.id}`)
-		return this.http.delete<Reservation>(`${this.apiUrl}/${reservation.id}`, this.httpOptions)
+		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservation.id}`, this.httpOptions)
 	}
 }
