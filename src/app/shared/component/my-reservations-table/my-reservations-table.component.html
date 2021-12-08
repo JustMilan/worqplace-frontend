@@ -44,11 +44,11 @@
 				<td mat-cell *matCellDef="let element"> {{element.recurrence.recurrencePattern}} </td>
 			</ng-container>
 
-			<ng-container matColumnDef="actions">
-				<mat-header-cell  *matHeaderCellDef >Actie</mat-header-cell>
-				<mat-cell *matCellDef="let row">
-					<button mat-button >Delete</button>
-				</mat-cell>
+			<ng-container matColumnDef="action">
+				<th mat-header-cell *matHeaderCellDef></th>
+				<td mat-cell *matCellDef="let element">
+					<button mat-raised-button (click)="deleteReservationByReservationId(element)">delete</button>
+				</td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
