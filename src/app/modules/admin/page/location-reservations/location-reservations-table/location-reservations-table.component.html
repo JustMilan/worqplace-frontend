@@ -1,11 +1,19 @@
 <div *ngIf="(showAddTask || hasRoute('/admin/location'))">
 	<div class="container">
-		<h2>Mijn Reserveringen</h2>
+		<h2>Location Reserveringen</h2>
+
+		<mat-form-field appearance="fill">
+			<mat-label class="location-label">Locatie</mat-label>
+			<mat-select [(value)]="location" required  (selectionChange)="refresh($event)">
+				<mat-option *ngFor="let loc of locations" [value]="loc.id">
+					{{loc.name}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
 	</div>
 
-	<div class="my-reservations-wrapper">
+	<div class="my-reservations-wrapper" *ngIf="allMyReservationsSlice">
 		<table mat-table [dataSource]="allMyReservationsSlice" matSort aria-label="Elements">
-
 			<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 
