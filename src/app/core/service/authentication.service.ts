@@ -60,4 +60,13 @@ export class AuthenticationService {
 		localStorage.removeItem("username");
 		localStorage.removeItem("token");
 	}
+
+	getRole() {
+		let token = localStorage.getItem("token");
+
+		if (!token) return "";
+		let decoded = this.jwtHelper.decodeToken(token);
+
+		return decoded.role[0];
+	}
 }
