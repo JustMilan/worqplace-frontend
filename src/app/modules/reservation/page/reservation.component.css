@@ -70,6 +70,7 @@ mat-card.mat-card {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .message-container {

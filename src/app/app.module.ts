@@ -14,6 +14,7 @@ import { SharedModule } from "./shared/shared.module";
 import { LoginModule } from "./modules/login/login.module";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { AdminModule } from "./modules/admin/admin.module";
+import { CoreModule } from "./core/core.module";
 
 @NgModule({
 	declarations: [
@@ -21,15 +22,22 @@ import { AdminModule } from "./modules/admin/admin.module";
 		NavBarComponent
 	],
 	imports: [
+		// angular
 		BrowserModule,
-		AppRoutingModule,
 		BrowserAnimationsModule,
+
+		// 3rd party
+		NgxMaterialTimepickerModule,
+
+		// app
 		ReservationModule,
 		LoginModule,
 		DataModule,
+		CoreModule,
 		SharedModule,
 		NgxMaterialTimepickerModule,
 		AdminModule,
+		AppRoutingModule
 	],
 	providers: [
 		{

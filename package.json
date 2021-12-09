@@ -21,10 +21,12 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@auth0/angular-jwt": "^5.0.2",
     "mat-timepicker": "^5.1.4",
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
+    "url-polyfill": "^1.1.12",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

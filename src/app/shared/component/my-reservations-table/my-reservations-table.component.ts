@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
-import { Reservation } from "../../../data/interface/Reservation";
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
-import { Subscription } from "rxjs";
-import { UiService } from "../../../modules/reservation/service/ui.service";
-import { Router } from "@angular/router";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {Reservation} from "../../../data/interface/Reservation";
+import {ReservationService} from "../../../data/service/reservation/reservation.service";
+import {Subscription} from "rxjs";
+import {UiService} from "../../../modules/reservation/service/ui.service";
+import {Router} from "@angular/router";
+import {MatTable} from "@angular/material/table";
 
 @Component({
 	selector: 'app-my-reservations-table',
@@ -13,10 +14,11 @@ import { Router } from "@angular/router";
 })
 export class MyReservationsTableComponent implements OnInit {
 
+	@ViewChild('myTable') myTable: MatTable<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	public allMyReservations: Reservation[];
 	public allMyReservationsSlice: Reservation[];
-	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence'];
+	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'action'];
 
 	showAddTask: boolean;
 	subscription: Subscription;
@@ -32,9 +34,13 @@ export class MyReservationsTableComponent implements OnInit {
 	}
 
 	getAllReservationsByEmployeeId(employeeId: number) {
-		employeeId = 1;
-
 		this.reservationService.getAllReservationsByEmployeeId(employeeId).subscribe(reservations => this.allMyReservations = reservations);
+	}
+
+	deleteReservationByReservationId(reservation: Reservation) {
+		console.log("stap 1/2 deleteReservationByReservationId " + reservation.id)
+		this.reservationService.deleteReservationById(reservation).subscribe()
+		this.myTable.renderRows()
 	}
 
 	OnPageChange(event: PageEvent) {
