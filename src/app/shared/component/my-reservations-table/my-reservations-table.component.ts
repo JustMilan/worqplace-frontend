@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
-import { Reservation } from "../../../data/interface/Reservation";
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
-import { Subscription } from "rxjs";
-import { UiService } from "../../../modules/reservation/service/ui.service";
-import { Router } from "@angular/router";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {Reservation} from "../../../data/interface/Reservation";
+import {ReservationService} from "../../../data/service/reservation/reservation.service";
+import {Subscription} from "rxjs";
+import {UiService} from "../../../modules/reservation/service/ui.service";
+import {Router} from "@angular/router";
 import {MatTable} from "@angular/material/table";
 
 @Component({
@@ -37,7 +37,7 @@ export class MyReservationsTableComponent implements OnInit {
 		this.reservationService.getAllReservationsByEmployeeId(employeeId).subscribe(reservations => this.allMyReservations = reservations);
 	}
 
-	deleteReservationByReservationId(reservation: Reservation){
+	deleteReservationByReservationId(reservation: Reservation) {
 		console.log("stap 1/2 deleteReservationByReservationId " + reservation.id)
 		this.reservationService.deleteReservationById(reservation).subscribe()
 		this.myTable.renderRows()
@@ -53,7 +53,7 @@ export class MyReservationsTableComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.getAllReservationsByEmployeeId(1	);
+		this.getAllReservationsByEmployeeId(1);
 		setTimeout(() => {
 			this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
 		}, 50);
