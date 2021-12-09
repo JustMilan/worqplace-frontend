@@ -34,11 +34,10 @@ export class MyReservationsTableComponent implements OnInit {
 	}
 
 	getAllReservationsByEmployeeId(employeeId: number) {
-		this.reservationService.getAllReservationsByEmployeeId(employeeId).subscribe(reservations => this.allMyReservations = reservations);
+		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => this.allMyReservations = reservations);
 	}
 
 	deleteReservationByReservationId(reservation: Reservation) {
-		console.log("stap 1/2 deleteReservationByReservationId " + reservation.id)
 		this.reservationService.deleteReservationById(reservation).subscribe()
 		this.myTable.renderRows()
 	}

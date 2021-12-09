@@ -5,7 +5,6 @@ export interface Reservation {
 	date: string,
 	startTime: string,
 	endTime: string,
-	employeeId: number,
 	roomId: number,
 	workplaceAmount?: number,
 	recurrence: Recurrence

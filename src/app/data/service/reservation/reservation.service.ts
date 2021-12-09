@@ -12,7 +12,7 @@ export class ReservationService {
 
 	private httpOptions = {
 		headers: new HttpHeaders({
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		})
 	}
 
@@ -27,8 +27,8 @@ export class ReservationService {
 		return this.http.post<Reservation>(`${this.apiUrl}/rooms`, reservation, this.httpOptions);
 	}
 
-	getAllReservationsByEmployeeId(employeeId: number): Observable<Reservation[]> {
-		return this.http.get<Reservation[]>(`${this.apiUrl}/${employeeId}/all`, this.httpOptions);
+	getAllReservationsByEmployeeId(): Observable<Reservation[]> {
+		return this.http.get<Reservation[]>(`${this.apiUrl}/all`, this.httpOptions);
 	}
 
 	getAllReservationsByLocationId(locationId: number): Observable<Reservation[]> {
@@ -36,7 +36,6 @@ export class ReservationService {
 	}
 
 	deleteReservationById(reservation: Reservation): Observable<Reservation> {
-		console.log("stap 2/2 deleteReservationById " + `${this.apiUrl}/${reservation.id}`)
 		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservation.id}`, this.httpOptions)
 	}
 }

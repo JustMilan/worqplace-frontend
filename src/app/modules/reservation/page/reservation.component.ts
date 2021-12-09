@@ -169,7 +169,7 @@ export class ReservationComponent implements OnInit {
 			date: this.reservationResponse.date,
 			startTime: this.reservationResponse.time.start,
 			endTime: this.reservationResponse.time.end,
-			employeeId: 1,
+			// employeeId: 1,
 			roomId: room.id,
 			recurrence: roomRecurrence
 		};
@@ -180,7 +180,6 @@ export class ReservationComponent implements OnInit {
 			date: this.reservationResponse.date,
 			startTime: this.reservationResponse.time.start,
 			endTime: this.reservationResponse.time.end,
-			employeeId: 1,
 			roomId: room.id,
 			workplaceAmount: workplaceAmount,
 			recurrence: roomRecurrence
