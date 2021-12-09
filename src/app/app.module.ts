@@ -13,6 +13,7 @@ import { ReservationModule } from "./modules/reservation/reservation.module";
 import { SharedModule } from "./shared/shared.module";
 import { LoginModule } from "./modules/login/login.module";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+import { AdminModule } from "./modules/admin/admin.module";
 import { CoreModule } from "./core/core.module";
 
 @NgModule({
@@ -34,6 +35,8 @@ import { CoreModule } from "./core/core.module";
 		DataModule,
 		CoreModule,
 		SharedModule,
+		NgxMaterialTimepickerModule,
+		AdminModule,
 		AppRoutingModule
 	],
 	providers: [

@@ -31,6 +31,10 @@ export class ReservationService {
 		return this.http.get<Reservation[]>(`${this.apiUrl}/all`, this.httpOptions);
 	}
 
+	getAllReservationsByLocationId(locationId: number): Observable<Reservation[]> {
+		return this.http.get<Reservation[]>(`${this.apiUrl}/location/${locationId}`, this.httpOptions);
+	}
+
 	deleteReservationById(reservation: Reservation): Observable<Reservation> {
 		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservation.id}`, this.httpOptions)
 	}
