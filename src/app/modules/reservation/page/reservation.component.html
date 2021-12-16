@@ -4,7 +4,8 @@
 
 <app-my-reservations-table></app-my-reservations-table>
 
-<app-reservation-form [locations]="locations" (submit)="onSubmit($event)"></app-reservation-form>
+<app-reservation-form class="reservation-form"
+					  [locations]="locations" (submit)="onSubmit($event)"></app-reservation-form>
 
 <app-notification></app-notification>
 

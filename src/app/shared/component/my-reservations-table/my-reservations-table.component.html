@@ -1,4 +1,4 @@
-<div *ngIf="(showAddTask || hasRoute('/my-reservations'))">
+<div *ngIf="(showTable || hasRoute('/my-reservations'))">
 	<div class="container">
 		<h2>Mijn Reserveringen</h2>
 	</div>
@@ -54,10 +54,11 @@
 			<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
 			<tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
 		</table>
-		<mat-paginator [length]="this.allMyReservations.length"
-									 [pageSize]="3"
-									 [pageSizeOptions]="[3,5,10,20]"
-									 (page)="OnPageChange($event)">
+		<mat-paginator class="paginator"
+					   [length]="this.allMyReservations.length"
+					   [pageSize]="3"
+					   [pageSizeOptions]="[3,5,10,20]"
+					   (page)="OnPageChange($event)">
 		</mat-paginator>
 
 	</div>

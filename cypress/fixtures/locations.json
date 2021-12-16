@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Quintor Amersfoort",
+    "address": {
+      "id": 1,
+      "houseNumber": 14,
+      "addition": "m",
+      "street": "Maanlander",
+      "postalCode": "3824 MP",
+      "city": "Amersfoort"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Quintor Den Bosch",
+    "address": {
+      "id": 2,
+      "houseNumber": 1,
+      "addition": "",
+      "street": "Havensingel",
+      "postalCode": "5211 TX",
+      "city": "Den Bosch"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Quintor Deventer",
+    "address": {
+      "id": 3,
+      "houseNumber": 6,
+      "addition": "",
+      "street": "Zutphenseweg",
+      "postalCode": "7418 AJ",
+      "city": "Deventer"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Quintor Den Haag",
+    "address": {
+      "id": 4,
+      "houseNumber": 4,
+      "addition": "-5",
+      "street": "Lange Vijverberg",
+      "postalCode": "2513 AC",
+      "city": "Den Haag"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Quintor Groningen",
+    "address": {
+      "id": 5,
+      "houseNumber": 112,
+      "addition": "",
+      "street": "Ubbo Emmiussingel",
+      "postalCode": "9711 BK",
+      "city": "Groningen"
+    }
+  }
+]

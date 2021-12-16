@@ -1,18 +1,18 @@
-<div *ngFor="let room of rooms" class="container">
+<div *ngFor="let room of rooms" class="container open-card" id="open-card-{{room.id}}">
 	<h4 class="card-title">{{reservationResponse.type}}</h4>
 	<ul>
-		<li>Verdieping:</li>
-		<li *ngIf="reservationResponse.type == 'Werkplek'">Available:</li>
-		<li>Capaciteit:</li>
+		<li id="floor">Verdieping:</li>
+		<li id="availability" *ngIf="reservationResponse.type === 'Werkplek'">Available:</li>
+		<li id="capacity">Capaciteit:</li>
 	</ul>
 
 	<ul>
-		<li>{{room.floor}}</li>
-		<li *ngIf="reservationResponse.type == 'Werkplek'">{{room.available}}</li>
-		<li>{{room.capacity}}</li>
+		<li id="floor-result" data-value="{{room.floor}}">{{room.floor}}</li>
+		<li id="availability-result" *ngIf="reservationResponse.type === 'Werkplek'" data-value="{{room.available}}">{{room.available}}</li>
+		<li id="capacity-result" data-value="{{room.capacity}}">{{room.capacity}}</li>
 	</ul>
 
 	<div class="container__button">
-		<Button class="quintor" (click)="book.emit(room)">Boek</Button>
+		<Button id="book-button" class="quintor" (click)="book.emit(room)">Boek</Button>
 	</div>
 </div>

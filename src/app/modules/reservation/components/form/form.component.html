@@ -1,4 +1,4 @@
-<form [formGroup]="reservationForm">
+<form [formGroup]="reservationForm" id="reservationsForm">
 	<mat-stepper linear>
 
 		<mat-step formGroupName="locationDetails"
@@ -6,7 +6,8 @@
 							label="Locatie">
 			<mat-form-field appearance="fill">
 				<mat-label class="location-label">Locatie</mat-label>
-				<mat-select formControlName="locationFormCtrl" required>
+				<mat-select formControlName="locationFormCtrl"
+							id="locationSelect" required>
 					<mat-option *ngFor="let loc of locations" [value]="loc.id">
 						{{loc.name}}
 					</mat-option>
@@ -16,21 +17,21 @@
 			</mat-form-field>
 
 			<div>
-				<button mat-button matStepperNext type="button">Next</button>
+				<button mat-button matStepperNext type="button" id="location-next-button">Next</button>
 			</div>
 		</mat-step>
 
 		<mat-step label="Datum">
 			<mat-card class="demo-inline-calendar-card">
 				<mat-calendar (selectedChange)="onSelect($event)"
-											[selected]="selectedDate"
-											[minDate]="minDate" required>
+							  [selected]="selectedDate"
+							  [minDate]="minDate">
 				</mat-calendar>
 			</mat-card>
 
 			<div>
 				<button mat-button matStepperPrevious type="button">Back</button>
-				<button mat-button matStepperNext type="button">Next</button>
+				<button mat-button matStepperNext type="button" id="date-next-button">Next</button>
 			</div>
 		</mat-step>
 
@@ -41,7 +42,8 @@
 											[floatLabel]="floatLabelControl.value">
 				<mat-label class="time-label">Start Tijd</mat-label>
 
-				<input matInput formControlName="startTimeFormCtrl" [format]=24 [ngxTimepicker]="startpicker">
+				<input matInput formControlName="startTimeFormCtrl" name="selectedStartTime" [format]=24 [ngxTimepicker]="startpicker"
+					   type="time" id="startTimeSelect" required>
 				<mat-icon matPrefix>access_time</mat-icon>
 				<mat-error>Kies een start tijd</mat-error>
 			</mat-form-field>
@@ -51,7 +53,8 @@
 			<mat-form-field appearance="outline"
 											[floatLabel]="floatLabelControl.value">
 				<mat-label class="time-label">Eind Tijd</mat-label>
-				<input matInput formControlName="endTimeFormCtrl" [format]=24 [ngxTimepicker]="endpicker">
+				<input matInput  formControlName="endTimeFormCtrl" name="selectedEndTime"
+					   type="time" id="endTimeSelect" [format]=24 [ngxTimepicker]="endpicker" required>
 				<mat-icon matPrefix>timelapse</mat-icon>
 				<mat-error>Kies een eind tijd</mat-error>
 			</mat-form-field>
@@ -59,7 +62,7 @@
 
 			<div>
 				<button mat-button matStepperPrevious type="button">Back</button>
-				<button mat-button matStepperNext type="button">Next</button>
+				<button mat-button matStepperNext type="button" id="time-next-button">Next</button>
 			</div>
 		</mat-step>
 
@@ -68,7 +71,8 @@
 							label="Type">
 			<mat-form-field appearance="fill">
 				<mat-label class="type-label">Type</mat-label>
-				<mat-select formControlName="typeFormCtrl" required>
+				<mat-select formControlName="typeFormCtrl"
+							id="typeSelect" required>
 					<mat-option *ngFor="let type of reservationType" [value]="type">
 						{{type}}
 					</mat-option>

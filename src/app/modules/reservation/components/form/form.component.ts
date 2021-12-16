@@ -3,6 +3,18 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Location } from "../../../../data/interface/Location";
 import { ReservationResponse } from "../../../../data/interface/ReservationResponse";
 
+/**
+ * The reservation form component
+ * @property reservationForm - the formgroup for a reservation
+ * @property submit - a submit event emitter
+ * @property locations - the locations array
+ * @property reservationType - the hardcoded reservation types
+ * @property minDate - the minimum date
+ * @property selectedDate - the selected date
+ * @property reservationTypeControl - the reservation type form control
+ * @property locationsControl - the location form control
+ * @property floatLabelControl - the float label form control
+ */
 @Component({
 	selector: 'app-reservation-form',
 	templateUrl: './form.component.html',
@@ -25,6 +37,9 @@ export class FormComponent implements OnInit {
 	constructor() {
 	}
 
+	/**
+	 * Initializes the reservation form group with multiple form groups.
+	 */
 	ngOnInit(): void {
 		this.reservationForm = new FormGroup({
 			'locationDetails': new FormGroup({
@@ -43,6 +58,11 @@ export class FormComponent implements OnInit {
 		});
 	}
 
+	/**
+	 * Converts a date object from the event to the date format YYYY/MM/DD and sets the selectedDate property
+	 *
+	 * @param event - the date event from the calendar
+	 */
 	onSelect(event: any) {
 		let date = new Date(event);
 
@@ -53,6 +73,9 @@ export class FormComponent implements OnInit {
 		this.selectedDate = `${year}-${month}-${day}`;
 	}
 
+	/**
+	 * Emits the reservations form data to the submit event emitter
+	 */
 	onSubmit() {
 		const reservation: ReservationResponse = {
 			locationId: this.reservationForm.get('locationDetails')!.get('locationFormCtrl')!.value,

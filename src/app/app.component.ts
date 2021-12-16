@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	title = 'worqplace-FrontEnd';
+	title = 'worqplace';
 
 	constructor(private router: Router) {
 	}
