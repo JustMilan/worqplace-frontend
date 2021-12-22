@@ -72,10 +72,10 @@ export class ReservationService {
 	 * Makes a http POST request to the reservations/delete/{id} path to reserve a room
 	 *
 	 * TODO -> Its currently a post because the delete is not allowed in the CORS filter, it must be fixed
-	 * @param reservation - the reservation object to delete
+	 * @param reservationId - the id of the reservation
 	 * @returns - An observable of the reservation object
 	 */
-	deleteReservationById(reservation: Reservation): Observable<Reservation> {
-		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservation.id}`, this.httpOptions)
+	deleteReservationById(reservationId: number): Observable<Reservation> {
+		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservationId}`, this.httpOptions)
 	}
 }

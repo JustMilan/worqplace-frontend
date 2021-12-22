@@ -3,10 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-export class User {
-	constructor(public status: string) {}
-}
-
 @Injectable({
 	providedIn: "root"
 })
@@ -21,10 +17,6 @@ export class AuthenticationService {
 
 	isAuthenticated(): boolean {
 		let token = localStorage.getItem("token");
-		let username = localStorage.getItem('username');
-
-		if (username === null)
-			return false;
 
 		if (token !== null) {
 			token = this.splitToken(token);

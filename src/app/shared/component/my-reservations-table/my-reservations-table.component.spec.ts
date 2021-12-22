@@ -16,6 +16,7 @@ describe('MyReservationsTableComponent', () => {
 
 	let reservationsMock: Reservation[] = [
 		{
+			id: 1,
 			date: '2021-12-31',
 			startTime: '12:00',
 			endTime: '13:30',
@@ -30,7 +31,9 @@ describe('MyReservationsTableComponent', () => {
 			declarations: [MyReservationsTableComponent],
 			providers: [{
 				provide: ReservationService,
-				useValue: jasmine.createSpyObj('ReservationService', { getAllReservationsByEmployeeId: of(reservationsMock) } )
+				useValue: jasmine.createSpyObj('ReservationService', {
+					getAllReservationsByEmployeeId: of(reservationsMock),
+					deleteReservationById: of(reservationsMock)} )
 			}]
 		})
 			.compileComponents();
@@ -38,9 +41,12 @@ describe('MyReservationsTableComponent', () => {
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(MyReservationsTableComponent);
+
 		component = fixture.componentInstance;
 		component.showTable = true;
 		component.allMyReservations = reservationsMock;
+		component.allMyReservationsSlice = reservationsMock.slice(0,3);
+
 		fixture.detectChanges();
 	});
 
@@ -61,6 +67,17 @@ describe('MyReservationsTableComponent', () => {
 
 		expect(spy).toHaveBeenCalled();
 		expect(component.allMyReservations).toHaveSize(1);
+	});
+
+	it('should call deleteReservationByReservationId method',  () => {
+		let spy = spyOn(component, 'deleteReservationByReservationId').and.callThrough();
+		let reservationId = 1;
+
+		component.deleteReservationByReservationId(reservationId);
+		component.allMyReservations = component.allMyReservationsSlice.filter(r => r.id !== reservationId);
+
+		expect(spy).toHaveBeenCalled();
+		expect(component.allMyReservations).toHaveSize(0);
 	});
 
 	it('should slice allMyReservations in OnPageChange',  () => {
@@ -88,4 +105,8 @@ describe('MyReservationsTableComponent', () => {
 		expect(spy).toHaveBeenCalled();
 		expect(component.allMyReservationsSlice).toHaveSize(1);
 	});
+
+
+
+
 });

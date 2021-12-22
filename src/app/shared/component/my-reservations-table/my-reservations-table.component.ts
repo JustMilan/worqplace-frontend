@@ -78,12 +78,12 @@ export class MyReservationsTableComponent implements OnInit {
 	/**
 	 * Method that deletes the reservations by the reservation object from the reservations service
 	 *
-	 * @param reservation - reservation object to delete
+	 * @param reservationId - reservation id of the object to delete
 	 *
 	 * @return - an observable of the reservations array
 	 */
-	deleteReservationByReservationId(reservation: Reservation) {
-		this.reservationService.deleteReservationById(reservation).subscribe()
+	deleteReservationByReservationId(reservationId: number) {
+		this.reservationService.deleteReservationById(reservationId).subscribe()
 		this.myTable.renderRows()
 	}
 
