@@ -3,6 +3,7 @@
 }
 app-notification {
 	justify-content: center;
+	text-align: center;
 }
 
 body.login-body {
@@ -20,10 +21,6 @@ body.login-body {
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-}
-
-app-notification{
-	text-align: center;
 }
 
 .login-box{

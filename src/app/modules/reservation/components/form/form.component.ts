@@ -35,6 +35,7 @@ export class FormComponent implements OnInit {
 	floatLabelControl = new FormControl('auto');
 
 	constructor() {
+		// this is intentional
 	}
 
 	/**
