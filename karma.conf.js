@@ -29,8 +29,9 @@ module.exports = function (config) {
             subdir: '.',
             reporters: [
                 {type: 'html'},
-                {type: 'text-summary'}
-            ]
+                {type: 'text-summary'},
+				{type: 'clover', dir: 'test-reports', subdir: '.', file: 'clover.xml'}
+			]
         },
         reporters: ['progress', 'kjhtml'],
         port: 9876,
