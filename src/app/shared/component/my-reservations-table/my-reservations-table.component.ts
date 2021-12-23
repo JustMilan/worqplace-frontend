@@ -51,9 +51,6 @@ export class MyReservationsTableComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 		this.getAllReservationsByEmployeeId();
-		setTimeout(() => {
-			this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
-		}, 50);
 	}
 
 	/**
@@ -72,7 +69,10 @@ export class MyReservationsTableComponent implements OnInit {
 	 * @return - an observable of the reservations array
 	 */
 	getAllReservationsByEmployeeId() {
-		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => this.allMyReservations = reservations);
+		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => {
+			this.allMyReservations = reservations
+			this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
+		});
 	}
 
 	/**
