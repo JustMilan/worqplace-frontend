@@ -9,8 +9,8 @@ describe('ReservationFormComponent', () => {
 	let fixture: ComponentFixture<FormComponent>;
 	let formElement: any;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+	beforeEach(() => {
+		TestBed.configureTestingModule({
 			imports: [MaterialModule, BrowserAnimationsModule],
 			declarations: [FormComponent]
 		})

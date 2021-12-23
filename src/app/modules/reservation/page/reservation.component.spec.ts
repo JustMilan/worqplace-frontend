@@ -14,6 +14,8 @@ import { LocationService } from "../../../data/service/location/location.service
 import { RoomService } from "../../../data/service/room/room.service";
 import { NotificationService } from "../../../shared/service/notification.service";
 import { DialogComponent } from "../components/dialog/dialog.component";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
 
 describe('ReservationPageComponent', () => {
 	let component: ReservationComponent;
@@ -24,10 +26,15 @@ describe('ReservationPageComponent', () => {
 	let roomMock: Room;
 	let reservationResponseMock: ReservationResponse;
 	let recurrenceMock: Recurrence;
-	let workplaceAmountMock = 2;
+	let workplaceAmountMock: number;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+	let dialog: MatDialog;
+	let dialogRef: jasmine.SpyObj<MatDialogRef<any>>;
+
+	let notificationService: NotificationService;
+
+	beforeEach( () => {
+		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule],
 			declarations: [ReservationComponent, DialogComponent],
 			providers: [{
@@ -41,8 +48,24 @@ describe('ReservationPageComponent', () => {
 					reserveRoom: of(roomMock)
 				})
 			}, {
+				provide: ReservationService,
+				useValue: jasmine.createSpyObj('ReservationService', {
+					reserveRoom: of({}),
+					reserveWorkplace: of({}),
+					getAllReservationsByEmployeeId: of(),
+				})
+			}, {
 				provide: NotificationService
-			}]
+			},
+				{
+					provide: MatDialogRef,
+					useValue: {
+						afterClosed: jasmine.createSpy('MatDialogRef.afterClosed()').and.returnValue(of( {
+							data: {room: roomMock, reservationType: reservationResponseMock }
+						}))
+					}
+				}
+			]
 		})
 			.compileComponents();
 
@@ -51,6 +74,11 @@ describe('ReservationPageComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ReservationComponent);
 		component = fixture.componentInstance;
+
+		dialog = TestBed.inject(MatDialog);
+		dialogRef = TestBed.inject(MatDialogRef) as jasmine.SpyObj<MatDialogRef<any>>;
+
+		notificationService = TestBed.inject(NotificationService);
 
 		fixture.detectChanges();
 	});
@@ -84,7 +112,19 @@ describe('ReservationPageComponent', () => {
 	describe('getting data', () => {
 
 		beforeEach(() => {
-			availableRooms = [];
+			availableRooms = [
+				{
+					id: 1,
+					floor: 0,
+					capacity: 8,
+					available: 8
+				}, {
+					id: 2,
+					floor: 0,
+					capacity: 6,
+					available: 6
+				},
+			];
 
 			roomMock = {
 				id: 1,
@@ -107,12 +147,16 @@ describe('ReservationPageComponent', () => {
 				active: false
 			}
 
+			workplaceAmountMock = 2;
+
+			component.rooms = availableRooms;
 			component.reservationResponse = reservationResponseMock;
 		});
 
 		it('should call openDialog method', () => {
-			let spy = spyOn(component, 'openDialog').and.callThrough();
+			let spy = spyOn(dialog, 'open').and.returnValue(dialogRef);
 
+			fixture.detectChanges();
 			component.openDialog(roomMock);
 
 			expect(spy).toHaveBeenCalled();
@@ -157,6 +201,38 @@ describe('ReservationPageComponent', () => {
 
 			reservationResponseMock.type = 'Werkplek';
 			component.checkAvailability(reservationResponseMock);
+
+			expect(spy).toHaveBeenCalled();
+		});
+
+		it('should reserve room',  () => {
+			let spy = spyOn(component, "reserveRoom").and.callThrough();
+
+			component.reserveRoom(component.selectedRoomReservation(roomMock, recurrenceMock));
+
+			expect(component.rooms).toHaveSize(1);
+			expect(spy).toHaveBeenCalled();
+		});
+
+		it('should reserve workplace',  () => {
+			let spy = spyOn(component, "reserveWorkplace").and.callThrough();
+
+			component.reserveWorkplace(component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock), roomMock, workplaceAmountMock);
+
+			expect(component.rooms).toHaveSize(2);
+			expect(spy).toHaveBeenCalled();
+		});
+
+		it('should notify when workplace amount is less than 1 when reserving workplace',  () => {
+			let spy = spyOn(component, "reserveWorkplace").and.callThrough();
+			const invalidWorkplaceAmount = 0;
+
+			notificationService.onNotification().subscribe((notification) => {
+				expect(notification.message).toEqual('The workplace amount is not valid!');
+				expect(notification.colorClass).toEqual('error');
+			})
+
+			component.reserveWorkplace(component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock), roomMock, invalidWorkplaceAmount);
 
 			expect(spy).toHaveBeenCalled();
 		});

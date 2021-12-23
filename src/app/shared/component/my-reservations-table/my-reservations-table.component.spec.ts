@@ -25,8 +25,8 @@ describe('MyReservationsTableComponent', () => {
 				active: false
 			}}];
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+	beforeEach( () => {
+		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule],
 			declarations: [MyReservationsTableComponent],
 			providers: [{

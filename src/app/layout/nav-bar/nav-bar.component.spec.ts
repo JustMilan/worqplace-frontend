@@ -6,8 +6,8 @@ describe('NavBarComponent', () => {
 	let component: NavBarComponent;
 	let fixture: ComponentFixture<NavBarComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+	beforeEach( () => {
+		TestBed.configureTestingModule({
 			declarations: [NavBarComponent]
 		})
 			.compileComponents();

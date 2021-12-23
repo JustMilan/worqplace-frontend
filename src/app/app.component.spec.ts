@@ -6,8 +6,8 @@ describe('AppComponent', () => {
 	let fixture: ComponentFixture<AppComponent>;
 	let app: AppComponent;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+	beforeEach( () => {
+		TestBed.configureTestingModule({
 			imports: [
 				RouterTestingModule
 			],

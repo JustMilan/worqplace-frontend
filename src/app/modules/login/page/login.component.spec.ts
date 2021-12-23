@@ -22,8 +22,8 @@ describe('LoginPageComponent', () => {
         'authorization': token
     });
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
+    beforeEach( () => {
+        TestBed.configureTestingModule({
             imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule, CoreModule],
             declarations: [LoginComponent],
             providers: [{

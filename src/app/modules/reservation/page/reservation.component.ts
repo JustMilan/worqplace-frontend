@@ -115,36 +115,11 @@ export class ReservationComponent implements OnInit {
 				}
 
 				if (this.reservationResponse.type == 'Ruimte') {
-					this.reservationService.reserveRoom(this.selectedRoomReservation(room, recurrence)).subscribe(() => {
-						this.rooms = this.rooms.filter(r => room.id !== r.id);
-					});
+					this.reserveRoom(this.selectedRoomReservation(room, recurrence));
 				}
 
 				if (this.reservationResponse.type == 'Werkplek') {
-					this.reservationService.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence)).subscribe(() => {
-						if (result.workplaceAmount <= 0) {
-							this.notificationService.handleError("The workplace amount is not valid!");
-							return;
-						}
-
-						const index = this.rooms.findIndex(r => room.id == r.id);
-
-						this.rooms = this.rooms.filter(r => room.id !== r.id);
-
-						let available = room.available -= result.workplaceAmount;
-
-						// create new room object
-						const newRoom: Room = {
-							id: room.id,
-							floor: room.floor,
-							capacity: room.capacity,
-							available: available
-						};
-
-						// check if room has enough workplaces
-						if (newRoom.available > 0)
-							this.rooms.splice(index, 0, newRoom); // add it to the exact position of the array
-					});
+					this.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence), room, result.workplaceAmount);
 				}
 
 				this.notificationService.handleSuccess("The reservation has been placed!");
@@ -216,6 +191,38 @@ export class ReservationComponent implements OnInit {
 		}
 
 	}
+
+	reserveRoom(selectedRoomReservation: Reservation): void {
+		this.reservationService.reserveRoom(selectedRoomReservation).subscribe(() => {
+			this.rooms = this.rooms.filter(r => selectedRoomReservation.roomId !== r.id);
+		});
+	}
+
+	reserveWorkplace(selectedWorkplaceReservation: Reservation, room: Room, workplaceAmount: number) {
+		this.reservationService.reserveWorkplace(selectedWorkplaceReservation).subscribe(() => {
+			if (workplaceAmount <= 0) {
+				this.notificationService.handleError("The workplace amount is not valid!");
+				return;
+			}
+
+			const index = this.rooms.findIndex(r => room.id == r.id);
+
+			this.rooms = this.rooms.filter(r => room.id !== r.id);
+
+			// create new room object
+			const newRoom: Room = {
+				id: room.id,
+				floor: room.floor,
+				capacity: room.capacity,
+				available: room.available -= workplaceAmount
+			};
+
+			// check if room has enough workplaces
+			if (newRoom.available > 0)
+				this.rooms.splice(index,0,newRoom); // add it to the exact position of the array
+		});
+	}
+
 
 	/**
 	 * Method that validates and handles the reservation response from the reservation form and checks the availability

@@ -16,8 +16,8 @@ describe('ReservationDialogComponent', () => {
 		close: () => { }
 	};
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+	beforeEach( () => {
+		TestBed.configureTestingModule({
 			imports: [SharedModule, BrowserAnimationsModule],
 			declarations: [DialogComponent],
 			providers: [
