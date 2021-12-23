@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from "@angular/material/dialog";
-import { Event } from "@angular/router";
-import { Location } from "../../../data/interface/Location";
-import { Recurrence } from "../../../data/interface/Recurrence";
-import { Reservation } from "../../../data/interface/Reservation";
-import { ReservationResponse } from "../../../data/interface/ReservationResponse";
-import { Room } from "../../../data/interface/Room";
-import { LocationService } from "../../../data/service/location/location.service";
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
-import { RoomService } from "../../../data/service/room/room.service";
-import { DialogComponent } from "../components/dialog/dialog.component";
-import { NotificationService } from "../../../shared/service/notification.service";
-import { Subscription } from "rxjs";
-import { UiService } from "../service/ui.service";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {Event} from "@angular/router";
+import {Location} from "../../../data/interface/Location";
+import {Recurrence} from "../../../data/interface/Recurrence";
+import {Reservation} from "../../../data/interface/Reservation";
+import {ReservationResponse} from "../../../data/interface/ReservationResponse";
+import {Room} from "../../../data/interface/Room";
+import {LocationService} from "../../../data/service/location/location.service";
+import {ReservationService} from "../../../data/service/reservation/reservation.service";
+import {RoomService} from "../../../data/service/room/room.service";
+import {DialogComponent} from "../components/dialog/dialog.component";
+import {NotificationService} from "../../../shared/service/notification.service";
+import {Subscription} from "rxjs";
+import {UiService} from "../service/ui.service";
 
 /**
  * The reservation page component
@@ -53,7 +53,9 @@ export class ReservationComponent implements OnInit {
 				private reservationService: ReservationService, public dialog: MatDialog,
 				private notificationService: NotificationService, private uiService: UiService) {
 
-		this.subscription = this.uiService.onToggle().subscribe(value => { this.showTable = value});
+		this.subscription = this.uiService.onToggle().subscribe(value => {
+			this.showTable = value
+		});
 	}
 
 	/**
@@ -129,17 +131,19 @@ export class ReservationComponent implements OnInit {
 
 						this.rooms = this.rooms.filter(r => room.id !== r.id);
 
+						let available = room.available -= result.workplaceAmount;
+
 						// create new room object
 						const newRoom: Room = {
 							id: room.id,
 							floor: room.floor,
 							capacity: room.capacity,
-							available: room.available -= result.workplaceAmount
+							available: available
 						};
 
 						// check if room has enough workplaces
 						if (newRoom.available > 0)
-							this.rooms.splice(index,0,newRoom); // add it to the exact position of the array
+							this.rooms.splice(index, 0, newRoom); // add it to the exact position of the array
 					});
 				}
 

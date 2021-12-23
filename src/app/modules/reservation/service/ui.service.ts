@@ -14,6 +14,7 @@ export class UiService {
     private subject = new Subject<any>();
 
     constructor() {
+		// this is intentional
     }
 
     /**

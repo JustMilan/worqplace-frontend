@@ -19,5 +19,6 @@ export class OpenCardComponent {
 	@Output() book = new EventEmitter();
 
 	constructor() {
+		// this is intentional
 	}
 }

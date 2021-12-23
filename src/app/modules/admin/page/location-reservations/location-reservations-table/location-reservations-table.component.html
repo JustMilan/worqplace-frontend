@@ -4,7 +4,7 @@
 
 		<mat-form-field appearance="fill">
 			<mat-label class="location-label">Locatie</mat-label>
-			<mat-select [(value)]="location" required  (selectionChange)="refresh($event)">
+			<mat-select [(value)]="location" required (selectionChange)="refresh($event)">
 				<mat-option *ngFor="let loc of locations" [value]="loc.id">
 					{{loc.name}}
 				</mat-option>
@@ -18,36 +18,36 @@
 						The actual rendered columns are set as a property on the row definition" -->
 
 			<!-- Id Column -->
-			<ng-container matColumnDef="id">
+			<ng-container matColumnDef="id" id="id">
 				<th mat-header-cell *matHeaderCellDef>Id</th>
 				<td mat-cell *matCellDef="let element"> {{element.id}} </td>
 			</ng-container>
 
 			<!-- Date Column -->
-			<ng-container matColumnDef="date">
+			<ng-container matColumnDef="date" id="date">
 				<th mat-header-cell *matHeaderCellDef>Datum</th>
 				<td mat-cell *matCellDef="let element"> {{element.date}} </td>
 			</ng-container>
 
 			<!-- Time Column -->
-			<ng-container matColumnDef="tijd">
+			<ng-container matColumnDef="tijd" id="tijd">
 				<th mat-header-cell *matHeaderCellDef>Tijd</th>
 				<td mat-cell *matCellDef="let element">{{element.startTime}} - {{element.endTime}} </td>
 			</ng-container>
 
 			<!-- workplace amount Column -->
-			<ng-container matColumnDef="workplaceAmount">
+			<ng-container matColumnDef="workplaceAmount" id="workplaceAmount">
 				<th mat-header-cell *matHeaderCellDef>werkplek(ken)</th>
 				<td mat-cell *matCellDef="let element">{{element.workplaceAmount}} </td>
 			</ng-container>
 
 			<!-- Room id Column -->
-			<ng-container matColumnDef="roomId">
+			<ng-container matColumnDef="roomId" id="roomId">
 				<th mat-header-cell *matHeaderCellDef>Kamer</th>
 				<td mat-cell *matCellDef="let element"> {{element.roomId}} </td>
 			</ng-container>
 
-			<ng-container matColumnDef="recurrence">
+			<ng-container matColumnDef="recurrence" id="recurrence">
 				<th mat-header-cell *matHeaderCellDef>herhaling</th>
 				<td mat-cell *matCellDef="let element"> {{element.recurrence.recurrencePattern}} </td>
 			</ng-container>
