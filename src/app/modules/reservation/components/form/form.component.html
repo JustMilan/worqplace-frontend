@@ -1,91 +1,67 @@
-<form [formGroup]="reservationForm" id="reservationsForm">
-	<mat-stepper linear>
-
-		<mat-step formGroupName="locationDetails"
-							[stepControl]="reservationForm?.get('locationDetails')!"
-							label="Locatie">
-			<mat-form-field appearance="fill">
-				<mat-label class="location-label">Locatie</mat-label>
-				<mat-select formControlName="locationFormCtrl"
-							id="locationSelect" required>
-					<mat-option *ngFor="let loc of locations" [value]="loc.id">
-						{{loc.name}}
-					</mat-option>
-				</mat-select>
-
-				<mat-error *ngIf="locationsControl.hasError('required')">Kies een locatie</mat-error>
-			</mat-form-field>
-
-			<div>
-				<button mat-button matStepperNext type="button" id="location-next-button">Next</button>
-			</div>
-		</mat-step>
-
-		<mat-step label="Datum">
-			<mat-card class="demo-inline-calendar-card">
-				<mat-calendar (selectedChange)="onSelect($event)"
-							  [selected]="selectedDate"
-							  [minDate]="minDate">
-				</mat-calendar>
-			</mat-card>
-
-			<div>
-				<button mat-button matStepperPrevious type="button">Back</button>
-				<button mat-button matStepperNext type="button" id="date-next-button">Next</button>
-			</div>
-		</mat-step>
-
-		<mat-step formGroupName="timeDetails"
-							[stepControl]="reservationForm?.get('timeDetails')!"
-							label="Tijden">
-			<mat-form-field appearance="outline"
-											[floatLabel]="floatLabelControl.value">
-				<mat-label class="time-label">Start Tijd</mat-label>
-
-				<input matInput formControlName="startTimeFormCtrl" name="selectedStartTime" [format]=24 [ngxTimepicker]="startpicker"
-					   type="time" id="startTimeSelect" required>
-				<mat-icon matPrefix>access_time</mat-icon>
-				<mat-error>Kies een start tijd</mat-error>
-			</mat-form-field>
-			<ngx-material-timepicker #startpicker><</ngx-material-timepicker>
-
-
-			<mat-form-field appearance="outline"
-											[floatLabel]="floatLabelControl.value">
-				<mat-label class="time-label">Eind Tijd</mat-label>
-				<input matInput  formControlName="endTimeFormCtrl" name="selectedEndTime"
-					   type="time" id="endTimeSelect" [format]=24 [ngxTimepicker]="endpicker" required>
-				<mat-icon matPrefix>timelapse</mat-icon>
-				<mat-error>Kies een eind tijd</mat-error>
-			</mat-form-field>
-			<ngx-material-timepicker #endpicker><</ngx-material-timepicker>
-
-			<div>
-				<button mat-button matStepperPrevious type="button">Back</button>
-				<button mat-button matStepperNext type="button" id="time-next-button">Next</button>
-			</div>
-		</mat-step>
-
-		<mat-step formGroupName="typeDetails"
-							[stepControl]="reservationForm?.get('typeDetails')!"
-							label="Type">
-			<mat-form-field appearance="fill">
-				<mat-label class="type-label">Type</mat-label>
-				<mat-select formControlName="typeFormCtrl"
-							id="typeSelect" required>
-					<mat-option *ngFor="let type of reservationType" [value]="type">
+<div class="reservationsForm-container">
+	<form [formGroup]="reservationForm" id="reservationsForm">
+			<div class="search-options-container">
+			<div class="search-options">
+				<ul class="reservationType-list">
+					<li *ngFor="let type of reservationType" class="reservationType-item">
 						{{type}}
-					</mat-option>
-				</mat-select>
-
-				<mat-error *ngIf="reservationTypeControl.hasError('required')">Kies een reservatie type</mat-error>
-			</mat-form-field>
-
-			<div>
-				<button mat-button matStepperPrevious type="button">Back</button>
-				<button class="search-button" mat-flat-button (click)="onSubmit()" type="button">Zoek</button>
+					</li>
+				</ul>
 			</div>
-		</mat-step>
+		</div>
 
-	</mat-stepper>
-</form>
+		<div class="reservationsForm-fields-container">
+			<div class="reservationsForm-fields">
+
+				<div class="location-field-container location-area">
+					<div class="location-field">
+						<label>locatie</label>
+						<div class="location-select">
+							<select>
+								<option *ngFor="let loc of locations" [value]="loc.id">{{loc.name}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="location-field-container date-area">
+					<div class="location-field">
+						<label>datum</label>
+						<div class="datepicker">
+								<input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+						</div>
+					</div>
+				</div>
+
+				<div class="location-field-container start-time-area">
+					<div class="location-field">
+						<label>start</label>
+						<div class="datepicker">
+							<div>
+								<input matInput formControlName="startTimeFormCtrl" name="selectedStartTime" [format]=24 [ngxTimepicker]="startpicker"
+											 type="time" id="startTimeSelect" required>
+								<ngx-material-timepicker #startpicker><</ngx-material-timepicker>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="location-field-container end-time-area">
+					<div class="location-field">
+						<label>end</label>
+						<div class="datepicker">
+							<div>
+								<input matInput  formControlName="endTimeFormCtrl" name="selectedEndTime"
+											 type="time" id="endTimeSelect" [format]=24 [ngxTimepicker]="endpicker" required>
+								<ngx-material-timepicker #endpicker><</ngx-material-timepicker>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button class="search-button submit-area" mat-flat-button (click)="onSubmit()" type="button">Zoek</button>
+			</div>
+		</div>
+
+	</form>
+</div>

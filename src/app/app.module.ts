@@ -15,6 +15,7 @@ import { LoginModule } from "./modules/login/login.module";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { AdminModule } from "./modules/admin/admin.module";
 import { CoreModule } from "./core/core.module";
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { CoreModule } from "./core/core.module";
 		SharedModule,
 		NgxMaterialTimepickerModule,
 		AdminModule,
-		AppRoutingModule
+		AppRoutingModule,
+  BsDatepickerModule.forRoot()
 	],
 	providers: [
 		{
