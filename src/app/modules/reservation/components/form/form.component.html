@@ -3,7 +3,8 @@
 			<div class="search-options-container">
 			<div class="search-options">
 				<ul class="reservationType-list">
-					<li *ngFor="let type of reservationType" class="reservationType-item">
+					<li *ngFor="let type of reservationType" id="{{type}}" (click)="onTypeChange(type)"
+							class="reservationType-item">
 						{{type}}
 					</li>
 				</ul>
@@ -13,10 +14,10 @@
 		<div class="reservationsForm-fields-container">
 			<div class="reservationsForm-fields">
 
-				<div class="location-field-container location-area">
-					<div class="location-field">
+				<div class="field-container location-area">
+					<div class="field">
 						<label>locatie</label>
-						<div class="location-select">
+						<div class="field-input">
 							<select>
 								<option *ngFor="let loc of locations" [value]="loc.id">{{loc.name}}</option>
 							</select>
@@ -24,19 +25,19 @@
 					</div>
 				</div>
 
-				<div class="location-field-container date-area">
-					<div class="location-field">
+				<div class="field-container date-area">
+					<div class="field">
 						<label>datum</label>
-						<div class="datepicker">
-								<input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+						<div class="field-input">
+								<input type="text" placeholder="Kies een datum" class="form-control" bsDatepicker>
 						</div>
 					</div>
 				</div>
 
-				<div class="location-field-container start-time-area">
-					<div class="location-field">
+				<div class="field-container start-time-area">
+					<div class="field">
 						<label>start</label>
-						<div class="datepicker">
+						<div class="field-input">
 							<div>
 								<input matInput formControlName="startTimeFormCtrl" name="selectedStartTime" [format]=24 [ngxTimepicker]="startpicker"
 											 type="time" id="startTimeSelect" required>
@@ -46,10 +47,10 @@
 					</div>
 				</div>
 
-				<div class="location-field-container end-time-area">
-					<div class="location-field">
+				<div class="field-container end-time-area">
+					<div class="field">
 						<label>end</label>
-						<div class="datepicker">
+						<div class="field-input">
 							<div>
 								<input matInput  formControlName="endTimeFormCtrl" name="selectedEndTime"
 											 type="time" id="endTimeSelect" [format]=24 [ngxTimepicker]="endpicker" required>

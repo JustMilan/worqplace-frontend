@@ -68,11 +68,6 @@
 	background: #fff;
 	height: 82px;
 }
-@media (max-width: 1023px) {
-	.reservationsForm-fields-container {
-		height: auto;
-	}
-}
 
 .reservationsForm-fields {
 	height: 100%;
@@ -80,6 +75,15 @@
 }
 
 @media (max-width: 1023px) {
+	.location-area,
+	.date-area {
+		border-bottom: 2px solid #eee;
+	}
+
+	.reservationsForm-fields-container {
+		height: auto;
+	}
+
 	.reservationsForm-fields {
 		display: grid;
 		grid-template:
@@ -90,6 +94,10 @@
 		grid-template-rows: 70px 70px 70px 60px;
 		grid-template-columns: 1fr 1fr;
 	}
+}
+
+.form-control {
+	height: inherit;
 }
 
 .location-area {
@@ -112,14 +120,14 @@
 	grid-area: submit;
 }
 
-.location-field-container {
+.field-container {
 	flex: 1;
 	border-right: 2px solid #eee;
 	height: 100%;
 	position: relative;
 }
 
-.location-field {
+.field {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -127,11 +135,12 @@
 	padding: 0 20px;
 }
 
-.location-field label {
+.field label {
 	color: #171717;
 	line-height: 23px;
 	font-size: 11px;
 	display: block;
+	z-index: 1;
 }
 
 form label {
@@ -141,10 +150,9 @@ form label {
 	font-weight: 300;
 	color: rgba(23,23,23,.5);
 	line-height: 1.7;
-	margin-bottom: 1.875rem;
 }
 
-.location-field.location-select {
+.field.location-select {
 	font-size: 13px;
 	font-weight: 700;
 	position: relative;
@@ -153,11 +161,18 @@ form label {
 	line-height: 23px;
 }
 
-.location-select {
-	position: absolute;
+.field-input {
+	position: relative;
 	white-space: nowrap;
 	overflow: hidden;
 	width: 100%;
+}
+
+.reservationsForm-fields input {
+	margin: 0;
+	padding: 0;
+
+	border: none;
 }
 
 select {
@@ -178,13 +193,6 @@ select::-ms-expand {
 	display: none;
 }
 
-.datepicker {
-	position: absolute;
-	white-space: nowrap;
-	overflow: hidden;
-	width: 100%;
-}
-
 /* color the datepicker head */
 ::ng-deep.bs-datepicker-head {
 	background-color: var(--quintor-red) !important;
@@ -196,33 +204,6 @@ select::-ms-expand {
 
 ::ng-deep.bs-datepicker-body table td.week span {
 	color: var(--quintor-red) !important;
-}
-
-/* color the labels */
-.location-label {
-	color: black;
-}
-
-.timepicker-overlay {
-		z-index: 10000000 !important;
-}
-
-.timepicker-backdrop-overlay{
-	z-index: 10000000 !important;
-}
-
-.time-label {
-	color: white;
-}
-
-.type-label {
-	color: black;
-}
-
-/* mat form field */
-.mat-form-field-flex.ng-tns-c52-1 {
-	width: 140px;
-	text-align: center;
 }
 
 .search-button {
