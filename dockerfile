@@ -1,5 +1,5 @@
 # Setup node container
-FROM node:14 as node
+FROM node:14-alpine as node
 
 # Set workdir and copy files
 WORKDIR /app
