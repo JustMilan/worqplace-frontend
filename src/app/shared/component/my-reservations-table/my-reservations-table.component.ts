@@ -6,6 +6,9 @@ import {Subscription} from "rxjs";
 import {UiService} from "../../../modules/reservation/service/ui.service";
 import {Router} from "@angular/router";
 import {MatTable} from "@angular/material/table";
+import {Location} from "../../../data/interface/Location";
+import {LocationService} from "../../../data/service/location/location.service";
+import {MatSelectChange} from "@angular/material/select";
 
 /**
  * The my reservation table component
@@ -28,29 +31,41 @@ export class MyReservationsTableComponent implements OnInit {
 	public allMyReservationsSlice: Reservation[];
 	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'action'];
 
+	locations: Location[];
+	location: number;
+
 	showTable: boolean;
 	subscription: Subscription;
+
+	selectedDate: Date = new Date();
 
 	/**
 	 * Constructor of the my reservation table component
 	 *
 	 * @param reservationService - The reservation service
+	 * @param locationService - The location service
 	 * @param uiService - The ui service
 	 * @param router - The router
 	 *
 	 * It also sets the subscription to the value that comes from the UI service on toggle subscription
 	 */
 	constructor(private reservationService: ReservationService,
+				private locationService: LocationService,
 				private uiService: UiService, private router: Router) {
 
 		this.subscription = this.uiService.onToggle().subscribe(value => this.showTable = value);
 	}
 
 	/**
-	 * Initializes all the reservations by employeeId and get the first slice of 3 reservations
+	 * Initializes all the reservations by employeeId and get the first slice of 3 reservations.
+	 * Also loads all the locations into the selector.
 	 */
 	ngOnInit(): void {
 		this.getAllReservationsByEmployeeId();
+		this.locationService.getLocations()
+			.subscribe(locations => {
+				this.locations = locations
+			});
 	}
 
 	/**
@@ -99,5 +114,13 @@ export class MyReservationsTableComponent implements OnInit {
 			endIndex = this.allMyReservations.length;
 		}
 		this.allMyReservationsSlice = this.allMyReservations.slice(startIndex, endIndex)
+	}
+
+	refreshLocation($event: MatSelectChange) {
+		// TODO: Add logic to get the right reservations
+	}
+
+	refreshStartDate($event: MatSelectChange) {
+		// TODO: Add logic to get the right reservations
 	}
 }

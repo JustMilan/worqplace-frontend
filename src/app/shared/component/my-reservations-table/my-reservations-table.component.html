@@ -1,6 +1,25 @@
 <div *ngIf="(showTable || hasRoute('/my-reservations'))">
+
 	<div class="container">
 		<h2>Mijn Reserveringen</h2>
+	</div>
+
+	<div class="filter-pane">
+		<mat-form-field appearance="fill">
+			<mat-label class="location-label">Locatie</mat-label>
+			<mat-select [(value)]="location" (selectionChange)="refreshLocation($event)">
+				<mat-option *ngFor="let loc of locations" [value]="loc.id">
+					{{loc.name}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Choose a date</mat-label>
+			<input matInput [matDatepicker]="picker" [value]="selectedDate">
+			<mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
 	</div>
 
 	<div class="my-reservations-wrapper">
