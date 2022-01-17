@@ -1,0 +1,44 @@
+ul {
+	list-style-type: none;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	font-size: 20px;
+	background-color: var(--quintor-red) !important;
+}
+
+/* color the datepicker head */
+::ng-deep.bs-datepicker-head {
+	background-color: var(--quintor-red) !important;
+}
+
+::ng-deep.bs-datepicker-body table td span.selected {
+	background-color: var(--quintor-red) !important;
+}
+
+::ng-deep.bs-datepicker-body table td.week span {
+	color: var(--quintor-red) !important;
+}
+
+select:required:invalid {
+	color: white;
+}
+
+.button-options {
+	display: inline-flex;
+	flex-direction: row;
+	float: right;
+}
+
+.button-options-cancel {
+	background-color: var(--primary-background-dark);
+	color: white;
+	margin-left: 10px;
+}
+
+.button-options-confirm {
+	background-color: #FFFFFF;
+	margin-left: 10px;
+}

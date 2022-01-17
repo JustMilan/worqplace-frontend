@@ -68,70 +68,77 @@ td {
 }
 
 @media screen and (max-width: 1195px) {
-	.mat-table.cdk-table {
-		width: fit-content;
-		min-width: 100%;
-	}
-
-	.mat-paginator {
-		width: fit-content;
-		min-width: 100%;
-	}
-
-	th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-		padding-left: 20px;
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-
-	div {
-		margin-left: 25px;
-	}
-}
-
-@media screen and (max-width: 1029px) {
-	.my-reservations-wrapper {
-		margin: 0;
-	}
-
-	.filters {
-		margin: 30px auto;
-	}
-
-	.mat-paginator {
-		display: block;
-		width: auto;
-		max-width: none;
-		min-width: 100%;
-		table-layout: fixed;
-	}
-
-	.mat-table.cdk-table {
-		display: block;
-		width: auto;
-		max-width: none;
-		min-width: 100%;
-		table-layout: fixed;
-	}
-
-	.reservation-table {
-		width: auto;
-		max-width: none;
-		min-width: 100%;
-		overflow-x: auto;
-	}
-
-	.reservation-table > table {
-		width: fit-content;
-	}
-
-	.my-reservations-wrapper {
-		display: block;
-	}
-
-	div {
+	.button-delete {
+		background-color: firebrick;
+		color: white;
 		margin-left: 10px;
-		margin-right: 10px;
+	}
+
+	@media screen and (max-width: 800px) {
+		.mat-table.cdk-table {
+			width: fit-content;
+			min-width: 100%;
+		}
+
+		.mat-paginator {
+			width: fit-content;
+			min-width: 100%;
+		}
+
+		th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+			padding-left: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+
+		div {
+			margin-left: 25px;
+		}
+	}
+
+	@media screen and (max-width: 1029px) {
+		.my-reservations-wrapper {
+			margin: 0;
+		}
+
+		.filters {
+			margin: 30px auto;
+		}
+
+		.mat-paginator {
+			display: block;
+			width: auto;
+			max-width: none;
+			min-width: 100%;
+			table-layout: fixed;
+		}
+
+		.mat-table.cdk-table {
+			display: block;
+			width: auto;
+			max-width: none;
+			min-width: 100%;
+			table-layout: fixed;
+		}
+
+		.reservation-table {
+			width: auto;
+			max-width: none;
+			min-width: 100%;
+			overflow-x: auto;
+		}
+
+		.reservation-table > table {
+			width: fit-content;
+		}
+
+		.my-reservations-wrapper {
+			display: block;
+		}
+
+		div {
+			margin-left: 10px;
+			margin-right: 10px;
+		}
 	}
 }
-

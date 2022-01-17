@@ -4,7 +4,7 @@ import { ReservationDialogData } from "../../../../data/interface/ReservationDia
 import { Room } from "../../../../data/interface/Room";
 
 /**
- * The reservation dialog component
+ * The reservation reservation-dialog component
  * @property repeatOptions - the hardcoded repeat options string array
  * @property room - the room
  * @property selectedWorkplaceAmount - the selected workplace amount
@@ -12,10 +12,10 @@ import { Room } from "../../../../data/interface/Room";
  */
 @Component({
 	selector: 'app-reservation-dialog',
-	templateUrl: './dialog.component.html',
-	styleUrls: ['./dialog.component.css']
+	templateUrl: './reservation-dialog.component.html',
+	styleUrls: ['./reservation-dialog.component.css']
 })
-export class DialogComponent {
+export class ReservationDialogComponent {
 	repeatOptions: string[] = ['Geen', 'Dagelijks', 'Wekelijks', '2 Wekelijks', 'Maandelijks'];
 	room: Room;
 
@@ -23,27 +23,27 @@ export class DialogComponent {
 	selectedRecurringPattern: string = 'Geen';
 
 	/**
-	 * Constructor of the DialogComponent component.
+	 * Constructor of the ReservationDialogComponent component.
 	 *
-	 * @param dialogRef - The reference to the dialog
-	 * @param data - The data from the dialog
+	 * @param dialogRef - The reference to the reservation-dialog
+	 * @param data - The data from the reservation-dialog
 	 *
 	 * It also sets the room property with the data param
 	 */
-	constructor(public dialogRef: MatDialogRef<DialogComponent>,
+	constructor(public dialogRef: MatDialogRef<ReservationDialogComponent>,
 				@Inject(MAT_DIALOG_DATA) public data: ReservationDialogData) {
 		this.room = data.room;
 	}
 
 	/**
-	 * Method to close the dialog
+	 * Method to close the reservation-dialog
 	 */
 	onCancel(): void {
 		this.dialogRef.close();
 	}
 
 	/**
-	 * Method to close the dialog. It also gives back a data object from the results of the dialog.
+	 * Method to close the reservation-dialog. It also gives back a data object from the results of the reservation-dialog.
 	 */
 	confirmBooking() {
 		this.dialogRef.close({

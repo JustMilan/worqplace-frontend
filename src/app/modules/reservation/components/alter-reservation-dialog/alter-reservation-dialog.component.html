@@ -1,0 +1,55 @@
+<div class="wrapper">
+	<h1 mat-dialog-title>Alter reservation</h1>
+	<div mat-dialog-content>
+		<div class="container">
+			<table>
+				<tbody>
+				<tr>
+					<td>Date:</td>
+					<td>
+						<input bsDatepicker class="form-control" [minDate]="minDate"
+									 (bsValueChange)="alterDate($event)" [bsValue]="selectedDate">
+					</td>
+				</tr>
+				<tr>
+					<td>Start time:</td>
+					<td>
+						<input matInput type="time" name="selectedStartTime"
+									 [ngModel]="selectedStartTime" (ngModelChange)="alterStartTime($event)" required
+									 value="{{processedData.startTime}}">
+					</td>
+				</tr>
+				<tr>
+					<td>End time:</td>
+					<td>
+						<input matInput type="time" name="selectedEndTime"
+									 [ngModel]="selectedEndTime" (ngModelChange)="alterEndTime($event)" required
+									 value="{{processedData.endTime}}">
+					</td>
+				</tr>
+				<tr>
+					<td>Recurrence:</td>
+					<td>
+						<mat-select [ngModel]="selectedRecurrencePattern" (selectionChange)="alterRecurrence($event)"
+												value="{{selectedRecurrencePattern}}" placeholder="{{selectedRecurrencePattern}}">
+							<mat-option *ngFor="let option of repeatOptions" [value]="option">{{option}}</mat-option>
+						</mat-select>
+					</td>
+				</tr>
+				<tr>
+					<td>Room:</td>
+					<td>{{processedData.roomId}}</td>
+				</tr>
+				<tr>
+					<td>Amount:</td>
+					<td>{{processedData.workplaceAmount}}</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="button-options">
+			<button class="button-options-cancel" (click)="onCancel()" mat-raised-button>Cancel</button>
+			<button class="button-options-confirm" (click)="confirm()" mat-raised-button>Confirm</button>
+		</div>
+	</div>
+</div>

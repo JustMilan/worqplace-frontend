@@ -1,13 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
-import { Reservation } from "../../../data/interface/Reservation";
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
-import { Subscription } from "rxjs";
-import { UiService } from "../../../modules/reservation/service/ui.service";
-import { Router } from "@angular/router";
 import { MatTable } from "@angular/material/table";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { Reservation } from "../../../data/interface/Reservation";
+import { ReservationResponse } from "../../../data/interface/ReservationResponse";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
+import { UiService } from "../../../modules/reservation/service/ui.service";
 import { Location } from "../../../data/interface/Location";
 import { LocationService } from "../../../data/service/location/location.service";
+import { MatDialog } from "@angular/material/dialog";
+import { NotificationService } from "../../service/notification.service";
+import { AlterReservationDialogComponent } from "../../../modules/reservation/components/alter-reservation-dialog/alter-reservation-dialog.component";
 import { MatSelectChange } from "@angular/material/select";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
@@ -43,20 +47,22 @@ export class MyReservationsTableComponent implements OnInit {
 
 	showTable: boolean;
 	subscription: Subscription;
+	reservationResponse: ReservationResponse;
 
 	/**
 	 * Constructor of the my reservation table component
-	 *
+	 * It also sets the subscription to the value that comes from the UI service on toggle subscription
 	 * @param reservationService - The reservation service
 	 * @param locationService - The location service
 	 * @param uiService - The ui service
 	 * @param router - The router
-	 *
-	 * It also sets the subscription to the value that comes from the UI service on toggle subscription
+	 * @param dialog
+	 * @param notificationService
 	 */
 	constructor(private reservationService: ReservationService,
 				private locationService: LocationService,
-				private uiService: UiService, private router: Router) {
+				private uiService: UiService, private router: Router,
+				public dialog: MatDialog, private notificationService: NotificationService) {
 
 		this.subscription = this.uiService.onToggle().subscribe(value => this.showTable = value);
 	}
@@ -77,9 +83,9 @@ export class MyReservationsTableComponent implements OnInit {
 	 * Method that compares the given route with the current url route
 	 *
 	 * @param route - the route you want to compare
-	 * @return - a boolean
+	 * @return - if the url is the same as the route
 	 */
-	hasRoute(route: string) {
+	hasRoute(route: string): boolean {
 		return this.router.url === route;
 	}
 
@@ -145,6 +151,50 @@ export class MyReservationsTableComponent implements OnInit {
 			this.paginatorEndIndex = this.allMyReservations.length;
 		}
 		this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex)
+	}
+
+	/**
+	 * Method to convert the recurring pattern string to an enum literal for the http request to the back-end
+	 *
+	 * @param recurringPattern - the recurring pattern string
+	 *
+	 * @return - the string enum literal or an empty string if invalid
+	 */
+	convertRecurringPatternToEnumLiteral(recurringPattern: string): string {
+		switch (recurringPattern) {
+			case 'Dagelijks':
+				return 'DAILY';
+			case 'Wekelijks':
+				return 'WEEKLY';
+			case '2 Wekelijks':
+				return 'BIWEEKLY';
+			case 'Maandelijks':
+				return 'MONTHLY';
+		}
+
+		return '';
+	}
+
+	/**
+	 * Method that shows the alter reservation-dialog from the selected reservation.
+	 *
+	 * @param selectedReservation selected reservation
+	 */
+	showAlterDialog(selectedReservation: Reservation): void {
+		const dialogRef = this.dialog.open(AlterReservationDialogComponent, {
+			width: '500px',
+			data: {reservation: selectedReservation},
+			panelClass: 'reservation-reservation-dialog'
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(result)
+			// 	check if the confirmation button is clicked in reservation-dialog
+			if (result != undefined) {
+				//TODO: compare result vs existing and only post change request if there are differences
+
+			}
+		});
 	}
 
 	/**

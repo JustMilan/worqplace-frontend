@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogComponent } from './dialog.component';
+import { ReservationDialogComponent } from './reservation-dialog.component';
 import { SharedModule } from "../../../../shared/shared.module";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -8,8 +8,8 @@ import { ReservationDialogData } from "../../../../data/interface/ReservationDia
 import { Room } from "../../../../data/interface/Room";
 
 describe('ReservationDialogComponent', () => {
-	let component: DialogComponent;
-	let fixture: ComponentFixture<DialogComponent>;
+	let component: ReservationDialogComponent;
+	let fixture: ComponentFixture<ReservationDialogComponent>;
 	let data: ReservationDialogData;
 
 	const dialogMock = {
@@ -19,7 +19,7 @@ describe('ReservationDialogComponent', () => {
 	beforeEach( () => {
 		TestBed.configureTestingModule({
 			imports: [SharedModule, BrowserAnimationsModule],
-			declarations: [DialogComponent],
+			declarations: [ReservationDialogComponent],
 			providers: [
 				{ provide: MatDialogRef, useValue: dialogMock },
 				{ provide: MAT_DIALOG_DATA, useValue: { data } }
@@ -29,7 +29,7 @@ describe('ReservationDialogComponent', () => {
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(DialogComponent);
+		fixture = TestBed.createComponent(ReservationDialogComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 
@@ -73,7 +73,7 @@ describe('ReservationDialogComponent', () => {
 		expect(component.confirmBooking).toHaveBeenCalled();
 	});
 
-	it('should close dialog after onCancel()', () => {
+	it('should close reservation-dialog after onCancel()', () => {
 		let spy = spyOn(component.dialogRef, 'close').and.callThrough();
 
 		component.onCancel();
@@ -81,7 +81,7 @@ describe('ReservationDialogComponent', () => {
 		expect(spy).toHaveBeenCalled();
 	});
 
-	it('should close dialog after confirm confirmBooking()', () => {
+	it('should close reservation-dialog after confirm confirmBooking()', () => {
 		let spy = spyOn(component.dialogRef, 'close').and.callThrough();
 
 		component.confirmBooking();
@@ -89,7 +89,7 @@ describe('ReservationDialogComponent', () => {
 		expect(spy).toHaveBeenCalled();
 	});
 
-	it('should close dialog with correct repeatOptions after confirm confirmBooking()', () => {
+	it('should close reservation-dialog with correct repeatOptions after confirm confirmBooking()', () => {
 		let spy = spyOn(component.dialogRef, 'close').and.callThrough();
 
 		component.selectedRecurringPattern = 'Wekelijks';

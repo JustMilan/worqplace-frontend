@@ -13,7 +13,7 @@ import { of } from "rxjs";
 import { LocationService } from "../../../data/service/location/location.service";
 import { RoomService } from "../../../data/service/room/room.service";
 import { NotificationService } from "../../../shared/service/notification.service";
-import { DialogComponent } from "../components/dialog/dialog.component";
+import { ReservationDialogComponent } from "../components/reservation-dialog/reservation-dialog.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ReservationService } from "../../../data/service/reservation/reservation.service";
 
@@ -36,7 +36,7 @@ describe('ReservationPageComponent', () => {
 	beforeEach( () => {
 		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule],
-			declarations: [ReservationComponent, DialogComponent],
+			declarations: [ReservationComponent, ReservationDialogComponent],
 			providers: [{
 				provide: LocationService,
 				useValue: jasmine.createSpyObj('LocationService', { getLocations: of(locationsMock) } )

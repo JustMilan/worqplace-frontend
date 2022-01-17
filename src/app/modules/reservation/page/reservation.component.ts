@@ -1,18 +1,18 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {Event} from "@angular/router";
-import {Location} from "../../../data/interface/Location";
-import {Recurrence} from "../../../data/interface/Recurrence";
-import {Reservation} from "../../../data/interface/Reservation";
-import {ReservationResponse} from "../../../data/interface/ReservationResponse";
-import {Room} from "../../../data/interface/Room";
-import {LocationService} from "../../../data/service/location/location.service";
-import {ReservationService} from "../../../data/service/reservation/reservation.service";
-import {RoomService} from "../../../data/service/room/room.service";
-import {DialogComponent} from "../components/dialog/dialog.component";
-import {NotificationService} from "../../../shared/service/notification.service";
-import {Subscription} from "rxjs";
-import {UiService} from "../service/ui.service";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
+import { Event } from "@angular/router";
+import { Location } from "../../../data/interface/Location";
+import { Recurrence } from "../../../data/interface/Recurrence";
+import { Reservation } from "../../../data/interface/Reservation";
+import { ReservationResponse } from "../../../data/interface/ReservationResponse";
+import { Room } from "../../../data/interface/Room";
+import { LocationService } from "../../../data/service/location/location.service";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
+import { RoomService } from "../../../data/service/room/room.service";
+import { ReservationDialogComponent } from "../components/reservation-dialog/reservation-dialog.component";
+import { NotificationService } from "../../../shared/service/notification.service";
+import { Subscription } from "rxjs";
+import { UiService } from "../service/ui.service";
 
 /**
  * The reservation page component
@@ -43,7 +43,7 @@ export class ReservationComponent implements OnInit {
 	 * @param roomService - The room service
 	 * @param locationService - The location service
 	 * @param reservationService - The reservation service
-	 * @param dialog - The dialog from angular material dialog
+	 * @param dialog - The reservation-dialog from angular material reservation-dialog
 	 * @param notificationService - The notification service
 	 * @param uiService - The ui service
 	 *
@@ -95,19 +95,19 @@ export class ReservationComponent implements OnInit {
 	}
 
 	/**
-	 * Method to open the dialog
+	 * Method to open the reservation-dialog
 	 *
-	 * @param room - the room for which the dialog has been opened
+	 * @param room - the room for which the reservation-dialog has been opened
 	 */
 	openDialog(room: Room): void {
-		const dialogRef = this.dialog.open(DialogComponent, {
+		const dialogRef = this.dialog.open(ReservationDialogComponent, {
 			width: '500px',
 			data: {room: room, reservationType: this.reservationResponse.type},
-			panelClass: 'reservation-dialog'
+			panelClass: 'reservation-reservation-dialog'
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			// check if the confirmation button is clicked in dialog
+			// check if the confirmation button is clicked in reservation-dialog
 			if (result != undefined) {
 				const recurrence = {
 					active: result.recurringPattern != undefined,
@@ -219,7 +219,7 @@ export class ReservationComponent implements OnInit {
 
 			// check if room has enough workplaces
 			if (newRoom.available > 0)
-				this.rooms.splice(index,0,newRoom); // add it to the exact position of the array
+				this.rooms.splice(index, 0, newRoom); // add it to the exact position of the array
 		});
 	}
 
@@ -284,7 +284,7 @@ export class ReservationComponent implements OnInit {
 	}
 
 	/**
-	 * Method that parses the event to a room object and opens the dialog
+	 * Method that parses the event to a room object and opens the reservation-dialog
 	 *
 	 * @param event - the event with a room object in it
 	 */
