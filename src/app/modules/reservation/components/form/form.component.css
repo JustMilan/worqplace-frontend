@@ -157,13 +157,9 @@ form label {
 	line-height: 1.7;
 }
 
-.field.location-select {
-	font-size: 13px;
-	font-weight: 700;
-	position: relative;
-	height: 23px;
-	color: #171717;
-	line-height: 23px;
+.field-input.location-select {
+	color: red !important;
+	background-color: red !important;
 }
 
 .field-input {
@@ -184,14 +180,14 @@ select {
 	appearance: none;
 	background-color: transparent;
 	border: none;
-	padding: 0 1em 0 0;
+	padding: 0;
 	margin: 0;
 	width: 100%;
-	font-family: inherit;
-	font-size: inherit;
 	cursor: inherit;
-	line-height: inherit;
-	outline: none;
+}
+
+#location-placeholder {
+	font-size: 5px !important;
 }
 
 /* color the datepicker head */
