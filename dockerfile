@@ -11,6 +11,6 @@ RUN npm run build
 
 # Setup the NGINX container
 FROM nginx:alpine
-COPY --from=node /app/dist/worqplace.=-FrontEnd /usr/share/nginx/html
+COPY --from=node /app/dist/worqplace-FrontEnd /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
