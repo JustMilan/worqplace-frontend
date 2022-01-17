@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Location } from "../../../../data/interface/Location";
-import { ReservationResponse } from "../../../../data/interface/ReservationResponse";
+import {ReservationResponse} from "../../../../data/interface/ReservationResponse";
 
 /**
  * The reservation form component
@@ -10,10 +10,6 @@ import { ReservationResponse } from "../../../../data/interface/ReservationRespo
  * @property locations - the locations array
  * @property reservationType - the hardcoded reservation types
  * @property minDate - the minimum date
- * @property selectedDate - the selected date
- * @property reservationTypeControl - the reservation type form control
- * @property locationsControl - the location form control
- * @property floatLabelControl - the float label form control
  */
 @Component({
 	selector: 'app-reservation-form',
@@ -21,57 +17,56 @@ import { ReservationResponse } from "../../../../data/interface/ReservationRespo
 	styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-	reservationForm: FormGroup;
-
 	@Output() submit = new EventEmitter();
 	@Input() locations: Location[];
 
+	reservationForm: FormGroup;
 	reservationType: string[] = ['Ruimte', 'Werkplek'];
 	minDate: Date = new Date(Date.now());
-	selectedDate: string;
 
-	reservationTypeControl = new FormControl('', Validators.required);
-	locationsControl = new FormControl('', Validators.required);
-	floatLabelControl = new FormControl('auto');
+	selectedReservationType: string = 'Ruimte';
 
-	constructor() {
-		// this is intentional
+	constructor(private fb: FormBuilder) {
+
+	}
+
+	onTypeChange(reservationType: string): void {
+		this.selectedReservationType = reservationType;
+
+		document.getElementById(reservationType)!.classList.add('active');
+
+		this.reservationType.forEach( type => {
+			if (type !== reservationType) {
+				document.getElementById(type)!.classList.remove('active');
+			}
+		})
 	}
 
 	/**
 	 * Initializes the reservation form group with multiple form groups.
 	 */
 	ngOnInit(): void {
-		this.reservationForm = new FormGroup({
-			'locationDetails': new FormGroup({
-				'locationFormCtrl': new FormControl('', Validators.required)
-			}),
-			'dateDetails': new FormGroup({
-				'dateFormCtrl': new FormControl('', Validators.required)
-			}),
-			'timeDetails': new FormGroup({
-				'startTimeFormCtrl': new FormControl('', Validators.required),
-				'endTimeFormCtrl': new FormControl('', Validators.required)
-			}),
-			'typeDetails': new FormGroup({
-				'typeFormCtrl': new FormControl('', Validators.required)
-			})
+		this.reservationForm = this.fb.group({
+			type: ['', Validators.required],
+			location: ['', Validators.required],
+			date: ['', Validators.required],
+			startTime: ['', Validators.required],
+			endTime: ['', Validators.required]
 		});
 	}
 
 	/**
-	 * Converts a date object from the event to the date format YYYY/MM/DD and sets the selectedDate property
+	 * Converts a date object to the date format YYYY/MM/DD and returns the converted date
 	 *
-	 * @param event - the date event from the calendar
+	 * @param date - the to convert date
+	 * @returns - the converted date
 	 */
-	onSelect(event: any) {
-		let date = new Date(event);
-
+	dateConverter(date: Date): string {
 		let day = ('0' + date.getDate()).slice(-2);
 		let month = ('0' + (date.getMonth() + 1)).slice(-2);
 		let year = date.getFullYear();
 
-		this.selectedDate = `${year}-${month}-${day}`;
+		return`${year}-${month}-${day}`;
 	}
 
 	/**
@@ -79,13 +74,13 @@ export class FormComponent implements OnInit {
 	 */
 	onSubmit() {
 		const reservation: ReservationResponse = {
-			locationId: this.reservationForm.get('locationDetails')!.get('locationFormCtrl')!.value,
-			date: this.selectedDate,
+			locationId: this.reservationForm.value.location,
+			date: this.reservationForm.value.date? this.dateConverter(this.reservationForm.value.date): undefined!,
 			time: {
-				start: this.reservationForm.get('timeDetails')!.get('startTimeFormCtrl')!.value,
-				end: this.reservationForm.get('timeDetails')!.get('endTimeFormCtrl')!.value
+				start: this.reservationForm.value.startTime,
+				end: this.reservationForm.value.endTime
 			},
-			type: this.reservationForm.get('typeDetails')!.get('typeFormCtrl')!.value
+			type: this.selectedReservationType
 		}
 
 		this.submit.emit(reservation);

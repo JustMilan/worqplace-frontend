@@ -64,6 +64,11 @@
 	color: #fff;
 }
 
+.reservationType-item.active {
+	background: white;
+	color: black !important;
+}
+
 .reservationsForm-fields-container {
 	background: #fff;
 	height: 82px;
@@ -187,10 +192,6 @@ select {
 	cursor: inherit;
 	line-height: inherit;
 	outline: none;
-}
-
-select::-ms-expand {
-	display: none;
 }
 
 /* color the datepicker head */

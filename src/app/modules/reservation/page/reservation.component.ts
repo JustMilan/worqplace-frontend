@@ -233,9 +233,10 @@ export class ReservationComponent implements OnInit {
 	onSubmit(reservationResponse: ReservationResponse) {
 		this.reservationResponse = reservationResponse;
 
-		if (reservationResponse.locationId == undefined || reservationResponse.date == undefined ||
-			reservationResponse.time.start == undefined || reservationResponse.time.end == undefined ||
-			reservationResponse.type == undefined) {
+		// Check if the fields have a truthy value (so not null, undefined, NaN, empty, 0, false)
+		if (!(reservationResponse.locationId && reservationResponse.date &&
+			reservationResponse.time.start && reservationResponse.time.end && reservationResponse.type)) {
+
 			this.notificationService.handleError("Niet alle velden zijn ingevuld!");
 			return;
 		}
