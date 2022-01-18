@@ -161,6 +161,10 @@ form label {
 	color: gray;
 }
 
+#start-time-select, #end-time-select {
+	color: black;
+}
+
 .field-input {
 	position: relative;
 	white-space: nowrap;

@@ -43,29 +43,26 @@ describe('ReservationFormComponent', () => {
 
 		const locationSelect = formElement.querySelector('#location-select');
 		const dateSelect = formElement.querySelector('#datepicker-input');
-		// const startTimeSelect = formElement.querySelector('#start-time-select');
-		// const endTimeSelect = formElement.querySelector('#end-time-select');
-		// const typeSelect = formElement.querySelector('#typeSelect');
+		const startTimeSelect = formElement.querySelector('#start-time-select');
+		const endTimeSelect = formElement.querySelector('#end-time-select');
+		const typeSelect = formElement.querySelector('#typeSelect');
 
 		locationSelect.setValue('Quintor Amersfoort');
 		dateSelect.value = date;
-		// startTimeSelect.value = '10:00';
-		// endTimeSelect.value = '12:00';
-		// typeSelect.value = 'Ruimte';
+		startTimeSelect.value = '10:00';
+		endTimeSelect.value = '12:00';
+		typeSelect.value = 'Ruimte';
 
 		component.onSubmit();
 		fixture.detectChanges();
 		console.log(component.reservationForm.controls['location'].value)
 
 		fixture.whenStable().then(() => {
-			console.log(locationSelect.text)
-			console.log(component.reservationForm.controls['location'].value)
 			expect(locationSelect.value).toEqual(component.reservationForm.controls['location'].value);
 			expect(component.dateConverter(date)).toEqual(component.reservationForm.controls['date'].value);
-			// expect(startTimeSelect.value).toEqual(component.reservationForm.controls['startTime'].value);
-			// expect(endTimeSelect.value).toEqual(component.reservationForm.controls['endTime'].value);
-			// console.log(component.reservationForm.value)
-			// expect(typeSelect.value).toEqual(component.reservationForm.get('typeDetails')!.get('typeFormCtrl')!.value);
+			expect(startTimeSelect.value).toEqual(component.reservationForm.controls['startTime'].value);
+			expect(endTimeSelect.value).toEqual(component.reservationForm.controls['endTime'].value);
+			expect(typeSelect.value).toEqual(component.reservationForm.get('typeDetails')!.get('typeFormCtrl')!.value);
 		})
 	}));
 
