@@ -18,7 +18,7 @@
 					<div class="field">
 						<label>locatie</label>
 						<div class="field-input">
-							<select name="location" formControlName="location" class="location-select">
+							<select name="location" formControlName="location" id="location-select" required>
 								<option value="" selected hidden id="location-placeholder">Kies een locatie</option>
 								<option *ngFor="let loc of locations" [value]="loc.id">{{loc.name}}</option>
 							</select>
@@ -30,8 +30,8 @@
 					<div class="field">
 						<label>datum</label>
 						<div class="field-input">
-								<input [minDate]="minDate" type="text" placeholder="Kies een datum" class="form-control"
-											 name="date" formControlName="date" bsDatepicker>
+								<input [minDate]="minDate" type="text" placeholder="Kies een datum" id="datepicker-input"
+											 class="form-control" name="date" formControlName="date" bsDatepicker>
 						</div>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 						<div class="field-input">
 							<div>
 								<input matInput [format]=24 [ngxTimepicker]="startpicker"
-											 type="time" id="startTimeSelect"
+											 type="time" id="start-time-select"
 											 name="startTime" formControlName="startTime" required>
 								<ngx-material-timepicker #startpicker><</ngx-material-timepicker>
 							</div>
@@ -56,7 +56,7 @@
 						<div class="field-input">
 							<div>
 								<input matInput [format]=24 [ngxTimepicker]="endpicker"
-											 type="time" id="endTimeSelect"
+											 type="time" id="end-time-select"
 											 name="endTime" formControlName="endTime" required>
 								<ngx-material-timepicker #endpicker><</ngx-material-timepicker>
 							</div>

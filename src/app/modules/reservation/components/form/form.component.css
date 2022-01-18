@@ -157,9 +157,8 @@ form label {
 	line-height: 1.7;
 }
 
-.field-input.location-select {
-	color: red !important;
-	background-color: red !important;
+#location-select:required:invalid {
+	color: gray;
 }
 
 .field-input {
@@ -184,10 +183,6 @@ select {
 	margin: 0;
 	width: 100%;
 	cursor: inherit;
-}
-
-#location-placeholder {
-	font-size: 5px !important;
 }
 
 /* color the datepicker head */
