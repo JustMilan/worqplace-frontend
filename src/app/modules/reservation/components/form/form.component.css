@@ -3,6 +3,7 @@
 	margin: 0 auto;
 	position: relative;
 }
+
 @media (min-width: 768px) {
 	.reservationsForm-container {
 		border-radius: 2px;
