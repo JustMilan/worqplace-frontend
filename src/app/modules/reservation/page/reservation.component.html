@@ -1,11 +1,12 @@
 <div class="center">
-	<button mat-button (click)="toggleTable()" class="recente-reserveringen-button" [ngClass]="showTable? 'close' : 'open'">{{showTable? 'Close': 'Recente reserveringen'}}</button>
+	<button mat-button (click)="toggleTable()" class="recente-reserveringen-button"
+					[ngClass]="showTable? 'close' : 'open'">{{showTable ? 'Close' : 'Recente reserveringen'}}</button>
 </div>
 
 <app-my-reservations-table></app-my-reservations-table>
 
 <app-reservation-form class="reservation-form"
-					  [locations]="locations" (submit)="onSubmit($event)"></app-reservation-form>
+											[locations]="locations" (submit)="onSubmit($event)"></app-reservation-form>
 
 <app-notification></app-notification>
 

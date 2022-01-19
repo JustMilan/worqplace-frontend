@@ -73,7 +73,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/all`);
+		const request = httpMock.expectOne(`${apiUrl}/all`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -146,7 +146,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/location/${locationId}`);
+		const request = httpMock.expectOne(`${apiUrl}/location/${locationId}`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -178,7 +178,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/delete/${toDeleteReservation.id}`);
+		const request = httpMock.expectOne(`${apiUrl}/delete/${toDeleteReservation.id}`);
 
 		// TODO: must be changed to DELETE
 		// Check if the type of the request is a POST
@@ -211,7 +211,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/workplaces`);
+		const request = httpMock.expectOne(`${apiUrl}/workplaces`);
 
 		// Check if the type of the request is a POST
 		expect(request.request.method).toBe('POST');
@@ -243,7 +243,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/rooms`);
+		const request = httpMock.expectOne(`${apiUrl}/rooms`);
 
 		// Check if the type of the request is a POST
 		expect(request.request.method).toBe('POST');
@@ -284,7 +284,7 @@ describe('ReservationService', () => {
 				fail('complete handler must not be called');
 			});
 
-		const request = httpMock.expectOne( `${apiUrl}/rooms`);
+		const request = httpMock.expectOne(`${apiUrl}/rooms`);
 
 		// Let the request error instead of flush
 		request.error(errorEvent, {status: status, statusText: statusText});
@@ -322,7 +322,7 @@ describe('ReservationService', () => {
 				fail('complete handler must not be called');
 			});
 
-		const request = httpMock.expectOne( `${apiUrl}/workplaces`);
+		const request = httpMock.expectOne(`${apiUrl}/workplaces`);
 
 		// Let the request error instead of flush
 		request.error(errorEvent, {status: status, statusText: statusText});

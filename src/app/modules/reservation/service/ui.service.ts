@@ -7,30 +7,30 @@ import { Observable, Subject } from "rxjs";
  * @property subject - the subject
  */
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class UiService {
-    private showTable: boolean;
-    private subject = new Subject<any>();
+	private showTable: boolean;
+	private subject = new Subject<any>();
 
-    constructor() {
+	constructor() {
 		// this is intentional
-    }
+	}
 
-    /**
-     * Method that allows for multiple observers
-     *
-     * @return - an observable from the subject
-     */
-    onToggle(): Observable<any> {
-        return this.subject.asObservable();
-    }
+	/**
+	 * Method that allows for multiple observers
+	 *
+	 * @return - an observable from the subject
+	 */
+	onToggle(): Observable<any> {
+		return this.subject.asObservable();
+	}
 
-    /**
-     * Method that toggles the my reservations table
-     */
-    toggleTable(): void {
-        this.showTable = !this.showTable;
-        this.subject.next(this.showTable);
-    }
+	/**
+	 * Method that toggles the my reservations table
+	 */
+	toggleTable(): void {
+		this.showTable = !this.showTable;
+		this.subject.next(this.showTable);
+	}
 }

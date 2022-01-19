@@ -7,12 +7,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 	providedIn: "root"
 })
 export class AuthenticationService {
-	constructor(private httpClient: HttpClient, public jwtHelper: JwtHelperService) {}
+	constructor(private httpClient: HttpClient, public jwtHelper: JwtHelperService) {
+	}
 
 	// Provide username and password for authentication
 	authenticate(email: string, password: string) {
 		return this.httpClient
-			.post<any>(environment.baseUrl + "/login", { username: email, password }, {observe: "response"})
+			.post<any>(environment.baseUrl + "/login", {username: email, password}, {observe: "response"})
 	}
 
 	isAuthenticated(): boolean {
@@ -31,7 +32,7 @@ export class AuthenticationService {
 	}
 
 	splitToken(token: string): string {
-		if (token.startsWith("Bearer ")){
+		if (token.startsWith("Bearer ")) {
 			return token.substring(7, token.length);
 		} else {
 			return '';

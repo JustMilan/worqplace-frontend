@@ -33,13 +33,13 @@ describe('ReservationPageComponent', () => {
 
 	let notificationService: NotificationService;
 
-	beforeEach( () => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule],
 			declarations: [ReservationComponent, ReservationDialogComponent],
 			providers: [{
 				provide: LocationService,
-				useValue: jasmine.createSpyObj('LocationService', { getLocations: of(locationsMock) } )
+				useValue: jasmine.createSpyObj('LocationService', {getLocations: of(locationsMock)})
 			}, {
 				provide: RoomService,
 				useValue: jasmine.createSpyObj('RoomService', {
@@ -60,8 +60,8 @@ describe('ReservationPageComponent', () => {
 				{
 					provide: MatDialogRef,
 					useValue: {
-						afterClosed: jasmine.createSpy('MatDialogRef.afterClosed()').and.returnValue(of( {
-							data: {room: roomMock, reservationType: reservationResponseMock }
+						afterClosed: jasmine.createSpy('MatDialogRef.afterClosed()').and.returnValue(of({
+							data: {room: roomMock, reservationType: reservationResponseMock}
 						}))
 					}
 				}
@@ -162,7 +162,7 @@ describe('ReservationPageComponent', () => {
 			expect(spy).toHaveBeenCalled();
 		});
 
-		it('should convert to room reservation',  () => {
+		it('should convert to room reservation', () => {
 			reservationResponseMock.type = 'Ruimte';
 
 			let roomReservation = component.selectedRoomReservation(roomMock, recurrenceMock);
@@ -174,7 +174,7 @@ describe('ReservationPageComponent', () => {
 			expect(roomReservation.recurrence).toEqual(recurrenceMock);
 		});
 
-		it('should convert to workplace reservation',  () => {
+		it('should convert to workplace reservation', () => {
 			reservationResponseMock.type = 'Werkplek';
 
 			let roomReservation = component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock);
@@ -187,7 +187,7 @@ describe('ReservationPageComponent', () => {
 			expect(roomReservation.recurrence).toEqual(recurrenceMock);
 		});
 
-		it('should check room availability',  () => {
+		it('should check room availability', () => {
 			let spy = spyOn(component, 'checkAvailability').and.callThrough();
 
 			reservationResponseMock.type = 'Ruimte';
@@ -196,7 +196,7 @@ describe('ReservationPageComponent', () => {
 			expect(spy).toHaveBeenCalled();
 		});
 
-		it('should check workplace availability',  () => {
+		it('should check workplace availability', () => {
 			let spy = spyOn(component, 'checkAvailability').and.callThrough();
 
 			reservationResponseMock.type = 'Werkplek';
@@ -205,7 +205,7 @@ describe('ReservationPageComponent', () => {
 			expect(spy).toHaveBeenCalled();
 		});
 
-		it('should reserve room',  () => {
+		it('should reserve room', () => {
 			let spy = spyOn(component, "reserveRoom").and.callThrough();
 
 			component.reserveRoom(component.selectedRoomReservation(roomMock, recurrenceMock));
@@ -214,7 +214,7 @@ describe('ReservationPageComponent', () => {
 			expect(spy).toHaveBeenCalled();
 		});
 
-		it('should reserve workplace',  () => {
+		it('should reserve workplace', () => {
 			let spy = spyOn(component, "reserveWorkplace").and.callThrough();
 
 			component.reserveWorkplace(component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock), roomMock, workplaceAmountMock);
@@ -223,7 +223,7 @@ describe('ReservationPageComponent', () => {
 			expect(spy).toHaveBeenCalled();
 		});
 
-		it('should notify when workplace amount is less than 1 when reserving workplace',  () => {
+		it('should notify when workplace amount is less than 1 when reserving workplace', () => {
 			let spy = spyOn(component, "reserveWorkplace").and.callThrough();
 			const invalidWorkplaceAmount = 0;
 

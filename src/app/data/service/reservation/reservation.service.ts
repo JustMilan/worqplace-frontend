@@ -107,4 +107,13 @@ export class ReservationService {
 	deleteReservationById(reservationId: number): Observable<Reservation> {
 		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservationId}`, this.httpOptions)
 	}
+
+	/**
+	 * Makes a http POST request to the reservations/update/{id} path to update a reservation.
+	 *
+	 * @param reservation {@link Reservation}
+	 */
+	updateReservation(reservation: Reservation): Observable<Reservation> {
+		return this.http.post<Reservation>(`${this.apiUrl}/update/${reservation.id}`, reservation, this.httpOptions)
+	}
 }

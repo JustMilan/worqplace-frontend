@@ -10,7 +10,7 @@ export class AdminAuthGuard implements CanActivate {
 	canActivate(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
-	): Observable<boolean>|Promise<boolean>|boolean {
+	): Observable<boolean> | Promise<boolean> | boolean {
 		if (!this.authService.isAuthenticated() || this.authService.getRole() != "ROLE_ADMIN") {
 			this.router.navigate(['login']);
 		}

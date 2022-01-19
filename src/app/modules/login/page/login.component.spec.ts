@@ -11,78 +11,78 @@ import { HttpHeaders, HttpResponse } from "@angular/common/http";
 import { CoreModule } from "../../../core/core.module";
 
 describe('LoginPageComponent', () => {
-    let component: LoginComponent;
-    let fixture: ComponentFixture<LoginComponent>;
-    let authService: AuthenticationService;
-    let notificationService: NotificationService;
+	let component: LoginComponent;
+	let fixture: ComponentFixture<LoginComponent>;
+	let authService: AuthenticationService;
+	let notificationService: NotificationService;
 
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
+	let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
 
-    const headerMock: HttpHeaders = new HttpHeaders({
-        'authorization': token
-    });
+	const headerMock: HttpHeaders = new HttpHeaders({
+		'authorization': token
+	});
 
-    beforeEach( () => {
-        TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule, CoreModule],
-            declarations: [LoginComponent],
-            providers: [{
-                provide: AuthenticationService
-            }, {
-                provide: NotificationService
-            }]
-        })
-            .compileComponents();
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule, CoreModule],
+			declarations: [LoginComponent],
+			providers: [{
+				provide: AuthenticationService
+			}, {
+				provide: NotificationService
+			}]
+		})
+			.compileComponents();
 
-    });
+	});
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(LoginComponent);
-        component = fixture.componentInstance;
+	beforeEach(() => {
+		fixture = TestBed.createComponent(LoginComponent);
+		component = fixture.componentInstance;
 
-        authService = TestBed.inject(AuthenticationService);
-        notificationService = TestBed.inject(NotificationService);
-        fixture.detectChanges();
-    });
+		authService = TestBed.inject(AuthenticationService);
+		notificationService = TestBed.inject(NotificationService);
+		fixture.detectChanges();
+	});
 
-    it('should create ',  () => {
-        expect(component).toBeTruthy();
-    });
+	it('should create ', () => {
+		expect(component).toBeTruthy();
+	});
 
-    it('should store the token in the local storage when login is successful', () => {
-        let loginComponentSpy = spyOn(component, "login").and.callThrough();
-        let authServiceSpy = spyOn(authService, 'authenticate').and.callFake(() => {
-            return of( new HttpResponse ({ headers: headerMock}) )
-        });
+	it('should store the token in the local storage when login is successful', () => {
+		let loginComponentSpy = spyOn(component, "login").and.callThrough();
+		let authServiceSpy = spyOn(authService, 'authenticate').and.callFake(() => {
+			return of(new HttpResponse({headers: headerMock}))
+		});
 
-        component.username = "test";
-        component.password = "test123";
-        component.login();
+		component.username = "test";
+		component.password = "test123";
+		component.login();
 
-        expect(loginComponentSpy).toHaveBeenCalled();
-        expect(authServiceSpy).toHaveBeenCalled();
-        expect(localStorage.getItem('token')).toEqual(token);
-    });
+		expect(loginComponentSpy).toHaveBeenCalled();
+		expect(authServiceSpy).toHaveBeenCalled();
+		expect(localStorage.getItem('token')).toEqual(token);
+	});
 
-    it('should notify when login is not successful', () => {
-        let message = 'Verkeerde gebruikersnaam of wachtwoord';
-        let loginComponentSpy = spyOn(component, "login").and.callThrough();
-        let authServiceSpy = spyOn(authService, 'authenticate').and.callFake(() => {
-            return throwError(new Error(message))
-        });
+	it('should notify when login is not successful', () => {
+		let message = 'Verkeerde gebruikersnaam of wachtwoord';
+		let loginComponentSpy = spyOn(component, "login").and.callThrough();
+		let authServiceSpy = spyOn(authService, 'authenticate').and.callFake(() => {
+			return throwError(new Error(message))
+		});
 
-        // expect there to be a notification with the correct message and colorclass
-        // component.login makes the observable resolve
-        notificationService.onNotification().subscribe((notification) => {
-            expect(notification.message).toEqual(message);
-            expect(notification.colorClass).toEqual('error');
-        })
+		// expect there to be a notification with the correct message and colorclass
+		// component.login makes the observable resolve
+		notificationService.onNotification().subscribe((notification) => {
+			expect(notification.message).toEqual(message);
+			expect(notification.colorClass).toEqual('error');
+		})
 
-        component.username = "test";
-        component.password = "wrongpassword123";
-        component.login();
+		component.username = "test";
+		component.password = "wrongpassword123";
+		component.login();
 
-        expect(loginComponentSpy).toHaveBeenCalled();
-        expect(authServiceSpy).toHaveBeenCalled();
-    });
+		expect(loginComponentSpy).toHaveBeenCalled();
+		expect(authServiceSpy).toHaveBeenCalled();
+	});
 });

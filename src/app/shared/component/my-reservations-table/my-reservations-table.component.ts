@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import {  MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatTable } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -11,7 +11,7 @@ import { Location } from "../../../data/interface/Location";
 import { LocationService } from "../../../data/service/location/location.service";
 import { MatDialog } from "@angular/material/dialog";
 import { NotificationService } from "../../service/notification.service";
-import { AlterReservationDialogComponent } from "../../../modules/reservation/components/alter-reservation-dialog/alter-reservation-dialog.component";
+import {AlterReservationDialogComponent } from "../../../modules/reservation/components/alter-reservation-dialog/alter-reservation-dialog.component";
 import { MatSelectChange } from "@angular/material/select";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
@@ -154,29 +154,8 @@ export class MyReservationsTableComponent implements OnInit {
 	}
 
 	/**
-	 * Method to convert the recurring pattern string to an enum literal for the http request to the back-end
-	 *
-	 * @param recurringPattern - the recurring pattern string
-	 *
-	 * @return - the string enum literal or an empty string if invalid
-	 */
-	convertRecurringPatternToEnumLiteral(recurringPattern: string): string {
-		switch (recurringPattern) {
-			case 'Dagelijks':
-				return 'DAILY';
-			case 'Wekelijks':
-				return 'WEEKLY';
-			case '2 Wekelijks':
-				return 'BIWEEKLY';
-			case 'Maandelijks':
-				return 'MONTHLY';
-		}
-
-		return '';
-	}
-
-	/**
-	 * Method that shows the alter reservation-dialog from the selected reservation.
+	 * Method that shows the alter reservation-dialog from the selected reservation and
+	 * updates the reservation if any properties have been changed.
 	 *
 	 * @param selectedReservation selected reservation
 	 */
@@ -188,12 +167,32 @@ export class MyReservationsTableComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log(result)
-			// 	check if the confirmation button is clicked in reservation-dialog
+			// 	check if there are any changed values
 			if (result != undefined) {
-				//TODO: compare result vs existing and only post change request if there are differences
+				result = JSON.parse(JSON.stringify(result));
 
+				// Check if values have changed
+				if (!(selectedReservation.id === result.reservation.id &&
+					selectedReservation.date === result.reservation.date &&
+					selectedReservation.startTime === result.reservation.startTime &&
+					selectedReservation.endTime === result.reservation.endTime &&
+					selectedReservation.recurrence.recurrencePattern === result.reservation.recurrence.recurrencePattern)) {
+					this.#requestUpdateReservation(result);
+				}
 			}
+		});
+	}
+
+	/**
+	 * Function that calls the {@link reservationService.updateReservation updateReservation} method in order
+	 * to try to update the reservation.
+	 *
+	 * @param reservation {@link Reservation} object.
+	 * @private
+	 */
+	#requestUpdateReservation(reservation: Reservation): void {
+		//TODO: handle possible errors, can only be done when backend is done.
+		this.reservationService.updateReservation(reservation).subscribe(() => {
 		});
 	}
 

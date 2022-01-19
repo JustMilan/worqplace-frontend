@@ -23,7 +23,7 @@ describe('OpenRoomCardComponent', () => {
 		type: 'Ruimte'
 	};
 
-	beforeEach( () => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [OpenCardComponent]
 		})

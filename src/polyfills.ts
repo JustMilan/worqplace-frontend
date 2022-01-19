@@ -62,5 +62,4 @@ import 'zone.js'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-
 import 'url-polyfill'; // For angular2-jwt

@@ -16,7 +16,7 @@ import { AlterReservationDialogComponent } from './modules/reservation/component
 
 import { ReservationModule } from "./modules/reservation/reservation.module";
 import { SharedModule } from "./shared/shared.module";
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({

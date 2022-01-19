@@ -6,7 +6,7 @@ describe('MyReservationsComponent', () => {
 	let component: MyReservationsComponent;
 	let fixture: ComponentFixture<MyReservationsComponent>;
 
-	beforeEach( () => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [MyReservationsComponent]
 		})

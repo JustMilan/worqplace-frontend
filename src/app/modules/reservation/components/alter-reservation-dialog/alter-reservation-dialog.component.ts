@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {Reservation} from "../../../../data/interface/Reservation";
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Reservation } from "../../../../data/interface/Reservation";
 
 @Component({
 	selector: 'app-alter-reservation-dialog',
@@ -53,6 +53,12 @@ export class AlterReservationDialogComponent implements OnInit {
 		this.selectedEndTime = this.processedData.endTime;
 	}
 
+	/**
+	 * Function that translates the english recurrence options to the dutch options
+	 * given in {@link repeatOptions}
+	 *
+	 * @private
+	 */
 	#translateRecurrence(): string {
 		switch (this.processedData.recurrence.recurrencePattern) {
 			case 'NONE':
@@ -70,11 +76,15 @@ export class AlterReservationDialogComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Function that creates a new {@link Reservation} object with the values from the dialog.
+	 * Then closes the dialog with the reservation object.
+	 */
 	confirm() {
 		let recurrencePattern = this.#getTranslatedRecurrence();
 		let reservation: Reservation = {
 			id: this.processedData.id,
-			date: this.selectedDate.toISOString(),
+			date: this.selectedDate.toISOString().slice(0, 10),
 			startTime: this.selectedStartTime,
 			endTime: this.selectedEndTime,
 			roomId: this.processedData.roomId,
@@ -90,22 +100,47 @@ export class AlterReservationDialogComponent implements OnInit {
 		});
 	}
 
+	/**
+	 * sets the selected date with the given date.
+	 *
+	 * @param date
+	 */
 	alterDate(date: Date) {
 		this.selectedDate = date;
 	}
 
+	/**
+	 * sets the selected start time with the given start time.
+	 *
+	 * @param startTime
+	 */
 	alterStartTime(startTime: string) {
 		this.selectedStartTime = startTime;
 	}
 
+	/**
+	 *  sets the selected end time with the given end time.
+	 *
+	 * @param endTime
+	 */
 	alterEndTime(endTime: string) {
 		this.selectedEndTime = endTime;
 	}
 
+	/**
+	 * sets the selected recurrence with the given recurrence.
+	 *
+	 * @param recurrence
+	 */
 	alterRecurrence(recurrence: any) {
 		this.selectedRecurrencePattern = recurrence.value;
 	}
 
+	/**
+	 * Translates the english recurrence patterns to the dutch ones
+	 *
+	 * @private
+	 */
 	#getTranslatedRecurrence(): string {
 		switch (this.selectedRecurrencePattern) {
 			case 'Geen':

@@ -178,6 +178,8 @@ form label {
 	padding: 0;
 
 	border: none;
+.timepicker-backdrop-overlay {
+	z-index: 10000000 !important;
 }
 
 select {

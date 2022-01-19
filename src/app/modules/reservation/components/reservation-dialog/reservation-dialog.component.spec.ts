@@ -13,16 +13,17 @@ describe('ReservationDialogComponent', () => {
 	let data: ReservationDialogData;
 
 	const dialogMock = {
-		close: () => { }
+		close: () => {
+		}
 	};
 
-	beforeEach( () => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [SharedModule, BrowserAnimationsModule],
 			declarations: [ReservationDialogComponent],
 			providers: [
-				{ provide: MatDialogRef, useValue: dialogMock },
-				{ provide: MAT_DIALOG_DATA, useValue: { data } }
+				{provide: MatDialogRef, useValue: dialogMock},
+				{provide: MAT_DIALOG_DATA, useValue: {data}}
 			]
 		})
 			.compileComponents();
