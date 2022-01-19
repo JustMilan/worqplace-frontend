@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { environment } from "../../../../environments/environment";
@@ -55,6 +55,35 @@ export class ReservationService {
 	 */
 	getAllReservationsByEmployeeId(): Observable<Reservation[]> {
 		return this.http.get<Reservation[]>(`${this.apiUrl}/all`, this.httpOptions);
+	}
+
+	/**
+	 * Makes a http GET request to the /reservations/all path with date and locationId params
+	 * The Backend automatically picks up the userId from the JWT token.
+	 *
+	 * @param date - the lowest date to get Reservations from
+	 * @param locationId - the id of the location
+	 *
+	 * @returns - An observable of the reservations array
+	 */
+	getAllReservationsByEmployeeIdAndFilters(date: Date | null, locationId: number | undefined): Observable<Reservation[]> {
+		let params = new HttpParams();
+
+		if (date) {
+			date.setHours(12);
+			params = params.set("date", date.toISOString().split('T')[0]);
+		}
+
+		if (locationId) params = params.set("location", locationId);
+		let customHttpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json'
+			}),
+			params: params,
+		}
+
+
+		return this.http.get<Reservation[]>(`${this.apiUrl}/all`, customHttpOptions);
 	}
 
 	/**

@@ -9,6 +9,7 @@ import {MatTable} from "@angular/material/table";
 import {Location} from "../../../data/interface/Location";
 import {LocationService} from "../../../data/service/location/location.service";
 import {MatSelectChange} from "@angular/material/select";
+import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 /**
  * The my reservation table component
@@ -34,10 +35,11 @@ export class MyReservationsTableComponent implements OnInit {
 	locations: Location[];
 	location: number;
 
+	selectedDate: Date = new Date();
+	date: Date | null;
+
 	showTable: boolean;
 	subscription: Subscription;
-
-	selectedDate: Date = new Date();
 
 	/**
 	 * Constructor of the my reservation table component
@@ -116,11 +118,26 @@ export class MyReservationsTableComponent implements OnInit {
 		this.allMyReservationsSlice = this.allMyReservations.slice(startIndex, endIndex)
 	}
 
-	refreshLocation($event: MatSelectChange) {
-		// TODO: Add logic to get the right reservations
+	/**
+	 * Method that gets all the reservations by the given employeeId from the reservations service
+	 * including searchparams for filters.
+	 *
+	 * @return - an observable of the reservations array
+	 */
+	getAllReservationsByEmployeeIdWithFilters() {
+		this.reservationService.getAllReservationsByEmployeeIdAndFilters(this.date, this.location).subscribe(reservations => {
+			this.allMyReservations = reservations
+			this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
+		});
 	}
 
-	refreshStartDate($event: MatSelectChange) {
-		// TODO: Add logic to get the right reservations
+	refreshLocation($event: MatSelectChange) {
+		this.location = $event.value;
+		this.getAllReservationsByEmployeeIdWithFilters();
+	}
+
+	refreshStartDate($event: MatDatepickerInputEvent<any>) {
+		this.date = $event.value;
+		this.getAllReservationsByEmployeeIdWithFilters();
 	}
 }

@@ -82,6 +82,60 @@ describe('ReservationService', () => {
 		request.flush(reservationsMock);
 	});
 
+	it('should be able to retrieve all reservations by employeeId and both filters from the API via GET', () => {
+		// Run the getAllReservationsByEmployeeIdAndFilters method and expect the response to match the expectations
+		// (when the observable resolves)
+		service.getAllReservationsByEmployeeIdAndFilters(new Date(2022, 0, 19, 12, 0, 0), 1).subscribe(reservations => {
+			expect(reservations.length).toBe(3);
+			expect(reservations).toEqual(reservationsMock);
+		});
+
+		// When the service function is called, we can expect that there has been made 1 request to the endpoint
+		const request = httpMock.expectOne( `${apiUrl}/all?date=2022-01-19&location=1`);
+
+		// Check if the type of the request is a GET
+		expect(request.request.method).toBe('GET');
+
+		// Respond with the mock data which resolves the observable
+		request.flush(reservationsMock);
+	});
+
+	it('should be able to retrieve all reservations by employeeId and date from the API via GET', () => {
+		// Run the getAllReservationsByEmployeeIdAndFilters method and expect the response to match the expectations
+		// (when the observable resolves)
+		service.getAllReservationsByEmployeeIdAndFilters(new Date(2022, 0, 19, 12, 0, 0), undefined).subscribe(reservations => {
+			expect(reservations.length).toBe(3);
+			expect(reservations).toEqual(reservationsMock);
+		});
+
+		// When the service function is called, we can expect that there has been made 1 request to the endpoint
+		const request = httpMock.expectOne( `${apiUrl}/all?date=2022-01-19`);
+
+		// Check if the type of the request is a GET
+		expect(request.request.method).toBe('GET');
+
+		// Respond with the mock data which resolves the observable
+		request.flush(reservationsMock);
+	});
+
+	it('should be able to retrieve all reservations by employeeId and location from the API via GET', () => {
+		// Run the getAllReservationsByEmployeeIdAndFilters method and expect the response to match the expectations
+		// (when the observable resolves)
+		service.getAllReservationsByEmployeeIdAndFilters(null, 1).subscribe(reservations => {
+			expect(reservations.length).toBe(3);
+			expect(reservations).toEqual(reservationsMock);
+		});
+
+		// When the service function is called, we can expect that there has been made 1 request to the endpoint
+		const request = httpMock.expectOne( `${apiUrl}/all?location=1`);
+
+		// Check if the type of the request is a GET
+		expect(request.request.method).toBe('GET');
+
+		// Respond with the mock data which resolves the observable
+		request.flush(reservationsMock);
+	});
+
 	it('should be able to retrieve all reservations by locationId from the API via GET', () => {
 		const locationId = 1;
 		// Run the getAllReservationsByLocationId method and expect the response to match the expectations

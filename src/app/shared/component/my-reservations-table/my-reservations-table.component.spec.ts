@@ -9,6 +9,8 @@ import { of } from "rxjs";
 import { ReservationService } from "../../../data/service/reservation/reservation.service";
 import { Reservation } from "../../../data/interface/Reservation";
 import { By } from "@angular/platform-browser";
+import { MatSelectChange } from "@angular/material/select";
+import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 describe('MyReservationsTableComponent', () => {
 	let component: MyReservationsTableComponent;
@@ -33,6 +35,7 @@ describe('MyReservationsTableComponent', () => {
 				provide: ReservationService,
 				useValue: jasmine.createSpyObj('ReservationService', {
 					getAllReservationsByEmployeeId: of(reservationsMock),
+					getAllReservationsByEmployeeIdAndFilters: of(reservationsMock),
 					deleteReservationById: of(reservationsMock)} )
 			}]
 		})
@@ -106,7 +109,36 @@ describe('MyReservationsTableComponent', () => {
 		expect(component.allMyReservationsSlice).toHaveSize(1);
 	});
 
+	it('should call getAllReservationsByEmployeeIdWithFilters method when location is changed',  () => {
+		const locFilter = fixture.debugElement.query(By.css('.location-filter'));
 
+		let spy = spyOn(component, 'getAllReservationsByEmployeeIdWithFilters').and.callThrough();
 
+		component.refreshLocation(new MatSelectChange(locFilter.componentInstance, 1));
+
+		fixture.detectChanges();
+
+		expect(spy).toHaveBeenCalled();
+		expect(location).toBe(location);
+		expect(component.allMyReservations).toHaveSize(1);
+	});
+
+	it('should call getAllReservationsByEmployeeIdWithFilters method when date is changed',  () => {
+		const dateFilter = fixture.debugElement.query(By.css('.date-filter'));
+
+		let spy = spyOn(component, 'getAllReservationsByEmployeeIdWithFilters').and.callThrough();
+		let date = new Date();
+
+		let event = new MatDatepickerInputEvent(dateFilter.componentInstance, dateFilter.nativeElement);
+		event.value = date;
+
+		component.refreshStartDate(event);
+
+		fixture.detectChanges();
+
+		expect(spy).toHaveBeenCalled();
+		expect(component.date).toBe(date);
+		expect(component.allMyReservations).toHaveSize(1);
+	});
 
 });
