@@ -31,6 +31,9 @@ export class MyReservationsTableComponent implements OnInit {
 	public allMyReservations: Reservation[];
 	public allMyReservationsSlice: Reservation[];
 	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'action'];
+	private datesort: number = 0;
+	private startIndex: number = 0;
+	private endIndex: number = 3;
 
 	locations: Location[];
 	location: number;
@@ -81,14 +84,28 @@ export class MyReservationsTableComponent implements OnInit {
 	}
 
 	/**
-	 * Method that gets all the reservations by the given employeeId from the reservations service
+	 * Method that gets all the reservations by the given employeeId from the reservations service and sorts them by date ascending
 	 *
 	 * @return - an observable of the reservations array
 	 */
 	getAllReservationsByEmployeeId() {
 		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => {
 			this.allMyReservations = reservations
-			this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
+			if (this.datesort == 1){
+				this.allMyReservations.sort(function(a,b){return Date.parse(a.date) - Date.parse(b.date)})
+				this.datesort = 2
+				document.getElementById("Datebutton")!.classList.remove("rotate")
+			}
+			else if (this.datesort == 2){
+				this.allMyReservations.sort(function(a,b){return Date.parse(b.date) - Date.parse(a.date)})
+				this.datesort = 1
+				document.getElementById("Datebutton")!.classList.add("rotate")
+			}
+			if (this.datesort ==0 ){
+				this.allMyReservations.sort(function(a,b){return Date.parse(a.date) - Date.parse(b.date)})
+				this.datesort = 2;
+			}
+			this.allMyReservationsSlice = this.allMyReservations.slice(this.startIndex, this.endIndex);
 		});
 	}
 
@@ -110,12 +127,12 @@ export class MyReservationsTableComponent implements OnInit {
 	 * @param event - the page event
 	 */
 	OnPageChange(event: PageEvent) {
-		const startIndex = event.pageIndex * event.pageSize;
-		let endIndex = startIndex + event.pageSize;
-		if (endIndex > this.allMyReservations.length) {
-			endIndex = this.allMyReservations.length;
+		this.startIndex = event.pageIndex * event.pageSize;
+		this.endIndex = this.startIndex + event.pageSize;
+		if (this.endIndex > this.allMyReservations.length) {
+			this.endIndex = this.allMyReservations.length;
 		}
-		this.allMyReservationsSlice = this.allMyReservations.slice(startIndex, endIndex)
+		this.allMyReservationsSlice = this.allMyReservations.slice(this.startIndex, this.endIndex)
 	}
 
 	/**
