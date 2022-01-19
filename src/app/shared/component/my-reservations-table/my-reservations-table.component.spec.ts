@@ -10,7 +10,7 @@ import { ReservationService } from "../../../data/service/reservation/reservatio
 import { Reservation } from "../../../data/interface/Reservation";
 import { By } from "@angular/platform-browser";
 import { MatSelectChange } from "@angular/material/select";
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
 describe('MyReservationsTableComponent', () => {
 	let component: MyReservationsTableComponent;
@@ -25,9 +25,28 @@ describe('MyReservationsTableComponent', () => {
 			roomId: 1,
 			recurrence: {
 				active: false
-			}}];
+			}
+		}, {
+			id: 2,
+			date: '2022-01-01',
+			startTime: '12:00',
+			endTime: '13:30',
+			roomId: 1,
+			recurrence: {
+				active: false
+			}
+		}, {
+			id: 3,
+			date: '2022-01-02',
+			startTime: '12:00',
+			endTime: '13:30',
+			roomId: 1,
+			recurrence: {
+				active: false
+			}
+		}];
 
-	beforeEach( () => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule],
 			declarations: [MyReservationsTableComponent],
@@ -36,7 +55,8 @@ describe('MyReservationsTableComponent', () => {
 				useValue: jasmine.createSpyObj('ReservationService', {
 					getAllReservationsByEmployeeId: of(reservationsMock),
 					getAllReservationsByEmployeeIdAndFilters: of(reservationsMock),
-					deleteReservationById: of(reservationsMock)} )
+					deleteReservationById: of(reservationsMock)
+				})
 			}]
 		})
 			.compileComponents();
@@ -48,7 +68,7 @@ describe('MyReservationsTableComponent', () => {
 		component = fixture.componentInstance;
 		component.showTable = true;
 		component.allMyReservations = reservationsMock;
-		component.allMyReservationsSlice = reservationsMock.slice(0,3);
+		component.allMyReservationsSlice = reservationsMock.slice(0, 3);
 
 		fixture.detectChanges();
 	});
@@ -63,16 +83,16 @@ describe('MyReservationsTableComponent', () => {
 		});
 	});
 
-	it('should call getAllReservationsByEmployeeId method',  () => {
+	it('should call getAllReservationsByEmployeeId method', () => {
 		let spy = spyOn(component, 'getAllReservationsByEmployeeId').and.callThrough();
 
 		component.getAllReservationsByEmployeeId();
 
 		expect(spy).toHaveBeenCalled();
-		expect(component.allMyReservations).toHaveSize(1);
+		expect(component.allMyReservations).toHaveSize(3);
 	});
 
-	it('should call deleteReservationByReservationId method',  () => {
+	it('should call deleteReservationByReservationId method', () => {
 		let spy = spyOn(component, 'deleteReservationByReservationId').and.callThrough();
 		let reservationId = 1;
 
@@ -80,15 +100,15 @@ describe('MyReservationsTableComponent', () => {
 		component.allMyReservations = component.allMyReservationsSlice.filter(r => r.id !== reservationId);
 
 		expect(spy).toHaveBeenCalled();
-		expect(component.allMyReservations).toHaveSize(0);
+		expect(component.allMyReservations).toHaveSize(2);
 	});
 
-	it('should slice allMyReservations in OnPageChange',  () => {
+	it('should slice allMyReservations in OnPageChange', () => {
 		const paginator = fixture.debugElement.query(By.css('.paginator'));
 		let spy = spyOn(component, 'OnPageChange').and.callThrough();
 
 		component.paginator.pageIndex = 1;
-		component.paginator.pageSize = 1;
+		component.paginator.pageSize = 3;
 		paginator.triggerEventHandler('page', component.paginator);
 		fixture.detectChanges();
 
@@ -96,7 +116,7 @@ describe('MyReservationsTableComponent', () => {
 		expect(component.allMyReservationsSlice).toHaveSize(0);
 	});
 
-	it('should not slice allMyReservations in OnPageChange',  () => {
+	it('should not slice allMyReservations in OnPageChange', () => {
 		const paginator = fixture.debugElement.query(By.css('.paginator'));
 		let spy = spyOn(component, 'OnPageChange').and.callThrough();
 
@@ -109,7 +129,7 @@ describe('MyReservationsTableComponent', () => {
 		expect(component.allMyReservationsSlice).toHaveSize(1);
 	});
 
-	it('should call getAllReservationsByEmployeeIdWithFilters method when location is changed',  () => {
+	it('should call getAllReservationsByEmployeeIdWithFilters method when location is changed', () => {
 		const locFilter = fixture.debugElement.query(By.css('.location-filter'));
 
 		let spy = spyOn(component, 'getAllReservationsByEmployeeIdWithFilters').and.callThrough();
@@ -123,7 +143,7 @@ describe('MyReservationsTableComponent', () => {
 		expect(component.allMyReservations).toHaveSize(1);
 	});
 
-	it('should call getAllReservationsByEmployeeIdWithFilters method when date is changed',  () => {
+	it('should call getAllReservationsByEmployeeIdWithFilters method when date is changed', () => {
 		const dateFilter = fixture.debugElement.query(By.css('.date-filter'));
 
 		let spy = spyOn(component, 'getAllReservationsByEmployeeIdWithFilters').and.callThrough();
@@ -141,4 +161,22 @@ describe('MyReservationsTableComponent', () => {
 		expect(component.allMyReservations).toHaveSize(1);
 	});
 
+	it("should sort list ascending by date", () => {
+
+		component.getAllReservationsByEmployeeId();
+		component.sortReservationsByEmployeeId();
+		component.sortReservationsByEmployeeId();
+
+		expect(Date.parse(component.allMyReservations[0].date) - Date.parse(component.allMyReservations[1].date) > 0).toBeTrue();
+		expect(Date.parse(component.allMyReservations[1].date) - Date.parse(component.allMyReservations[2].date) > 0).toBeTrue();
+	});
+
+	it("should sort list descending by date", () => {
+
+		component.getAllReservationsByEmployeeId();
+		component.sortReservationsByEmployeeId();
+
+		expect(Date.parse(component.allMyReservations[0].date) - Date.parse(component.allMyReservations[1].date) > 0).toBeFalse();
+		expect(Date.parse(component.allMyReservations[1].date) - Date.parse(component.allMyReservations[2].date) > 0).toBeFalse();
+	});
 });

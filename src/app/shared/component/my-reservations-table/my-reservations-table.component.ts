@@ -31,9 +31,9 @@ export class MyReservationsTableComponent implements OnInit {
 	public allMyReservations: Reservation[];
 	public allMyReservationsSlice: Reservation[];
 	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'action'];
-	private datesort: number = 0;
-	private startIndex: number = 0;
-	private endIndex: number = 3;
+	private dateSortCounter: number = 0;
+	private paginatorStartIndex: number = 0;
+	private paginatorEndIndex: number = 3;
 
 	locations: Location[];
 	location: number;
@@ -90,22 +90,34 @@ export class MyReservationsTableComponent implements OnInit {
 	 */
 	getAllReservationsByEmployeeId() {
 		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => {
+			this.allMyReservations = reservations;
+			this.sortReservationsByEmployeeId();
+			this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex);
+		});
+	}
+
+	/**
+	 * Method that sorts the list by date either ascending or descending
+	 *
+	 * @return - sorted list
+	 */
+	sortReservationsByEmployeeId() {
+		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => {
 			this.allMyReservations = reservations
-			if (this.datesort == 1){
-				this.allMyReservations.sort(function(a,b){return Date.parse(a.date) - Date.parse(b.date)})
-				this.datesort = 2
-				document.getElementById("Datebutton")!.classList.remove("rotate")
+			if (this.dateSortCounter == 0) {
+				this.allMyReservations.sort(function (reservering1, reservering2) {
+					return Date.parse(reservering1.date) - Date.parse(reservering2.date)
+				});
+				this.dateSortCounter = 1;
+				document.getElementById("Datebutton")!.classList.remove("rotate");
+			} else if (this.dateSortCounter == 1) {
+				this.allMyReservations.sort(function (reservering1, reservering2) {
+					return Date.parse(reservering2.date) - Date.parse(reservering1.date)
+				});
+				this.dateSortCounter = 0;
+				document.getElementById("Datebutton")!.classList.add("rotate");
 			}
-			else if (this.datesort == 2){
-				this.allMyReservations.sort(function(a,b){return Date.parse(b.date) - Date.parse(a.date)})
-				this.datesort = 1
-				document.getElementById("Datebutton")!.classList.add("rotate")
-			}
-			if (this.datesort ==0 ){
-				this.allMyReservations.sort(function(a,b){return Date.parse(a.date) - Date.parse(b.date)})
-				this.datesort = 2;
-			}
-			this.allMyReservationsSlice = this.allMyReservations.slice(this.startIndex, this.endIndex);
+			this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex);
 		});
 	}
 
@@ -127,12 +139,12 @@ export class MyReservationsTableComponent implements OnInit {
 	 * @param event - the page event
 	 */
 	OnPageChange(event: PageEvent) {
-		this.startIndex = event.pageIndex * event.pageSize;
-		this.endIndex = this.startIndex + event.pageSize;
-		if (this.endIndex > this.allMyReservations.length) {
-			this.endIndex = this.allMyReservations.length;
+		this.paginatorStartIndex = event.pageIndex * event.pageSize;
+		this.paginatorEndIndex = this.paginatorStartIndex + event.pageSize;
+		if (this.paginatorEndIndex > this.allMyReservations.length) {
+			this.paginatorEndIndex = this.allMyReservations.length;
 		}
-		this.allMyReservationsSlice = this.allMyReservations.slice(this.startIndex, this.endIndex)
+		this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex)
 	}
 
 	/**
