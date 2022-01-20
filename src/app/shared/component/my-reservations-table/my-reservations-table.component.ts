@@ -6,6 +6,10 @@ import {Subscription} from "rxjs";
 import {UiService} from "../../../modules/reservation/service/ui.service";
 import {Router} from "@angular/router";
 import {MatTable} from "@angular/material/table";
+import {Location} from "../../../data/interface/Location";
+import {LocationService} from "../../../data/service/location/location.service";
+import {MatSelectChange} from "@angular/material/select";
+import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 /**
  * The my reservation table component
@@ -28,6 +32,12 @@ export class MyReservationsTableComponent implements OnInit {
 	public allMyReservationsSlice: Reservation[];
 	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'action'];
 
+	locations: Location[];
+	location: number;
+
+	selectedDate: Date = new Date();
+	date: Date | null;
+
 	showTable: boolean;
 	subscription: Subscription;
 
@@ -35,22 +45,29 @@ export class MyReservationsTableComponent implements OnInit {
 	 * Constructor of the my reservation table component
 	 *
 	 * @param reservationService - The reservation service
+	 * @param locationService - The location service
 	 * @param uiService - The ui service
 	 * @param router - The router
 	 *
 	 * It also sets the subscription to the value that comes from the UI service on toggle subscription
 	 */
 	constructor(private reservationService: ReservationService,
+				private locationService: LocationService,
 				private uiService: UiService, private router: Router) {
 
 		this.subscription = this.uiService.onToggle().subscribe(value => this.showTable = value);
 	}
 
 	/**
-	 * Initializes all the reservations by employeeId and get the first slice of 3 reservations
+	 * Initializes all the reservations by employeeId and get the first slice of 3 reservations.
+	 * Also loads all the locations into the selector.
 	 */
 	ngOnInit(): void {
 		this.getAllReservationsByEmployeeId();
+		this.locationService.getLocations()
+			.subscribe(locations => {
+				this.locations = locations
+			});
 	}
 
 	/**
@@ -99,5 +116,28 @@ export class MyReservationsTableComponent implements OnInit {
 			endIndex = this.allMyReservations.length;
 		}
 		this.allMyReservationsSlice = this.allMyReservations.slice(startIndex, endIndex)
+	}
+
+	/**
+	 * Method that gets all the reservations by the given employeeId from the reservations service
+	 * including searchparams for filters.
+	 *
+	 * @return - an observable of the reservations array
+	 */
+	getAllReservationsByEmployeeIdWithFilters() {
+		this.reservationService.getAllReservationsByEmployeeIdAndFilters(this.date, this.location).subscribe(reservations => {
+			this.allMyReservations = reservations
+			this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
+		});
+	}
+
+	refreshLocation($event: MatSelectChange) {
+		this.location = $event.value;
+		this.getAllReservationsByEmployeeIdWithFilters();
+	}
+
+	refreshStartDate($event: MatDatepickerInputEvent<any>) {
+		this.date = $event.value;
+		this.getAllReservationsByEmployeeIdWithFilters();
 	}
 }

@@ -13,7 +13,7 @@ img {
 }
 
 .mat-table.cdk-table {
-	width: fit-content;
+	width: 50vw;
 	min-width: 60%;
 	border: solid 2px white;
 	background-color: var(--primary-background-dark);
@@ -22,7 +22,6 @@ img {
 
 .mat-paginator {
 	margin-bottom: 20px;
-	width: fit-content;
 	min-width: 60%;
 	height: 50px;
 	border-collapse: collapse;
@@ -45,7 +44,26 @@ td {
 	white-space: nowrap;
 }
 
-@media screen and (max-width: 800px) {
+.filters {
+	background-color: white;
+	color: rgba(0, 0, 0, 0.87);
+	padding: 10px 35px;
+	width: 250px;
+	min-width: fit-content;
+	margin-left: 0;
+	border-radius: 10px;
+}
+
+.reservation-table {
+	width: fit-content;
+}
+
+.my-reservations-wrapper {
+	display: flex;
+	margin-right: 50px;
+}
+
+@media screen and (max-width: 1195px) {
 	.mat-table.cdk-table {
 		width: fit-content;
 		min-width: 100%;
@@ -61,9 +79,21 @@ td {
 		padding-top: 20px;
 		padding-bottom: 20px;
 	}
+
+	div {
+		margin-left: 25px;
+	}
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1029px) {
+	.my-reservations-wrapper {
+		margin: 0;
+	}
+
+	.filters {
+		margin: 30px auto;
+	}
+
 	.mat-paginator {
 		display: block;
 		width: auto;
@@ -80,17 +110,24 @@ td {
 		table-layout: fixed;
 	}
 
-	.my-reservations-wrapper {
+	.reservation-table {
 		width: auto;
 		max-width: none;
 		min-width: 100%;
-		table-layout: fixed;
+		overflow-x: auto;
+	}
+
+	.reservation-table > table {
+		width: fit-content;
+	}
+
+	.my-reservations-wrapper {
+		display: block;
 	}
 
 	div {
 		margin-left: 10px;
 		margin-right: 10px;
-		overflow-x: auto;
 	}
 }
 
