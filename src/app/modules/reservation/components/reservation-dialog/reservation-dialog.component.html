@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>{{data.reservationType}}</h1>
+<div mat-dialog-content>
+  <ul>
+    <li *ngIf="data.reservationType == 'Werkplek'" id="availability-item">
+      Beschikbaarheid: {{data.room.available}}/{{data.room.capacity}}
+    </li>
+    <li>
+      <mat-form-field *ngIf="data.reservationType == 'Werkplek'" appearance="fill">
+        <mat-label>Aantal</mat-label>
+        <input [(ngModel)]="selectedWorkplaceAmount" matInput type="number">
+      </mat-form-field>
+    </li>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>Herhaling</mat-label>
+        <mat-select [(ngModel)]="selectedRecurringPattern" [placeholder]="selectedRecurringPattern">
+          <mat-option *ngFor="let option of repeatOptions" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Kies een herhaling</mat-error>
+      </mat-form-field>
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()" id="cancel-button">Annuleer</button>
+  <button mat-button (click)="confirmBooking()" cdkFocusInitial id="confirm-booking">Bevestig</button>
+</div>

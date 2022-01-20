@@ -1,13 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
-import { Reservation } from "../../../data/interface/Reservation";
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
-import { Subscription } from "rxjs";
-import { UiService } from "../../../modules/reservation/service/ui.service";
-import { Router } from "@angular/router";
 import { MatTable } from "@angular/material/table";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { Reservation } from "../../../data/interface/Reservation";
+import { ReservationResponse } from "../../../data/interface/ReservationResponse";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
+import { UiService } from "../../../modules/reservation/service/ui.service";
 import { Location } from "../../../data/interface/Location";
 import { LocationService } from "../../../data/service/location/location.service";
+import { MatDialog } from "@angular/material/dialog";
+import { NotificationService } from "../../service/notification.service";
+import { AlterReservationDialogComponent } from "../../../modules/reservation/components/alter-reservation-dialog/alter-reservation-dialog.component";
 import { MatSelectChange } from "@angular/material/select";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
@@ -43,20 +47,22 @@ export class MyReservationsTableComponent implements OnInit {
 
 	showTable: boolean;
 	subscription: Subscription;
+	reservationResponse: ReservationResponse;
 
 	/**
 	 * Constructor of the my reservation table component
-	 *
+	 * It also sets the subscription to the value that comes from the UI service on toggle subscription
 	 * @param reservationService - The reservation service
 	 * @param locationService - The location service
 	 * @param uiService - The ui service
 	 * @param router - The router
-	 *
-	 * It also sets the subscription to the value that comes from the UI service on toggle subscription
+	 * @param dialog
+	 * @param notificationService
 	 */
 	constructor(private reservationService: ReservationService,
 				private locationService: LocationService,
-				private uiService: UiService, private router: Router) {
+				private uiService: UiService, private router: Router,
+				public dialog: MatDialog, private notificationService: NotificationService) {
 
 		this.subscription = this.uiService.onToggle().subscribe(value => this.showTable = value);
 	}
@@ -77,9 +83,9 @@ export class MyReservationsTableComponent implements OnInit {
 	 * Method that compares the given route with the current url route
 	 *
 	 * @param route - the route you want to compare
-	 * @return - a boolean
+	 * @return - if the url is the same as the route
 	 */
-	hasRoute(route: string) {
+	hasRoute(route: string): boolean {
 		return this.router.url === route;
 	}
 
@@ -145,6 +151,52 @@ export class MyReservationsTableComponent implements OnInit {
 			this.paginatorEndIndex = this.allMyReservations.length;
 		}
 		this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex)
+	}
+
+	/**
+	 * Method that shows the alter reservation-dialog from the selected reservation and
+	 * updates the reservation if any properties have been changed.
+	 *
+	 * @param selectedReservation selected reservation
+	 */
+	showAlterDialog(selectedReservation: Reservation): void {
+		const dialogRef = this.dialog.open(AlterReservationDialogComponent, {
+			width: '500px',
+			data: {reservation: selectedReservation},
+			panelClass: 'reservation-reservation-dialog'
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			// 	check if there are any changed values
+			/* istanbul ignore else */
+			if (result != undefined) {
+				result = JSON.parse(JSON.stringify(result));
+
+				// Check if values have changed
+				/* istanbul ignore next */
+				if (!(selectedReservation.id === result.reservation.id &&
+					selectedReservation.date === result.reservation.date &&
+					selectedReservation.startTime === result.reservation.startTime &&
+					selectedReservation.endTime === result.reservation.endTime &&
+					selectedReservation.recurrence.recurrencePattern === result.reservation.recurrence.recurrencePattern)) {
+					this.requestUpdateReservation(result);
+				}
+			}
+		});
+	}
+
+	/* istanbul ignore next */ /* for now because there is nothing to catch */
+	/**
+	 * Function that calls the {@link reservationService.updateReservation updateReservation} method in order
+	 * to try to update the reservation.
+	 *
+	 * @param reservation {@link Reservation} object.
+	 * @private
+	 */
+	requestUpdateReservation(reservation: Reservation): void {
+		//TODO: handle possible errors, can only be done when backend is done.
+		this.reservationService.updateReservation(reservation).subscribe(() => {
+		});
 	}
 
 	/**

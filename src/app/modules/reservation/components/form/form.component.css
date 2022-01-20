@@ -1,209 +1,212 @@
 .reservationsForm-container {
-	border-radius: 2px;
-	margin: 0 auto;
-	position: relative;
+  border-radius: 2px;
+  margin: 0 auto;
+  position: relative;
 }
 
 @media (min-width: 768px) {
-	.reservationsForm-container {
-		border-radius: 2px;
-		margin: 0 auto;
-		max-width: 473px;
-		min-width: 473px;
-		width: 473px;
-	}
+  .reservationsForm-container {
+    border-radius: 2px;
+    margin: 0 auto;
+    max-width: 473px;
+    min-width: 473px;
+    width: 473px;
+  }
 }
 
 @media (min-width: 1024px) {
-	.reservationsForm-container {
-		max-width: 800px;
-		min-width: 800px;
-		width: 800px
-	}
+  .reservationsForm-container {
+    max-width: 800px;
+    min-width: 800px;
+    width: 800px
+  }
 }
 
 @media (min-width: 1280px) {
-	.reservationsForm-container {
-		max-width: 980px;
-		min-width: 980px;
-		width: 980px
-	}
+  .reservationsForm-container {
+    max-width: 980px;
+    min-width: 980px;
+    width: 980px
+  }
 }
 
 .search-options-container {
-	height: 50px;
-	background: #171717;
+  height: 50px;
+  background: #171717;
 }
 
 #reservationsForm {
-	position: relative;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .reservationType-list li {
-	display: flex;
-	cursor: pointer;
-	align-items: center;
-	height: 50px;
-	color: #828282;
-	font-size: 11px;
-	font-weight: 700;
-	padding: 0 19px;
-	border-right: 2px solid #393939;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  height: 50px;
+  color: #828282;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0 19px;
+  border-right: 2px solid #393939;
 }
 
 .reservationType-list {
-	display: flex;
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 .reservationType-item {
-	color: #fff;
+  color: #fff;
 }
 
 .reservationType-item.active {
-	background: white;
-	color: black !important;
+  background: white;
+  color: black !important;
 }
 
 .reservationsForm-fields-container {
-	background: #fff;
-	height: 82px;
+  background: #fff;
+  height: 82px;
 }
 
 .reservationsForm-fields {
-	height: 100%;
-	display: flex;
+  height: 100%;
+  display: flex;
 }
 
 @media (max-width: 1023px) {
-	.location-area,
-	.date-area {
-		border-bottom: 2px solid #eee;
-	}
+  .location-area,
+  .date-area {
+    border-bottom: 2px solid #eee;
+  }
 
-	.reservationsForm-fields-container {
-		height: auto;
-	}
+  .reservationsForm-fields-container {
+    height: auto;
+  }
 
-	.reservationsForm-fields {
-		display: grid;
-		grid-template:
+  .reservationsForm-fields {
+    display: grid;
+    grid-template:
         "location location"
         "date date"
         "starttime endtime"
         "submit submit";
-		grid-template-rows: 70px 70px 70px 60px;
-		grid-template-columns: 1fr 1fr;
-	}
+    grid-template-rows: 70px 70px 70px 60px;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .form-control {
-	height: inherit;
+  height: inherit;
 }
 
 .location-area {
-	grid-area: location;
+  grid-area: location;
 }
 
 .date-area {
-	grid-area: date;
+  grid-area: date;
 }
 
 .start-time-area {
-	grid-area: starttime;
+  grid-area: starttime;
 }
 
 .end-time-area {
-	grid-area: endtime;
+  grid-area: endtime;
 }
 
 .submit-area {
-	grid-area: submit;
+  grid-area: submit;
 }
 
 .field-container {
-	flex: 1;
-	border-right: 2px solid #eee;
-	height: 100%;
-	position: relative;
+  flex: 1;
+  border-right: 2px solid #eee;
+  height: 100%;
+  position: relative;
 }
 
 .field {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 0 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
 }
 
 .field label {
-	color: #171717;
-	line-height: 23px;
-	font-size: 11px;
-	display: block;
-	z-index: 1;
+  color: #171717;
+  line-height: 23px;
+  font-size: 11px;
+  display: block;
+  z-index: 1;
 }
 
 form label {
-	display: block;
-	font-family: objektiv mk1,sans-serif;
-	font-size: .875rem;
-	font-weight: 300;
-	color: rgba(23,23,23,.5);
-	line-height: 1.7;
+  display: block;
+  font-family: objektiv mk1, sans-serif;
+  font-size: .875rem;
+  font-weight: 300;
+  color: rgba(23, 23, 23, .5);
+  line-height: 1.7;
 }
 
 #location-select:required:invalid {
-	color: gray;
+  color: gray;
 }
 
 #start-time-select, #end-time-select {
-	color: black;
+  color: black;
 }
 
 .field-input {
-	position: relative;
-	white-space: nowrap;
-	overflow: hidden;
-	width: 100%;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
 }
 
 .reservationsForm-fields input {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
 
-	border: none;
+.timepicker-backdrop-overlay {
+  z-index: 10000000 !important;
 }
 
 select {
-	appearance: none;
-	background-color: transparent;
-	border: none;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	cursor: inherit;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  cursor: inherit;
 }
 
 /* color the datepicker head */
 ::ng-deep.bs-datepicker-head {
-	background-color: var(--quintor-red) !important;
+  background-color: var(--quintor-red) !important;
 }
 
 ::ng-deep.bs-datepicker-body table td span.selected {
-	background-color: var(--quintor-red) !important;
+  background-color: var(--quintor-red) !important;
 }
 
 ::ng-deep.bs-datepicker-body table td.week span {
-	color: var(--quintor-red) !important;
+  color: var(--quintor-red) !important;
 }
 
 .search-button {
-	background-color: var(--quintor-red);
-	border-radius: 0;
+  background-color: var(--quintor-red);
+  border-radius: 0;
 }

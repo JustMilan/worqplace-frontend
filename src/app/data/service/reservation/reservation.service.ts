@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { environment } from "../../../../environments/environment";
@@ -106,5 +106,15 @@ export class ReservationService {
 	 */
 	deleteReservationById(reservationId: number): Observable<Reservation> {
 		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservationId}`, this.httpOptions)
+	}
+
+	/* istanbul ignore next: backend not implemented yet */
+	/**
+	 * Makes a http POST request to the reservations/update/{id} path to update a reservation.
+	 *
+	 * @param reservation {@link Reservation}
+	 */
+	updateReservation(reservation: Reservation): Observable<Reservation> {
+		return this.http.post<Reservation>(`${this.apiUrl}/update/${reservation.id}`, reservation, this.httpOptions)
 	}
 }

@@ -7,12 +7,13 @@ import { Observable, Subject } from "rxjs";
  * @property subject - the subject
  */
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class NotificationService {
 	private subject = new Subject<any>();
 
-	constructor() { }
+	constructor() {
+	}
 
 	/**
 	 * Method that allows for multiple observers
@@ -29,7 +30,7 @@ export class NotificationService {
 	 * @param errorMessage - the error message
 	 */
 	handleError(errorMessage: string) {
-		this.subject.next({ message: errorMessage, colorClass: 'error' });
+		this.subject.next({message: errorMessage, colorClass: 'error'});
 	}
 
 	/**
@@ -38,7 +39,7 @@ export class NotificationService {
 	 * @param warningMessage - the warning message
 	 */
 	handleWarning(warningMessage: string) {
-		this.subject.next({ message: warningMessage, colorClass: 'warning' });
+		this.subject.next({message: warningMessage, colorClass: 'warning'});
 	}
 
 	/**
@@ -47,6 +48,6 @@ export class NotificationService {
 	 * @param successMessage - the success message
 	 */
 	handleSuccess(successMessage: string) {
-		this.subject.next({ message: successMessage, colorClass: 'success' });
+		this.subject.next({message: successMessage, colorClass: 'success'});
 	}
 }

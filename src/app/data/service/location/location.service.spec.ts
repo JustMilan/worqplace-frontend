@@ -61,7 +61,7 @@ describe('LocationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}`);
+		const request = httpMock.expectOne(`${apiUrl}`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');

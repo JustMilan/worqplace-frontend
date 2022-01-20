@@ -1,95 +1,98 @@
 <div *ngIf="(showTable || hasRoute('/my-reservations'))">
 
-	<div class="container">
-		<h2>Mijn Reserveringen</h2>
-	</div>
+  <div class="container">
+    <h2>Mijn Reserveringen</h2>
+  </div>
 
 
-	<div class="my-reservations-wrapper">
-		<div class="filter-pane filters">
-			<h3>Filters</h3>
+  <div class="my-reservations-wrapper">
+    <div class="filter-pane filters">
+      <h3>Filters</h3>
 
-			Reserveringen op locatie<br>
-			<mat-form-field appearance="fill">
-				<mat-label class="location-label">Locatie</mat-label>
-				<mat-select class="location-filter" [(value)]="location" (selectionChange)="refreshLocation($event)">
-					<mat-option *ngFor="let loc of locations" [value]="loc.id">
-						{{loc.name}}
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<br>
-			Reserveringen na<br>
-			<mat-form-field appearance="fill">
-				<mat-label>Choose a date</mat-label>
-				<input class="date-filter" matInput [matDatepicker]="picker" [value]="selectedDate"
-							 (dateChange)="refreshStartDate($event)">
-				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-				<mat-datepicker #picker></mat-datepicker>
-			</mat-form-field>
-		</div>
+      Reserveringen op locatie<br>
+      <mat-form-field appearance="fill">
+        <mat-label class="location-label">Locatie</mat-label>
+        <mat-select class="location-filter" [(value)]="location" (selectionChange)="refreshLocation($event)">
+          <mat-option *ngFor="let loc of locations" [value]="loc.id">
+            {{loc.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      Reserveringen na<br>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input class="date-filter" matInput [matDatepicker]="picker" [value]="selectedDate"
+               (dateChange)="refreshStartDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-		<div class="reservation-table">
-			<table mat-table [dataSource]="allMyReservationsSlice" #myTable matSort aria-label="Elements">
+    <div class="reservation-table">
+      <table mat-table [dataSource]="allMyReservationsSlice" #myTable matSort aria-label="Elements">
 
-				<!--- Note that these columns can be defined in any order.
-							The actual rendered columns are set as a property on the row definition" -->
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
 
-				<!-- Id Column -->
-				<ng-container matColumnDef="id">
-					<th id="id" mat-header-cell *matHeaderCellDef>Id</th>
-					<td mat-cell *matCellDef="let element"> {{element.id}} </td>
-				</ng-container>
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th id="id" mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-				<!-- Date Column -->
-				<ng-container matColumnDef="date">
-					<th id="date" mat-header-cell *matHeaderCellDef>Datum
-						<button mat-button id="Datebutton" (click)="sortReservationsByEmployeeId()">
-							<mat-icon>keyboard_arrow_down</mat-icon>
-						</button>
-					</th>
-					<td mat-cell *matCellDef="let element"> {{element.date}} </td>
-				</ng-container>
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th id="date" mat-header-cell *matHeaderCellDef>Datum
+            <button mat-button id="Datebutton" (click)="sortReservationsByEmployeeId()">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
 
-				<!-- Time Column -->
-				<ng-container matColumnDef="tijd">
-					<th id="tijd" mat-header-cell *matHeaderCellDef>Tijd</th>
-					<td mat-cell *matCellDef="let element">{{element.startTime}} - {{element.endTime}} </td>
-				</ng-container>
+        <!-- Time Column -->
+        <ng-container matColumnDef="tijd">
+          <th id="tijd" mat-header-cell *matHeaderCellDef>Tijd</th>
+          <td mat-cell *matCellDef="let element">{{element.startTime}} - {{element.endTime}} </td>
+        </ng-container>
 
-				<!-- workplace amount Column -->
-				<ng-container matColumnDef="workplaceAmount">
-					<th id="workplaceAmount" mat-header-cell *matHeaderCellDef>werkplek(ken)</th>
-					<td mat-cell *matCellDef="let element">{{element.workplaceAmount}} </td>
-				</ng-container>
+        <!-- workplace amount Column -->
+        <ng-container matColumnDef="workplaceAmount">
+          <th id="workplaceAmount" mat-header-cell *matHeaderCellDef>werkplek(ken)</th>
+          <td mat-cell *matCellDef="let element">{{element.workplaceAmount}} </td>
+        </ng-container>
 
-				<!-- Room id Column -->
-				<ng-container matColumnDef="roomId">
-					<th id="roomId" mat-header-cell *matHeaderCellDef>Kamer</th>
-					<td mat-cell *matCellDef="let element"> {{element.roomId}} </td>
-				</ng-container>
+        <!-- Room id Column -->
+        <ng-container matColumnDef="roomId">
+          <th id="roomId" mat-header-cell *matHeaderCellDef>Kamer</th>
+          <td mat-cell *matCellDef="let element"> {{element.roomId}} </td>
+        </ng-container>
 
-				<ng-container matColumnDef="recurrence">
-					<th id="recurrence" mat-header-cell *matHeaderCellDef>herhaling</th>
-					<td mat-cell *matCellDef="let element"> {{element.recurrence.recurrencePattern}} </td>
-				</ng-container>
+        <ng-container matColumnDef="recurrence">
+          <th id="recurrence" mat-header-cell *matHeaderCellDef>herhaling</th>
+          <td mat-cell *matCellDef="let element"> {{element.recurrence.recurrencePattern}} </td>
+        </ng-container>
 
-				<ng-container matColumnDef="action">
-					<th id="action" mat-header-cell *matHeaderCellDef></th>
-					<td mat-cell *matCellDef="let element">
-						<button mat-raised-button (click)="deleteReservationByReservationId(element.id)">delete</button>
-					</td>
-				</ng-container>
+        <ng-container matColumnDef="action">
+          <th id="actionDelete" mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button (click)="showAlterDialog(element)">alter</button>
+            <button mat-raised-button (click)="deleteReservationByReservationId(element.id)" class="button-delete">
+              delete
+            </button>
+          </td>
+        </ng-container>
 
-				<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-				<tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-			</table>
-			<mat-paginator class="paginator"
-										 [length]="this.allMyReservations.length"
-										 [pageSize]="3"
-										 [pageSizeOptions]="[3,5,10,20]"
-										 (page)="OnPageChange($event)">
-			</mat-paginator>
-		</div>
-	</div>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+      <mat-paginator class="paginator"
+                     [length]="this.allMyReservations.length"
+                     [pageSize]="3"
+                     [pageSizeOptions]="[3,5,10,20]"
+                     (page)="OnPageChange($event)">
+      </mat-paginator>
+    </div>
+  </div>
 </div>

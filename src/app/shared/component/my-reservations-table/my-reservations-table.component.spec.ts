@@ -9,12 +9,16 @@ import { of } from "rxjs";
 import { ReservationService } from "../../../data/service/reservation/reservation.service";
 import { Reservation } from "../../../data/interface/Reservation";
 import { By } from "@angular/platform-browser";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSelectChange } from "@angular/material/select";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
 describe('MyReservationsTableComponent', () => {
 	let component: MyReservationsTableComponent;
 	let fixture: ComponentFixture<MyReservationsTableComponent>;
+
+	let dialog: MatDialog;
+	let dialogRef: jasmine.SpyObj<MatDialogRef<any>>;
 
 	let reservationsMock: Reservation[] = [
 		{
@@ -58,6 +62,13 @@ describe('MyReservationsTableComponent', () => {
 					getAllReservationsByEmployeeIdAndFilters: of(reservationsMock),
 					deleteReservationById: of(reservationsMock)
 				})
+			}, {
+				provide: MatDialogRef,
+				useValue: {
+					afterClosed: jasmine.createSpy('MatDialogRef.afterClosed()').and.returnValue(of({
+						data: {reservation: reservationsMock[0]}
+					}))
+				}
 			}]
 		})
 			.compileComponents();
@@ -70,6 +81,9 @@ describe('MyReservationsTableComponent', () => {
 		component.showTable = true;
 		component.allMyReservations = reservationsMock;
 		component.allMyReservationsSlice = reservationsMock.slice(0, 3);
+
+		dialog = TestBed.inject(MatDialog);
+		dialogRef = TestBed.inject(MatDialogRef) as jasmine.SpyObj<MatDialogRef<any>>;
 
 		fixture.detectChanges();
 	});
@@ -128,6 +142,15 @@ describe('MyReservationsTableComponent', () => {
 
 		expect(spy).toHaveBeenCalled();
 		expect(component.allMyReservationsSlice).toHaveSize(1);
+	});
+
+	it('should call showAlterDialog method', () => {
+		let spy = spyOn(dialog, 'open').and.returnValue(dialogRef);
+
+		fixture.detectChanges();
+		component.showAlterDialog(reservationsMock[0]);
+
+		expect(spy).toHaveBeenCalled();
 	});
 
 	it('should call getAllReservationsByEmployeeIdWithFilters method when location is changed', () => {

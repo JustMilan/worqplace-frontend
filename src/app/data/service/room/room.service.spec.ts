@@ -71,7 +71,7 @@ describe('RoomService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -89,7 +89,7 @@ describe('RoomService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -118,7 +118,7 @@ describe('RoomService', () => {
 				fail('complete handler must not be called');
 			});
 
-		const request = httpMock.expectOne( `${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
 
 		// Let the request error instead of flush
 		request.error(errorEvent, {status: status, statusText: statusText});
@@ -144,7 +144,7 @@ describe('RoomService', () => {
 				fail('complete handler must not be called');
 			});
 
-		const request = httpMock.expectOne( `${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
 
 		// Let the request error instead of flush
 		request.error(errorEvent, {status: status, statusText: statusText});

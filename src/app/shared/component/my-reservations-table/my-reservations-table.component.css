@@ -1,137 +1,150 @@
 div {
-	margin-left: 70px;
+  margin-left: 70px;
 }
 
 h2 {
-	font-size: 20px;
-	margin-right: 0;
+  font-size: 20px;
+  margin-right: 0;
 }
 
 img {
-	height: 20px;
-	margin-top: 30px;
+  height: 20px;
+  margin-top: 30px;
 }
 
 .mat-table.cdk-table {
-	width: 50vw;
-	min-width: 60%;
-	border: solid 2px white;
-	background-color: var(--primary-background-dark);
-	border-collapse: collapse;
+  width: 50vw;
+  min-width: 60%;
+  border: solid 2px white;
+  background-color: var(--primary-background-dark);
+  border-collapse: collapse;
 }
 
 .mat-paginator {
-	margin-bottom: 20px;
-	min-width: 60%;
-	height: 50px;
-	border-collapse: collapse;
+  margin-bottom: 20px;
+  min-width: 60%;
+  height: 50px;
+  border-collapse: collapse;
 }
 
 .rotate {
-	transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .not-empty-select.mat-selected {
-	color: white;
+  color: white;
 }
 
 tr.mat-row {
-	border: 2px solid white;
+  border: 2px solid white;
 }
 
 th {
-	color: white;
+  color: white;
 }
 
 td {
-	color: white;
-	white-space: nowrap;
+  color: white;
+  white-space: nowrap;
 }
 
 .filters {
-	background-color: white;
-	color: rgba(0, 0, 0, 0.87);
-	padding: 10px 35px;
-	width: 250px;
-	min-width: fit-content;
-	margin-left: 0;
-	border-radius: 10px;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 10px 35px;
+  width: 250px;
+  min-width: fit-content;
+  margin-left: 0;
+  border-radius: 10px;
 }
 
 .reservation-table {
-	width: fit-content;
+  width: fit-content;
 }
 
 .my-reservations-wrapper {
-	display: flex;
-	margin-right: 50px;
+  display: flex;
+  margin-right: 50px;
+}
+
+.button-delete {
+  background-color: firebrick;
+  color: white;
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 1195px) {
-	.mat-table.cdk-table {
-		width: fit-content;
-		min-width: 100%;
-	}
+  .button-delete {
+    background-color: firebrick;
+    color: white;
+    margin-left: 10px;
+  }
 
-	.mat-paginator {
-		width: fit-content;
-		min-width: 100%;
-	}
+  @media screen and (max-width: 800px) {
+    .mat-table.cdk-table {
+      width: fit-content;
+      min-width: 100%;
+    }
 
-	th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-		padding-left: 20px;
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
+    .mat-paginator {
+      width: fit-content;
+      min-width: 100%;
+    }
 
-	div {
-		margin-left: 25px;
-	}
+    th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+      padding-left: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    div {
+      margin-left: 25px;
+    }
+  }
+
+  @media screen and (max-width: 1029px) {
+    .my-reservations-wrapper {
+      margin: 0;
+    }
+
+    .filters {
+      margin: 30px auto;
+    }
+
+    .mat-paginator {
+      display: block;
+      width: auto;
+      max-width: none;
+      min-width: 100%;
+      table-layout: fixed;
+    }
+
+    .mat-table.cdk-table {
+      display: block;
+      width: auto;
+      max-width: none;
+      min-width: 100%;
+      table-layout: fixed;
+    }
+
+    .reservation-table {
+      width: auto;
+      max-width: none;
+      min-width: 100%;
+      overflow-x: auto;
+    }
+
+    .reservation-table > table {
+      width: fit-content;
+    }
+
+    .my-reservations-wrapper {
+      display: block;
+    }
+
+    div {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
 }
-
-@media screen and (max-width: 1029px) {
-	.my-reservations-wrapper {
-		margin: 0;
-	}
-
-	.filters {
-		margin: 30px auto;
-	}
-
-	.mat-paginator {
-		display: block;
-		width: auto;
-		max-width: none;
-		min-width: 100%;
-		table-layout: fixed;
-	}
-
-	.mat-table.cdk-table {
-		display: block;
-		width: auto;
-		max-width: none;
-		min-width: 100%;
-		table-layout: fixed;
-	}
-
-	.reservation-table {
-		width: auto;
-		max-width: none;
-		min-width: 100%;
-		overflow-x: auto;
-	}
-
-	.reservation-table > table {
-		width: fit-content;
-	}
-
-	.my-reservations-wrapper {
-		display: block;
-	}
-
-	div {
-		margin-left: 10px;
-		margin-right: 10px;
-	}
-}
-

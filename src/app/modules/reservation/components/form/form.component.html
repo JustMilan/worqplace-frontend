@@ -1,72 +1,72 @@
 <div class="reservationsForm-container">
-	<form [formGroup]="reservationForm" id="reservationsForm">
-			<div class="search-options-container">
-			<div class="search-options">
-				<ul class="reservationType-list">
-					<li class="reservationType-item" *ngFor="let type of reservationType; let f = first;" id="{{type}}"
-							(click)="onTypeChange(type)" [ngClass]="{'active': f}">
-						{{type}}
-					</li>
-				</ul>
-			</div>
-		</div>
+  <form [formGroup]="reservationForm" id="reservationsForm">
+    <div class="search-options-container">
+      <div class="search-options">
+        <ul class="reservationType-list">
+          <li class="reservationType-item" *ngFor="let type of reservationType; let f = first;" id="{{type}}"
+              (click)="onTypeChange(type)" [ngClass]="{'active': f}">
+            {{type}}
+          </li>
+        </ul>
+      </div>
+    </div>
 
-		<div class="reservationsForm-fields-container">
-			<div class="reservationsForm-fields">
+    <div class="reservationsForm-fields-container">
+      <div class="reservationsForm-fields">
 
-				<div class="field-container location-area">
-					<div class="field">
-						<label>locatie</label>
-						<div class="field-input">
-							<select name="location" formControlName="location" id="location-select" required>
-								<option value="" selected hidden disabled id="location-placeholder">Kies een locatie</option>
-								<option *ngFor="let loc of locations" [value]="loc.id">{{loc.name}}</option>
-							</select>
-						</div>
-					</div>
-				</div>
+        <div class="field-container location-area">
+          <div class="field">
+            <label>locatie</label>
+            <div class="field-input">
+              <select name="location" formControlName="location" id="location-select" required>
+                <option value="" selected hidden disabled id="location-placeholder">Kies een locatie</option>
+                <option *ngFor="let loc of locations" [value]="loc.id">{{loc.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-				<div class="field-container date-area">
-					<div class="field">
-						<label>datum</label>
-						<div class="field-input">
-								<input [minDate]="minDate" type="text" placeholder="Kies een datum" id="datepicker-input"
-											 class="form-control" name="date" formControlName="date" bsDatepicker>
-						</div>
-					</div>
-				</div>
+        <div class="field-container date-area">
+          <div class="field">
+            <label>datum</label>
+            <div class="field-input">
+              <input [minDate]="minDate" type="text" placeholder="Kies een datum" id="datepicker-input"
+                     class="form-control" name="date" formControlName="date" bsDatepicker>
+            </div>
+          </div>
+        </div>
 
-				<div class="field-container start-time-area">
-					<div class="field">
-						<label>start</label>
-						<div class="field-input">
-							<div>
-								<input matInput [format]=24 [ngxTimepicker]="startpicker"
-											 type="time" id="start-time-select"
-											 name="startTime" formControlName="startTime" required>
-								<ngx-material-timepicker #startpicker><</ngx-material-timepicker>
-							</div>
-						</div>
-					</div>
-				</div>
+        <div class="field-container start-time-area">
+          <div class="field">
+            <label>start</label>
+            <div class="field-input">
+              <div>
+                <input matInput [format]=24 [ngxTimepicker]="startpicker"
+                       type="time" id="start-time-select"
+                       name="startTime" formControlName="startTime" required>
+                <ngx-material-timepicker #startpicker><</ngx-material-timepicker>
+              </div>
+            </div>
+          </div>
+        </div>
 
-				<div class="field-container end-time-area">
-					<div class="field">
-						<label>end</label>
-						<div class="field-input">
-							<div>
-								<input matInput [format]=24 [ngxTimepicker]="endpicker"
-											 type="time" id="end-time-select"
-											 name="endTime" formControlName="endTime" required>
-								<ngx-material-timepicker #endpicker><</ngx-material-timepicker>
-							</div>
-						</div>
-					</div>
-				</div>
+        <div class="field-container end-time-area">
+          <div class="field">
+            <label>end</label>
+            <div class="field-input">
+              <div>
+                <input matInput [format]=24
+                       [ngxTimepicker]="endpicker" type="time" id="end-time-select"
+                       name="endTime" formControlName="endTime" required>
+                <ngx-material-timepicker #endpicker><</ngx-material-timepicker>
+              </div>
+            </div>
+          </div>
+        </div>
 
-				<button class="search-button submit-area" mat-flat-button (click)="onSubmit()" type="button">Zoek</button>
-			</div>
-		</div>
+        <button class="search-button submit-area" mat-flat-button (click)="onSubmit()" type="button">Zoek</button>
+      </div>
+    </div>
 
-	</form>
+  </form>
 </div>

@@ -17,7 +17,7 @@ const routes: Routes = [
 	{
 		path: 'admin',
 		loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
-	 	canActivate: [AdminAuthGuard]
+		canActivate: [AdminAuthGuard]
 	},
 	{path: 'login', component: LoginComponent},
 	{path: '**', component: ReservationComponent, canActivate: [AuthGuard]}

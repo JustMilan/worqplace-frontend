@@ -7,7 +7,7 @@ import { JWT_OPTIONS, JwtHelperService } from "@auth0/angular-jwt";
 	imports: [
 		CommonModule,
 	],
-	providers: [ { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService ]
+	providers: [{provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService]
 })
 export class CoreModule {
 }

@@ -9,7 +9,7 @@ import { NotificationService } from "./service/notification.service";
 @NgModule({
 	declarations: [
 		MyReservationsTableComponent,
-  		NotificationComponent,
+		NotificationComponent,
 	],
 	imports: [
 		CommonModule,
@@ -21,7 +21,7 @@ import { NotificationService } from "./service/notification.service";
 		MaterialModule,
 		NotificationComponent
 	],
-	providers: [ NotificationService, NotificationComponent ],
+	providers: [NotificationService, NotificationComponent],
 })
 export class SharedModule {
 }

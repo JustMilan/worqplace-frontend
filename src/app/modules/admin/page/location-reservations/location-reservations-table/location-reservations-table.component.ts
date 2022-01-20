@@ -7,7 +7,7 @@ import { UiService } from "../../../../reservation/service/ui.service";
 import { Router } from "@angular/router";
 import { LocationService } from "../../../../../data/service/location/location.service";
 import { Location } from "../../../../../data/interface/Location";
-import {MatSelectChange} from "@angular/material/select";
+import { MatSelectChange } from "@angular/material/select";
 
 @Component({
 	selector: 'app-admin-location-reservations-table',
