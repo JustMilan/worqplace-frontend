@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {Reservation} from "../../../data/interface/Reservation";
-import {ReservationService} from "../../../data/service/reservation/reservation.service";
-import {Subscription} from "rxjs";
-import {UiService} from "../../../modules/reservation/service/ui.service";
-import {Router} from "@angular/router";
-import {MatTable} from "@angular/material/table";
-import {Location} from "../../../data/interface/Location";
-import {LocationService} from "../../../data/service/location/location.service";
-import {MatSelectChange} from "@angular/material/select";
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { Reservation } from "../../../data/interface/Reservation";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
+import { Subscription } from "rxjs";
+import { UiService } from "../../../modules/reservation/service/ui.service";
+import { Router } from "@angular/router";
+import { MatTable } from "@angular/material/table";
+import { Location } from "../../../data/interface/Location";
+import { LocationService } from "../../../data/service/location/location.service";
+import { MatSelectChange } from "@angular/material/select";
+import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
 /**
  * The my reservation table component

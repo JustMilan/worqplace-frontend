@@ -44,7 +44,8 @@ describe('MyReservationsTableComponent', () => {
 			recurrence: {
 				active: false
 			}
-		}];
+		}
+	];
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({

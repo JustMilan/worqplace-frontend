@@ -27,8 +27,8 @@ img {
 	border-collapse: collapse;
 }
 
-.rotate{
-transform: rotate(180deg);
+.rotate {
+	transform: rotate(180deg);
 }
 
 .not-empty-select.mat-selected {
