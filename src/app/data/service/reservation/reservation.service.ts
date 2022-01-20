@@ -108,6 +108,7 @@ export class ReservationService {
 		return this.http.post<Reservation>(`${this.apiUrl}/delete/${reservationId}`, this.httpOptions)
 	}
 
+	/* istanbul ignore next: backend not implemented yet */
 	/**
 	 * Makes a http POST request to the reservations/update/{id} path to update a reservation.
 	 *
