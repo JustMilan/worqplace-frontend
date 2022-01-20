@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {Reservation} from "../../../data/interface/Reservation";
-import {ReservationService} from "../../../data/service/reservation/reservation.service";
-import {Subscription} from "rxjs";
-import {UiService} from "../../../modules/reservation/service/ui.service";
-import {Router} from "@angular/router";
-import {MatTable} from "@angular/material/table";
-import {Location} from "../../../data/interface/Location";
-import {LocationService} from "../../../data/service/location/location.service";
-import {MatSelectChange} from "@angular/material/select";
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { Reservation } from "../../../data/interface/Reservation";
+import { ReservationService } from "../../../data/service/reservation/reservation.service";
+import { Subscription } from "rxjs";
+import { UiService } from "../../../modules/reservation/service/ui.service";
+import { Router } from "@angular/router";
+import { MatTable } from "@angular/material/table";
+import { Location } from "../../../data/interface/Location";
+import { LocationService } from "../../../data/service/location/location.service";
+import { MatSelectChange } from "@angular/material/select";
+import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
 /**
  * The my reservation table component
@@ -31,6 +31,9 @@ export class MyReservationsTableComponent implements OnInit {
 	public allMyReservations: Reservation[];
 	public allMyReservationsSlice: Reservation[];
 	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'action'];
+	private dateSortCounter: number = 0;
+	private paginatorStartIndex: number = 0;
+	private paginatorEndIndex: number = 3;
 
 	locations: Location[];
 	location: number;
@@ -81,14 +84,40 @@ export class MyReservationsTableComponent implements OnInit {
 	}
 
 	/**
-	 * Method that gets all the reservations by the given employeeId from the reservations service
+	 * Method that gets all the reservations by the given employeeId from the reservations service and sorts them by date ascending
 	 *
 	 * @return - an observable of the reservations array
 	 */
 	getAllReservationsByEmployeeId() {
 		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => {
+			this.allMyReservations = reservations;
+			this.sortReservationsByEmployeeId();
+			this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex);
+		});
+	}
+
+	/**
+	 * Method that sorts the list by date either ascending or descending
+	 *
+	 * @return - sorted list
+	 */
+	sortReservationsByEmployeeId() {
+		this.reservationService.getAllReservationsByEmployeeId().subscribe(reservations => {
 			this.allMyReservations = reservations
-			this.allMyReservationsSlice = this.allMyReservations.slice(0, 3);
+			if (this.dateSortCounter == 0) {
+				this.allMyReservations.sort(function (reservering1, reservering2) {
+					return Date.parse(reservering1.date) - Date.parse(reservering2.date)
+				});
+				this.dateSortCounter = 1;
+				document.getElementById("Datebutton")!.classList.remove("rotate");
+			} else if (this.dateSortCounter == 1) {
+				this.allMyReservations.sort(function (reservering1, reservering2) {
+					return Date.parse(reservering2.date) - Date.parse(reservering1.date)
+				});
+				this.dateSortCounter = 0;
+				document.getElementById("Datebutton")!.classList.add("rotate");
+			}
+			this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex);
 		});
 	}
 
@@ -110,12 +139,12 @@ export class MyReservationsTableComponent implements OnInit {
 	 * @param event - the page event
 	 */
 	OnPageChange(event: PageEvent) {
-		const startIndex = event.pageIndex * event.pageSize;
-		let endIndex = startIndex + event.pageSize;
-		if (endIndex > this.allMyReservations.length) {
-			endIndex = this.allMyReservations.length;
+		this.paginatorStartIndex = event.pageIndex * event.pageSize;
+		this.paginatorEndIndex = this.paginatorStartIndex + event.pageSize;
+		if (this.paginatorEndIndex > this.allMyReservations.length) {
+			this.paginatorEndIndex = this.allMyReservations.length;
 		}
-		this.allMyReservationsSlice = this.allMyReservations.slice(startIndex, endIndex)
+		this.allMyReservationsSlice = this.allMyReservations.slice(this.paginatorStartIndex, this.paginatorEndIndex)
 	}
 
 	/**
