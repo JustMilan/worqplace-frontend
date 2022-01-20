@@ -168,21 +168,24 @@ export class MyReservationsTableComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe(result => {
 			// 	check if there are any changed values
+			/* istanbul ignore else */
 			if (result != undefined) {
 				result = JSON.parse(JSON.stringify(result));
 
 				// Check if values have changed
+				/* istanbul ignore next */
 				if (!(selectedReservation.id === result.reservation.id &&
 					selectedReservation.date === result.reservation.date &&
 					selectedReservation.startTime === result.reservation.startTime &&
 					selectedReservation.endTime === result.reservation.endTime &&
 					selectedReservation.recurrence.recurrencePattern === result.reservation.recurrence.recurrencePattern)) {
-					this.#requestUpdateReservation(result);
+					this.requestUpdateReservation(result);
 				}
 			}
 		});
 	}
 
+	/* istanbul ignore next */ /* for now because there is nothing to catch */
 	/**
 	 * Function that calls the {@link reservationService.updateReservation updateReservation} method in order
 	 * to try to update the reservation.
@@ -190,7 +193,7 @@ export class MyReservationsTableComponent implements OnInit {
 	 * @param reservation {@link Reservation} object.
 	 * @private
 	 */
-	#requestUpdateReservation(reservation: Reservation): void {
+	requestUpdateReservation(reservation: Reservation): void {
 		//TODO: handle possible errors, can only be done when backend is done.
 		this.reservationService.updateReservation(reservation).subscribe(() => {
 		});
