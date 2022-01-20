@@ -164,7 +164,7 @@ describe('MyReservationsTableComponent', () => {
 
 		expect(spy).toHaveBeenCalled();
 		expect(location).toBe(location);
-		expect(component.allMyReservations).toHaveSize(1);
+		expect(component.allMyReservations).toHaveSize(3);
 	});
 
 	it('should call getAllReservationsByEmployeeIdWithFilters method when date is changed', () => {
@@ -182,7 +182,7 @@ describe('MyReservationsTableComponent', () => {
 
 		expect(spy).toHaveBeenCalled();
 		expect(component.date).toBe(date);
-		expect(component.allMyReservations).toHaveSize(1);
+		expect(component.allMyReservations).toHaveSize(3);
 	});
 
 	it("should sort list ascending by date", () => {
