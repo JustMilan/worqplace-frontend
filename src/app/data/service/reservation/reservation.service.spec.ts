@@ -91,7 +91,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/all?date=2022-01-19&location=1`);
+		const request = httpMock.expectOne(`${apiUrl}/all?date=2022-01-19&location=1`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -109,7 +109,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/all?date=2022-01-19`);
+		const request = httpMock.expectOne(`${apiUrl}/all?date=2022-01-19`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -127,7 +127,7 @@ describe('ReservationService', () => {
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne( `${apiUrl}/all?location=1`);
+		const request = httpMock.expectOne(`${apiUrl}/all?location=1`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');

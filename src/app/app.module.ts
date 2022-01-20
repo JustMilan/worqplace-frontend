@@ -25,26 +25,26 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 		NavBarComponent,
 		AlterReservationDialogComponent,
 	],
-    imports: [
-        // angular
-        BrowserModule,
-        BrowserAnimationsModule,
+	imports: [
+		// angular
+		BrowserModule,
+		BrowserAnimationsModule,
 
-        // 3rd party
-        NgxMaterialTimepickerModule,
+		// 3rd party
+		NgxMaterialTimepickerModule,
 
-        // app
-        ReservationModule,
-        LoginModule,
-        DataModule,
-        CoreModule,
-        SharedModule,
-        NgxMaterialTimepickerModule,
-        AdminModule,
-        AppRoutingModule,
-        FormsModule,
-        BsDatepickerModule.forRoot()
-    ],
+		// app
+		ReservationModule,
+		LoginModule,
+		DataModule,
+		CoreModule,
+		SharedModule,
+		NgxMaterialTimepickerModule,
+		AdminModule,
+		AppRoutingModule,
+		FormsModule,
+		BsDatepickerModule.forRoot()
+	],
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,

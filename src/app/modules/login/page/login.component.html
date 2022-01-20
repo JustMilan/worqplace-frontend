@@ -1,21 +1,21 @@
 <div class="login-box">
-	<img src="../../../../assets/images/QuintorLogo.png" alt="Quintor logo">
-	<h1>Login</h1>
-	<app-notification></app-notification>
-	<form>
-		<div class="input_field">
-			<input class="input-username" type="text" name="username"
-						 [(ngModel)]="username" required>
-			<span></span>
-			<label>Username</label>
-		</div>
-		<div class="input_field">
-			<input class="input-password" type="password" name="password"
-						 [(ngModel)]="password" required>
-			<span></span>
-			<label>Password</label>
-		</div>
+  <img src="../../../../assets/images/QuintorLogo.png" alt="Quintor logo">
+  <h1>Login</h1>
+  <app-notification></app-notification>
+  <form>
+    <div class="input_field">
+      <input class="input-username" type="text" name="username"
+             [(ngModel)]="username" required>
+      <span></span>
+      <label>Username</label>
+    </div>
+    <div class="input_field">
+      <input class="input-password" type="password" name="password"
+             [(ngModel)]="password" required>
+      <span></span>
+      <label>Password</label>
+    </div>
 
-		<button mat-button class="submit-button" type="submit" (keydown.enter)="login()" (click)="login()">Login</button>
-	</form>
+    <button mat-button class="submit-button" type="submit" (keydown.enter)="login()" (click)="login()">Login</button>
+  </form>
 </div>

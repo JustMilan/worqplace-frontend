@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {  MatPaginator, PageEvent } from "@angular/material/paginator";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatTable } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -11,7 +11,7 @@ import { Location } from "../../../data/interface/Location";
 import { LocationService } from "../../../data/service/location/location.service";
 import { MatDialog } from "@angular/material/dialog";
 import { NotificationService } from "../../service/notification.service";
-import {AlterReservationDialogComponent } from "../../../modules/reservation/components/alter-reservation-dialog/alter-reservation-dialog.component";
+import { AlterReservationDialogComponent } from "../../../modules/reservation/components/alter-reservation-dialog/alter-reservation-dialog.component";
 import { MatSelectChange } from "@angular/material/select";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 

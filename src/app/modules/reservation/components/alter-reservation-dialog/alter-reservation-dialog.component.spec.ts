@@ -252,104 +252,104 @@ describe('AlterReservationDialogComponent', () => {
 			expect(component.getTranslatedRecurrence()).toEqual('NONE');
 		});
 
-	it('should get translated recurrence correctly - Geen', () => {
-		reservation = {
-			id: 1,
-			date: '2023-12-12',
-			startTime: '12:00:00',
-			endTime: '13:00:00',
-			roomId: 1,
-			workplaceAmount: 2,
-			recurrence: {
-				active: false,
-				recurrencePattern: 'NONE'
-			}
-		};
+		it('should get translated recurrence correctly - Geen', () => {
+			reservation = {
+				id: 1,
+				date: '2023-12-12',
+				startTime: '12:00:00',
+				endTime: '13:00:00',
+				roomId: 1,
+				workplaceAmount: 2,
+				recurrence: {
+					active: false,
+					recurrencePattern: 'NONE'
+				}
+			};
 
-		component.processIncomingData(reservation);
-		component.confirm();
+			component.processIncomingData(reservation);
+			component.confirm();
 
-		expect(component.getTranslatedRecurrence()).toEqual('NONE');
-	});
+			expect(component.getTranslatedRecurrence()).toEqual('NONE');
+		});
 
-	it('should get translated recurrence correctly - Dagelijks', () => {
-		reservation = {
-			id: 1,
-			date: '2023-12-12',
-			startTime: '12:00:00',
-			endTime: '13:00:00',
-			roomId: 1,
-			workplaceAmount: 2,
-			recurrence: {
-				active: false,
-				recurrencePattern: 'DAILY'
-			}
-		};
+		it('should get translated recurrence correctly - Dagelijks', () => {
+			reservation = {
+				id: 1,
+				date: '2023-12-12',
+				startTime: '12:00:00',
+				endTime: '13:00:00',
+				roomId: 1,
+				workplaceAmount: 2,
+				recurrence: {
+					active: false,
+					recurrencePattern: 'DAILY'
+				}
+			};
 
-		component.processIncomingData(reservation);
-		component.confirm();
+			component.processIncomingData(reservation);
+			component.confirm();
 
-		expect(component.getTranslatedRecurrence()).toEqual('DAILY');
-	});
+			expect(component.getTranslatedRecurrence()).toEqual('DAILY');
+		});
 
-	it('should get translated recurrence correctly - 2 Wekelijks', () => {
-		reservation = {
-			id: 1,
-			date: '2023-12-12',
-			startTime: '12:00:00',
-			endTime: '13:00:00',
-			roomId: 1,
-			workplaceAmount: 2,
-			recurrence: {
-				active: false,
-				recurrencePattern: 'BIWEEKLY'
-			}
-		};
+		it('should get translated recurrence correctly - 2 Wekelijks', () => {
+			reservation = {
+				id: 1,
+				date: '2023-12-12',
+				startTime: '12:00:00',
+				endTime: '13:00:00',
+				roomId: 1,
+				workplaceAmount: 2,
+				recurrence: {
+					active: false,
+					recurrencePattern: 'BIWEEKLY'
+				}
+			};
 
-		component.processIncomingData(reservation);
-		component.confirm();
+			component.processIncomingData(reservation);
+			component.confirm();
 
-		expect(component.getTranslatedRecurrence()).toEqual('BIWEEKLY');
-	});
+			expect(component.getTranslatedRecurrence()).toEqual('BIWEEKLY');
+		});
 
-	it('should get translated recurrence correctly - Maandelijks', () => {
-		reservation = {
-			id: 1,
-			date: '2023-12-12',
-			startTime: '12:00:00',
-			endTime: '13:00:00',
-			roomId: 1,
-			workplaceAmount: 2,
-			recurrence: {
-				active: false,
-				recurrencePattern: 'MONTHLY'
-			}
-		};
+		it('should get translated recurrence correctly - Maandelijks', () => {
+			reservation = {
+				id: 1,
+				date: '2023-12-12',
+				startTime: '12:00:00',
+				endTime: '13:00:00',
+				roomId: 1,
+				workplaceAmount: 2,
+				recurrence: {
+					active: false,
+					recurrencePattern: 'MONTHLY'
+				}
+			};
 
-		component.processIncomingData(reservation);
-		component.confirm();
+			component.processIncomingData(reservation);
+			component.confirm();
 
-		expect(component.getTranslatedRecurrence()).toEqual('MONTHLY');
-	});
+			expect(component.getTranslatedRecurrence()).toEqual('MONTHLY');
+		});
 
-	it('should get translated recurrence correctly - Maandelijks', () => {
-		reservation = {
-			id: 1,
-			date: '2023-12-12',
-			startTime: '12:00:00',
-			endTime: '13:00:00',
-			roomId: 1,
-			workplaceAmount: 2,
-			recurrence: {
-				active: false,
-				recurrencePattern: 'SpellingMistakes'
-			}
-		};
+		it('should get translated recurrence correctly - Maandelijks', () => {
+			reservation = {
+				id: 1,
+				date: '2023-12-12',
+				startTime: '12:00:00',
+				endTime: '13:00:00',
+				roomId: 1,
+				workplaceAmount: 2,
+				recurrence: {
+					active: false,
+					recurrencePattern: 'SpellingMistakes'
+				}
+			};
 
-		component.processIncomingData(reservation);
-		component.confirm();
+			component.processIncomingData(reservation);
+			component.confirm();
 
-		expect(component.getTranslatedRecurrence()).toEqual('ERROR in getTranslatedRecurrence');
-	});
+			expect(component.getTranslatedRecurrence()).toEqual('ERROR in getTranslatedRecurrence');
+		});
 	}
 );

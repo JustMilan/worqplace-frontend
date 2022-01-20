@@ -1,35 +1,35 @@
 .message.error {
-	display: inline-block;
-	border: 1px solid #f8d7da;
-	background-color: #f8d7da;
-	color: #721c24;
+  display: inline-block;
+  border: 1px solid #f8d7da;
+  background-color: #f8d7da;
+  color: #721c24;
 
-	position: relative;
-	padding: .75rem 1.25rem;
-	margin-bottom: 1rem;
-	border-radius: 0.25rem
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem
 }
 
 .message.warning {
-	display: inline-block;
-	border: 1px solid #fff3cd;
-	background-color: #fff3cd;
-	color: #856404;
+  display: inline-block;
+  border: 1px solid #fff3cd;
+  background-color: #fff3cd;
+  color: #856404;
 
-	position: relative;
-	padding: .75rem 1.25rem;
-	margin-bottom: 1rem;
-	border-radius: 0.25rem
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem
 }
 
 .message.success {
-	display: inline-block;
-	border: 1px solid #d4edda;
-	background-color: #d4edda;
-	color: #155724;
+  display: inline-block;
+  border: 1px solid #d4edda;
+  background-color: #d4edda;
+  color: #155724;
 
-	position: relative;
-	padding: .75rem 1.25rem;
-	margin-bottom: 1rem;
-	border-radius: 0.25rem
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem
 }

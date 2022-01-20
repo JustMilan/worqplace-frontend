@@ -23,7 +23,7 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 		ReactiveFormsModule,
 		RouterModule,
 		NgxMaterialTimepickerModule,
-	BsDatepickerModule.forRoot()
+		BsDatepickerModule.forRoot()
 	]
 })
 

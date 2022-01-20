@@ -3,7 +3,7 @@
 ## Table of contents
 
 - [Documentation](#documentation)
-  - [Angular](#Angular)
+    - [Angular](#Angular)
 - [Team](#team)
 - [Git Strategy](#git-strategy)
 - [Agile](#agile)

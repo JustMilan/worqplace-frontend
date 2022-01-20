@@ -5,7 +5,8 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class AdminAuthGuard implements CanActivate {
-	constructor(private authService: AuthenticationService, private router: Router) {}
+	constructor(private authService: AuthenticationService, private router: Router) {
+	}
 
 	canActivate(
 		route: ActivatedRouteSnapshot,

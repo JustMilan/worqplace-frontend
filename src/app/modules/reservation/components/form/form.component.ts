@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Location } from "../../../../data/interface/Location";
-import {ReservationResponse} from "../../../../data/interface/ReservationResponse";
+import { ReservationResponse } from "../../../../data/interface/ReservationResponse";
 
 /**
  * The reservation form component
@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
 
 		document.getElementById(reservationType)!.classList.add('active');
 
-		this.reservationType.forEach( type => {
+		this.reservationType.forEach(type => {
 			if (type !== reservationType) {
 				document.getElementById(type)!.classList.remove('active');
 			}
@@ -66,7 +66,7 @@ export class FormComponent implements OnInit {
 		let month = ('0' + (date.getMonth() + 1)).slice(-2);
 		let year = date.getFullYear();
 
-		return`${year}-${month}-${day}`;
+		return `${year}-${month}-${day}`;
 	}
 
 	/**
@@ -75,7 +75,7 @@ export class FormComponent implements OnInit {
 	onSubmit() {
 		const reservation: ReservationResponse = {
 			locationId: this.reservationForm.value.location,
-			date: this.reservationForm.value.date? this.dateConverter(this.reservationForm.value.date): undefined!,
+			date: this.reservationForm.value.date ? this.dateConverter(this.reservationForm.value.date) : undefined!,
 			time: {
 				start: this.reservationForm.value.startTime,
 				end: this.reservationForm.value.endTime
