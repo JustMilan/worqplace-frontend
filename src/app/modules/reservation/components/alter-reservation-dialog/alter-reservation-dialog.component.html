@@ -8,7 +8,7 @@
 					<td>Date:</td>
 					<td>
 						<input bsDatepicker class="form-control" [minDate]="minDate"
-									 (bsValueChange)="alterDate($event)" [bsValue]="selectedDate">
+									 (bsValueChange)="alterDate($event)" [bsValue]="selectedDate" #datePicker>
 					</td>
 				</tr>
 				<tr>
@@ -16,7 +16,7 @@
 					<td>
 						<input matInput type="time" name="selectedStartTime"
 									 [ngModel]="selectedStartTime" (ngModelChange)="alterStartTime($event)" required
-									 value="{{processedData.startTime}}">
+									 value="{{processedData.startTime}}" #startTime>
 					</td>
 				</tr>
 				<tr>
@@ -24,14 +24,14 @@
 					<td>
 						<input matInput type="time" name="selectedEndTime"
 									 [ngModel]="selectedEndTime" (ngModelChange)="alterEndTime($event)" required
-									 value="{{processedData.endTime}}">
+									 value="{{processedData.endTime}}" #endTime>
 					</td>
 				</tr>
 				<tr>
 					<td>Recurrence:</td>
 					<td>
 						<mat-select [ngModel]="selectedRecurrencePattern" (selectionChange)="alterRecurrence($event)"
-												value="{{selectedRecurrencePattern}}" placeholder="{{selectedRecurrencePattern}}">
+												value="{{selectedRecurrencePattern}}" placeholder="{{selectedRecurrencePattern}}" #recurrencePattern>
 							<mat-option *ngFor="let option of repeatOptions" [value]="option">{{option}}</mat-option>
 						</mat-select>
 					</td>
@@ -48,8 +48,8 @@
 			</table>
 		</div>
 		<div class="button-options">
-			<button class="button-options-cancel" (click)="onCancel()" mat-raised-button>Cancel</button>
-			<button class="button-options-confirm" (click)="confirm()" mat-raised-button>Confirm</button>
+			<button class="button-options-cancel" (click)="onCancel()" mat-raised-button id="cancelButton">Cancel</button>
+			<button class="button-options-confirm" (click)="confirm()" mat-raised-button id="confirmButton">Confirm</button>
 		</div>
 	</div>
 </div>
