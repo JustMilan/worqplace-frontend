@@ -19,7 +19,7 @@ export class AdminLocationReservationsTableComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	public allMyReservations: Reservation[];
 	public allMyReservationsSlice: Reservation[];
-	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence'];
+	columnsToDisplay = ['id', 'date', 'tijd', 'roomId', 'workplaceAmount', 'recurrence', 'employee'];
 
 	locations: Location[];
 	location: number;
