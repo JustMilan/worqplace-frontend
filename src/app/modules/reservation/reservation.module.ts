@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 import { SharedModule } from "../../shared/shared.module";
-import { ReservationDialogComponent } from "./components/reservation-dialog/reservation-dialog.component";
 import { FormComponent } from "./components/form/form.component";
 
 import { OpenCardComponent } from "./components/open-card/open-card.component";
@@ -15,7 +14,6 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 		OpenCardComponent,
 		FormComponent,
 		ReservationComponent,
-		ReservationDialogComponent
 	],
 	imports: [
 		SharedModule,

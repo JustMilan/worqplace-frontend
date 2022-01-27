@@ -1,21 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReservationComponent } from './reservation.component';
-import { SharedModule } from "../../../shared/shared.module";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { RouterTestingModule } from "@angular/router/testing";
-import { Room } from "../../../data/interface/Room";
-import { ReservationResponse } from "../../../data/interface/ReservationResponse";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { Recurrence } from "../../../data/interface/Recurrence";
-import { By } from "@angular/platform-browser";
-import { of } from "rxjs";
-import { LocationService } from "../../../data/service/location/location.service";
-import { RoomService } from "../../../data/service/room/room.service";
-import { NotificationService } from "../../../shared/service/notification.service";
-import { ReservationDialogComponent } from "../components/reservation-dialog/reservation-dialog.component";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { ReservationService } from "../../../data/service/reservation/reservation.service";
+import {ReservationComponent} from './reservation.component';
+import {SharedModule} from "../../../shared/shared.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
+import {Room} from "../../../data/interface/Room";
+import {ReservationResponse} from "../../../data/interface/ReservationResponse";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {Recurrence} from "../../../data/interface/Recurrence";
+import {By} from "@angular/platform-browser";
+import {of} from "rxjs";
+import {LocationService} from "../../../data/service/location/location.service";
+import {RoomService} from "../../../data/service/room/room.service";
+import {NotificationService} from "../../../shared/service/notification.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ReservationService} from "../../../data/service/reservation/reservation.service";
 
 describe('ReservationPageComponent', () => {
 	let component: ReservationComponent;
@@ -36,7 +35,7 @@ describe('ReservationPageComponent', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule, RouterTestingModule, SharedModule, BrowserAnimationsModule],
-			declarations: [ReservationComponent, ReservationDialogComponent],
+			declarations: [ReservationComponent],
 			providers: [{
 				provide: LocationService,
 				useValue: jasmine.createSpyObj('LocationService', {getLocations: of(locationsMock)})
@@ -95,20 +94,6 @@ describe('ReservationPageComponent', () => {
 		expect(spy).toHaveBeenCalled();
 	});
 
-	it('should convert recurring pattern to enum literal', () => {
-		const daily = 'Dagelijks';
-		const weekly = 'Wekelijks';
-		const biWeekly = '2 Wekelijks';
-		const monthly = 'Maandelijks';
-		const invalidRecurringPattern = 'testtest';
-
-		expect(component.convertRecurringPatternToEnumLiteral(daily)).toEqual('DAILY');
-		expect(component.convertRecurringPatternToEnumLiteral(weekly)).toEqual('WEEKLY');
-		expect(component.convertRecurringPatternToEnumLiteral(biWeekly)).toEqual('BIWEEKLY');
-		expect(component.convertRecurringPatternToEnumLiteral(monthly)).toEqual('MONTHLY');
-		expect(component.convertRecurringPatternToEnumLiteral(invalidRecurringPattern)).toEqual('');
-	});
-
 	describe('getting data', () => {
 
 		beforeEach(() => {
@@ -133,6 +118,11 @@ describe('ReservationPageComponent', () => {
 				available: 8
 			};
 
+			recurrenceMock = {
+				active: false,
+				recurrencePattern: 'NONE'
+			}
+
 			reservationResponseMock = {
 				locationId: 1,
 				date: '2021-12-12',
@@ -140,26 +130,15 @@ describe('ReservationPageComponent', () => {
 					start: '12:00',
 					end: '13:00'
 				},
-				type: 'Ruimte'
+				type: 'Ruimte',
+				amount: 5,
+				recurrence: recurrenceMock
 			};
-
-			recurrenceMock = {
-				active: false
-			}
 
 			workplaceAmountMock = 2;
 
 			component.rooms = availableRooms;
 			component.reservationResponse = reservationResponseMock;
-		});
-
-		it('should call openDialog method', () => {
-			let spy = spyOn(dialog, 'open').and.returnValue(dialogRef);
-
-			fixture.detectChanges();
-			component.openDialog(roomMock);
-
-			expect(spy).toHaveBeenCalled();
 		});
 
 		it('should convert to room reservation', () => {
@@ -217,7 +196,7 @@ describe('ReservationPageComponent', () => {
 		it('should reserve workplace', () => {
 			let spy = spyOn(component, "reserveWorkplace").and.callThrough();
 
-			component.reserveWorkplace(component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock), roomMock, workplaceAmountMock);
+			component.reserveWorkplace(component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock), roomMock);
 
 			expect(component.rooms).toHaveSize(2);
 			expect(spy).toHaveBeenCalled();
@@ -232,7 +211,7 @@ describe('ReservationPageComponent', () => {
 				expect(notification.colorClass).toEqual('error');
 			})
 
-			component.reserveWorkplace(component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock), roomMock, invalidWorkplaceAmount);
+			component.reserveWorkplace(component.selectedWorkplacesReservation(roomMock, workplaceAmountMock, recurrenceMock), roomMock);
 
 			expect(spy).toHaveBeenCalled();
 		});

@@ -28,7 +28,8 @@ describe('MyReservationsTableComponent', () => {
 			endTime: '13:30',
 			roomId: 1,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		}, {
 			id: 2,
@@ -37,7 +38,8 @@ describe('MyReservationsTableComponent', () => {
 			endTime: '13:30',
 			roomId: 1,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		}, {
 			id: 3,
@@ -46,7 +48,8 @@ describe('MyReservationsTableComponent', () => {
 			endTime: '13:30',
 			roomId: 1,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		}
 	];

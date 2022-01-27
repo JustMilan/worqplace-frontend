@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Location } from "../../../../data/interface/Location";
-import { ReservationResponse } from "../../../../data/interface/ReservationResponse";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Recurrence} from 'src/app/data/interface/Recurrence';
+import {Location} from "../../../../data/interface/Location";
+import {ReservationResponse} from "../../../../data/interface/ReservationResponse";
 
 /**
  * The reservation form component
@@ -22,9 +23,19 @@ export class FormComponent implements OnInit {
 
 	reservationForm: FormGroup;
 	reservationType: string[] = ['Ruimte', 'Werkplek'];
+	repeatOptions: string[] = ['Dagelijks', 'Wekelijks', '2 Wekelijks', 'Maandelijks'];
 	minDate: Date = new Date(Date.now());
 
 	selectedReservationType: string = 'Ruimte';
+	isRecurrenceSelected: boolean = false;
+
+	grid: string =
+		'"location location"\n' +
+		'"date date"\n' +
+		'"starttime endtime"\n' +
+		'"recurrence recurrence"\n' +
+		'"amount amount"\n' +
+		'"submit submit"';
 
 	constructor(private fb: FormBuilder) {
 
@@ -47,11 +58,12 @@ export class FormComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 		this.reservationForm = this.fb.group({
-			type: ['', Validators.required],
 			location: ['', Validators.required],
 			date: ['', Validators.required],
 			startTime: ['', Validators.required],
-			endTime: ['', Validators.required]
+			endTime: ['', Validators.required],
+			amount: ['', Validators.required],
+			recurrence: ['', Validators.required]
 		});
 	}
 
@@ -70,17 +82,50 @@ export class FormComponent implements OnInit {
 	}
 
 	/**
+	 * Method to convert the recurring pattern string to an enum literal for the http request to the back-end
+	 *
+	 * @param recurringPattern - the recurring pattern string
+	 *
+	 * @return - the string enum literal or an empty string if invalid
+	 */
+	convertRecurringPatternToEnumLiteral(recurringPattern: string): string {
+		switch (recurringPattern) {
+			case 'Dagelijks':
+				return 'DAILY';
+			case 'Wekelijks':
+				return 'WEEKLY';
+			case '2 Wekelijks':
+				return 'BIWEEKLY';
+			case 'Maandelijks':
+				return 'MONTHLY';
+		}
+
+		return 'NONE';
+	}
+
+	/**
 	 * Emits the reservations form data to the submit event emitter
 	 */
 	onSubmit() {
+		const recurrencePattern = this.reservationForm.value.recurrence;
+
+		console.log(this.isRecurrenceSelected);
+
+		const selectedRecurrence: Recurrence = {
+			active: this.isRecurrenceSelected,
+			recurrencePattern: this.isRecurrenceSelected ? this.convertRecurringPatternToEnumLiteral(recurrencePattern) : 'NONE'
+		}
+
 		const reservation: ReservationResponse = {
+			type: this.selectedReservationType,
 			locationId: this.reservationForm.value.location,
 			date: this.reservationForm.value.date ? this.dateConverter(this.reservationForm.value.date) : undefined!,
 			time: {
 				start: this.reservationForm.value.startTime,
 				end: this.reservationForm.value.endTime
 			},
-			type: this.selectedReservationType
+			amount: this.reservationForm.value.amount,
+			recurrence: selectedRecurrence
 		}
 
 		this.submit.emit(reservation);

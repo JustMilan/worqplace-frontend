@@ -1,9 +1,9 @@
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
-import { FormComponent } from './form.component';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MaterialModule } from "../../../../shared/material.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {FormComponent} from './form.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "../../../../shared/material.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('ReservationFormComponent', () => {
 	let component: FormComponent;
@@ -55,7 +55,6 @@ describe('ReservationFormComponent', () => {
 
 		component.onSubmit();
 		fixture.detectChanges();
-		console.log(component.reservationForm.controls['location'].value)
 
 		fixture.whenStable().then(() => {
 			expect(locationSelect.value).toEqual(component.reservationForm.controls['location'].value);
@@ -66,14 +65,14 @@ describe('ReservationFormComponent', () => {
 		})
 	}));
 
-	it('should have a form with 5 interaction elements', () => {
+	it('should have a form with 5 interaction elements when its first loaded', () => {
 		const inputElements = formElement.querySelectorAll('input');
 		const selectElements = formElement.querySelectorAll('select');
 		const liElements = formElement.querySelectorAll('li');
 
-		expect(inputElements.length).toEqual(3);
+		expect(inputElements.length).toEqual(4);
 		expect(selectElements.length).toEqual(1);
-		expect(liElements.length).toEqual(2);
+		expect(liElements.length).toEqual(3);
 	});
 
 	it('should add active class correctly when type is ruimte', () => {
@@ -94,5 +93,19 @@ describe('ReservationFormComponent', () => {
 
 		expect(liWorkplace).toHaveClass('active');
 		expect(liRoom).not.toHaveClass('active');
+	});
+
+	it('should convert recurring pattern to enum literal', () => {
+		const daily = 'Dagelijks';
+		const weekly = 'Wekelijks';
+		const biWeekly = '2 Wekelijks';
+		const monthly = 'Maandelijks';
+		const invalidRecurringPattern = 'testtest';
+
+		expect(component.convertRecurringPatternToEnumLiteral(daily)).toEqual('DAILY');
+		expect(component.convertRecurringPatternToEnumLiteral(weekly)).toEqual('WEEKLY');
+		expect(component.convertRecurringPatternToEnumLiteral(biWeekly)).toEqual('BIWEEKLY');
+		expect(component.convertRecurringPatternToEnumLiteral(monthly)).toEqual('MONTHLY');
+		expect(component.convertRecurringPatternToEnumLiteral(invalidRecurringPattern)).toEqual('NONE');
 	});
 });

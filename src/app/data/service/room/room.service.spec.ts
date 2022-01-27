@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { Room } from "../../interface/Room";
-import { RoomService } from "./room.service";
-import { TestBed } from "@angular/core/testing";
+import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {Room} from "../../interface/Room";
+import {RoomService} from "./room.service";
+import {TestBed} from "@angular/core/testing";
+import {Recurrence} from "../../interface/Recurrence";
 
 describe('RoomService', () => {
 	// Declare the variables which are used through out the test suite
@@ -10,11 +11,13 @@ describe('RoomService', () => {
 	let apiUrl: string;
 	let availableRoomMock: Room[];
 	let availableWorkplaceMock: Room[];
+	let recurrence: Recurrence;
 
 	const locationId = 1;
 	const date = '2021-12-20';
 	const startTime = '12:00';
 	const endTime = '14:00';
+	const toReserveAmount = 1;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -51,6 +54,11 @@ describe('RoomService', () => {
 			available: 6
 		}];
 
+		recurrence = {
+			active: false,
+			recurrencePattern: 'NONE'
+		}
+
 	});
 
 	afterEach(() => {
@@ -65,13 +73,13 @@ describe('RoomService', () => {
 	it('should be able to retrieve all the available workplaces from the API via GET', () => {
 		// Run the getAvailableWorkplacesInRooms method and expect the response to match the expectations
 		// (when the observable resolves)
-		service.getAvailableWorkplacesInRooms(locationId, date, startTime, endTime).subscribe(availableWorkplaces => {
+		service.getAvailableWorkplacesInRooms(locationId, date, startTime, endTime, toReserveAmount, recurrence.recurrencePattern).subscribe(availableWorkplaces => {
 			expect(availableWorkplaces.length).toBe(2);
 			expect(availableWorkplaces).toEqual(availableWorkplaceMock);
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne(`${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}&amount=${toReserveAmount}&recurrencePattern=${recurrence.recurrencePattern}`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -83,13 +91,13 @@ describe('RoomService', () => {
 	it('should be able to retrieve all the available rooms from the API via GET', () => {
 		// Run the getAvailableFullRooms method and expect the response to match the expectations
 		// (when the observable resolves)
-		service.getAvailableFullRooms(locationId, date, startTime, endTime).subscribe(availableRooms => {
+		service.getAvailableFullRooms(locationId, date, startTime, endTime, recurrence.recurrencePattern).subscribe(availableRooms => {
 			expect(availableRooms.length).toBe(2);
 			expect(availableRooms).toEqual(availableRoomMock);
 		});
 
 		// When the service function is called, we can expect that there has been made 1 request to the endpoint
-		const request = httpMock.expectOne(`${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}&recurrencePattern=${recurrence.recurrencePattern}`);
 
 		// Check if the type of the request is a GET
 		expect(request.request.method).toBe('GET');
@@ -104,7 +112,7 @@ describe('RoomService', () => {
 		const statusText = 'Unprocessable Entity';
 
 
-		service.getAvailableWorkplacesInRooms(locationId, date, startTime, endTime).subscribe(() => {
+		service.getAvailableWorkplacesInRooms(locationId, date, startTime, endTime, toReserveAmount, recurrence.recurrencePattern).subscribe(() => {
 				// Next handler should not be called and if it does let it fail
 				fail('next handler must not be called');
 			}, (error) => {
@@ -118,7 +126,7 @@ describe('RoomService', () => {
 				fail('complete handler must not be called');
 			});
 
-		const request = httpMock.expectOne(`${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}&amount=${toReserveAmount}&recurrencePattern=${recurrence.recurrencePattern}`);
 
 		// Let the request error instead of flush
 		request.error(errorEvent, {status: status, statusText: statusText});
@@ -129,7 +137,7 @@ describe('RoomService', () => {
 		const status = 422;
 		const statusText = 'Unprocessable Entity';
 
-		service.getAvailableFullRooms(locationId, date, startTime, endTime).subscribe(() => {
+		service.getAvailableFullRooms(locationId, date, startTime, endTime, recurrence.recurrencePattern).subscribe(() => {
 				// Next handler should not be called and if it does let it fail
 				fail('next handler must not be called');
 			},
@@ -144,7 +152,7 @@ describe('RoomService', () => {
 				fail('complete handler must not be called');
 			});
 
-		const request = httpMock.expectOne(`${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}`);
+		const request = httpMock.expectOne(`${apiUrl}/availability?locationId=${locationId}&date=${date}&start=${startTime}&end=${endTime}&recurrencePattern=${recurrence.recurrencePattern}`);
 
 		// Let the request error instead of flush
 		request.error(errorEvent, {status: status, statusText: statusText});

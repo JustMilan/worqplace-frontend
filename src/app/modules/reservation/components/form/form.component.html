@@ -7,12 +7,15 @@
               (click)="onTypeChange(type)" [ngClass]="{'active': f}">
             {{type}}
           </li>
+          <li><input type="checkbox" [checked]="isRecurrenceSelected"
+                     (change)="isRecurrenceSelected = !isRecurrenceSelected"> Herhaling
+          </li>
         </ul>
       </div>
     </div>
 
     <div class="reservationsForm-fields-container">
-      <div class="reservationsForm-fields">
+      <div class="reservationsForm-fields" [ngStyle]="{'grid-template': grid}">
 
         <div class="field-container location-area">
           <div class="field">
@@ -24,6 +27,7 @@
               </select>
             </div>
           </div>
+
         </div>
 
         <div class="field-container date-area">
@@ -52,14 +56,36 @@
 
         <div class="field-container end-time-area">
           <div class="field">
-            <label>end</label>
+            <label>einde</label>
             <div class="field-input">
               <div>
-                <input matInput [format]=24
-                       [ngxTimepicker]="endpicker" type="time" id="end-time-select"
+                <input matInput [format]=24 [ngxTimepicker]="endpicker"
+                       type="time" id="end-time-select"
                        name="endTime" formControlName="endTime" required>
                 <ngx-material-timepicker #endpicker><</ngx-material-timepicker>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedReservationType === 'Werkplek'" class="field-container amount-area">
+          <div class="field">
+            <label>aantal</label>
+            <div class="field-input">
+              <input type="number" name="amount" formControlName="amount" id="amount-select" required>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="isRecurrenceSelected" [ngClass]="isRecurrenceSelected? 'recurrence-area' : '' "
+             class="field-container recurrence-area">
+          <div class="field">
+            <label>herhaling</label>
+            <div class="field-input">
+              <select name="recurrence" formControlName="recurrence" id="recurrence-select" required>
+                <option value="" selected hidden disabled id="recurrence-placeholder">Kies een herhaling</option>
+                <option *ngFor="let repOpt of repeatOptions" [value]="repOpt">{{repOpt}}</option>
+              </select>
             </div>
           </div>
         </div>

@@ -14,19 +14,15 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1224px) {
   .reservationsForm-container {
-    max-width: 800px;
-    min-width: 800px;
-    width: 800px
+    max-width: 1180px;
+    min-width: 1180px;
+    width: 1180px
   }
-}
 
-@media (min-width: 1280px) {
-  .reservationsForm-container {
-    max-width: 980px;
-    min-width: 980px;
-    width: 980px
+  .field-container.amount-area, #amount-select {
+    width: 80px;
   }
 }
 
@@ -80,10 +76,16 @@
   display: flex;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1224px) {
   .location-area,
-  .date-area {
+  .date-area,
+  .start-time-area, .end-time-area,
+  .recurrence-area {
     border-bottom: 2px solid #eee;
+  }
+
+  .amount-area {
+    margin-bottom: 20px;
   }
 
   .reservationsForm-fields-container {
@@ -92,12 +94,7 @@
 
   .reservationsForm-fields {
     display: grid;
-    grid-template:
-        "location location"
-        "date date"
-        "starttime endtime"
-        "submit submit";
-    grid-template-rows: 70px 70px 70px 60px;
+    grid-template-rows: 70px 70px 70px 70px 70px 60px;
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -120,6 +117,14 @@
 
 .end-time-area {
   grid-area: endtime;
+}
+
+.amount-area {
+  grid-area: amount;
+}
+
+.recurrence-area {
+  grid-area: recurrence;
 }
 
 .submit-area {
@@ -158,7 +163,7 @@ form label {
   line-height: 1.7;
 }
 
-#location-select:required:invalid {
+#location-select:required:invalid, #recurrence-select:required:invalid {
   color: gray;
 }
 
@@ -176,11 +181,8 @@ form label {
 .reservationsForm-fields input {
   margin: 0;
   padding: 0;
-  border: none;
-}
 
-.timepicker-backdrop-overlay {
-  z-index: 10000000 !important;
+  border: none;
 }
 
 select {

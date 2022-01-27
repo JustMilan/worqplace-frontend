@@ -30,7 +30,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 2,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		}, {
 			id: 2,
@@ -40,7 +41,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 6,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		}, {
 			id: 3,
@@ -50,7 +52,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 2,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		}];
 	});
@@ -165,7 +168,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 2,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		};
 
@@ -197,7 +201,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 2,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		};
 
@@ -229,7 +234,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 6,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		};
 
@@ -261,7 +267,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 6,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		};
 
@@ -299,7 +306,8 @@ describe('ReservationService', () => {
 			roomId: 1,
 			workplaceAmount: 3,
 			recurrence: {
-				active: false
+				active: false,
+				recurrencePattern: 'NONE'
 			}
 		};
 

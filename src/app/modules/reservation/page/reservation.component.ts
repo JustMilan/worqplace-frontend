@@ -9,7 +9,6 @@ import { Room } from "../../../data/interface/Room";
 import { LocationService } from "../../../data/service/location/location.service";
 import { ReservationService } from "../../../data/service/reservation/reservation.service";
 import { RoomService } from "../../../data/service/room/room.service";
-import { ReservationDialogComponent } from "../components/reservation-dialog/reservation-dialog.component";
 import { NotificationService } from "../../../shared/service/notification.service";
 import { Subscription } from "rxjs";
 import { UiService } from "../service/ui.service";
@@ -43,7 +42,7 @@ export class ReservationComponent implements OnInit {
 	 * @param roomService - The room service
 	 * @param locationService - The location service
 	 * @param reservationService - The reservation service
-	 * @param dialog - The reservation-dialog from angular material reservation-dialog
+	 * @param dialog - The dialog from angular material dialog
 	 * @param notificationService - The notification service
 	 * @param uiService - The ui service
 	 *
@@ -73,61 +72,6 @@ export class ReservationComponent implements OnInit {
 	}
 
 	/**
-	 * Method to convert the recurring pattern string to an enum literal for the http request to the back-end
-	 *
-	 * @param recurringPattern - the recurring pattern string
-	 *
-	 * @return - the string enum literal or an empty string if invalid
-	 */
-	convertRecurringPatternToEnumLiteral(recurringPattern: string): string {
-		switch (recurringPattern) {
-			case 'Dagelijks':
-				return 'DAILY';
-			case 'Wekelijks':
-				return 'WEEKLY';
-			case '2 Wekelijks':
-				return 'BIWEEKLY';
-			case 'Maandelijks':
-				return 'MONTHLY';
-		}
-
-		return '';
-	}
-
-	/**
-	 * Method to open the reservation-dialog
-	 *
-	 * @param room - the room for which the reservation-dialog has been opened
-	 */
-	openDialog(room: Room): void {
-		const dialogRef = this.dialog.open(ReservationDialogComponent, {
-			width: '500px',
-			data: {room: room, reservationType: this.reservationResponse.type},
-			panelClass: 'reservation-reservation-dialog'
-		});
-
-		dialogRef.afterClosed().subscribe(result => {
-			// check if the confirmation button is clicked in reservation-dialog
-			if (result != undefined) {
-				const recurrence = {
-					active: result.recurringPattern != undefined,
-					recurrencePattern: result.recurringPattern != undefined ? this.convertRecurringPatternToEnumLiteral(result.recurringPattern) : null
-				}
-
-				if (this.reservationResponse.type == 'Ruimte') {
-					this.reserveRoom(this.selectedRoomReservation(room, recurrence));
-				}
-
-				if (this.reservationResponse.type == 'Werkplek') {
-					this.reserveWorkplace(this.selectedWorkplacesReservation(room, result.workplaceAmount, recurrence), room, result.workplaceAmount);
-				}
-
-				this.notificationService.handleSuccess("The reservation has been placed!");
-			}
-		});
-	}
-
-	/**
 	 * Method get all the locations from the location service
 	 */
 	getLocations(): void {
@@ -144,9 +88,10 @@ export class ReservationComponent implements OnInit {
 	 * @param date - the date
 	 * @param start - the start time
 	 * @param end - the end time
+	 * @param recurrence - the recurrence
 	 */
-	getAvailableRooms(locationId: number, date: string, start: string, end: string): void {
-		this.roomService.getAvailableFullRooms(locationId, date, start, end)
+	getAvailableRooms(locationId: number, date: string, start: string, end: string, recurrence: Recurrence): void {
+		this.roomService.getAvailableFullRooms(locationId, date, start, end, recurrence.recurrencePattern)
 			.subscribe(rooms => {
 				this.rooms = rooms
 
@@ -163,9 +108,12 @@ export class ReservationComponent implements OnInit {
 	 * @param date - the date
 	 * @param start - the start time
 	 * @param end - the end time
+	 * @param amount - the amount
+	 * @param recurrence - the recurrence
 	 */
-	getAvailableWorkplacesInRooms(locationId: number, date: string, start: string, end: string): void {
-		this.roomService.getAvailableWorkplacesInRooms(locationId, date, start, end)
+	getAvailableWorkplacesInRooms(locationId: number, date: string, start: string, end: string, amount: number,
+								  recurrence: Recurrence): void {
+		this.roomService.getAvailableWorkplacesInRooms(locationId, date, start, end, amount, recurrence.recurrencePattern)
 			.subscribe(rooms => {
 				this.rooms = rooms
 
@@ -183,28 +131,41 @@ export class ReservationComponent implements OnInit {
 	checkAvailability(reservationResponse: ReservationResponse): void {
 		switch (reservationResponse.type) {
 			case 'Ruimte':
-				this.getAvailableRooms(reservationResponse.locationId, reservationResponse.date, reservationResponse.time.start, reservationResponse.time.end);
+				this.getAvailableRooms(
+					reservationResponse.locationId, reservationResponse.date,
+					reservationResponse.time.start, reservationResponse.time.end,
+					reservationResponse.recurrence
+				);
 				break
 			case 'Werkplek':
-				this.getAvailableWorkplacesInRooms(reservationResponse.locationId, reservationResponse.date, reservationResponse.time.start, reservationResponse.time.end);
+				this.getAvailableWorkplacesInRooms(
+					reservationResponse.locationId, reservationResponse.date,
+					reservationResponse.time.start, reservationResponse.time.end,
+					reservationResponse.amount, reservationResponse.recurrence
+				);
 				break
 		}
-
 	}
 
-	reserveRoom(selectedRoomReservation: Reservation): void {
-		this.reservationService.reserveRoom(selectedRoomReservation).subscribe(() => {
-			this.rooms = this.rooms.filter(r => selectedRoomReservation.roomId !== r.id);
+	/**
+	 * Method that tries to reserve a room
+	 *
+	 * @param roomReservation - the reservation for the room
+	 */
+	reserveRoom(roomReservation: Reservation): void {
+		this.reservationService.reserveRoom(roomReservation).subscribe(() => {
+			this.rooms = this.rooms.filter(r => roomReservation.roomId !== r.id);
 		});
 	}
 
-	reserveWorkplace(selectedWorkplaceReservation: Reservation, room: Room, workplaceAmount: number) {
-		this.reservationService.reserveWorkplace(selectedWorkplaceReservation).subscribe(() => {
-			if (workplaceAmount <= 0) {
-				this.notificationService.handleError("The workplace amount is not valid!");
-				return;
-			}
-
+	/**
+	 * Method that tries to reserve a workplace
+	 *
+	 * @param workplaceReservation - the reservation for the workplace
+	 * @param room - the room to reserve
+	 */
+	reserveWorkplace(workplaceReservation: Reservation, room: Room) {
+		this.reservationService.reserveWorkplace(workplaceReservation).subscribe(() => {
 			const index = this.rooms.findIndex(r => room.id == r.id);
 
 			this.rooms = this.rooms.filter(r => room.id !== r.id);
@@ -214,7 +175,7 @@ export class ReservationComponent implements OnInit {
 				id: room.id,
 				floor: room.floor,
 				capacity: room.capacity,
-				available: room.available -= workplaceAmount
+				available: room.available -= workplaceReservation.workplaceAmount!
 			};
 
 			// check if room has enough workplaces
@@ -233,12 +194,28 @@ export class ReservationComponent implements OnInit {
 	onSubmit(reservationResponse: ReservationResponse) {
 		this.reservationResponse = reservationResponse;
 
-		// Check if the fields have a truthy value (so not null, undefined, NaN, empty, 0, false)
+		// Check if the fields have a falsy value (so null, undefined, NaN, empty, 0, false)
 		if (!(reservationResponse.locationId && reservationResponse.date &&
 			reservationResponse.time.start && reservationResponse.time.end && reservationResponse.type)) {
 
 			this.notificationService.handleError("Niet alle velden zijn ingevuld!");
 			return;
+		}
+
+		switch (reservationResponse.type) {
+			case 'Ruimte':
+				if (reservationResponse.recurrence.active && reservationResponse.recurrence.recurrencePattern === 'NONE') {
+					this.notificationService.handleError("Niet alle velden zijn ingevuld!");
+					return;
+				}
+				break;
+			case 'Werkplek':
+				if ((reservationResponse.recurrence.active && reservationResponse.recurrence.recurrencePattern === 'NONE')
+					|| (!reservationResponse.amount)) {
+					this.notificationService.handleError("Niet alle velden zijn ingevuld!");
+					return;
+				}
+				break;
 		}
 
 		this.checkAvailability(reservationResponse);
@@ -257,7 +234,6 @@ export class ReservationComponent implements OnInit {
 			date: this.reservationResponse.date,
 			startTime: this.reservationResponse.time.start,
 			endTime: this.reservationResponse.time.end,
-			// employeeId: 1,
 			roomId: room.id,
 			recurrence: roomRecurrence
 		};
@@ -284,13 +260,22 @@ export class ReservationComponent implements OnInit {
 	}
 
 	/**
-	 * Method that parses the event to a room object and opens the reservation-dialog
+	 * Method that parses the event to a room object and opens the dialog
 	 *
 	 * @param event - the event with a room object in it
 	 */
 	book(event: Event) {
 		const room: Room = JSON.parse(JSON.stringify(event));
 
-		this.openDialog(room);
+		if (this.reservationResponse.type == 'Ruimte') {
+			this.reserveRoom(this.selectedRoomReservation(room, this.reservationResponse.recurrence));
+		}
+
+		if (this.reservationResponse.type == 'Werkplek') {
+			this.reserveWorkplace(this.selectedWorkplacesReservation(room, this.reservationResponse.amount,
+				this.reservationResponse.recurrence), room);
+		}
+
+		this.notificationService.handleSuccess("The reservation has been placed!");
 	}
 }

@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { environment } from "../../../../environments/environment";
-import { Room } from "../../interface/Room";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {Observable, throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {environment} from "../../../../environments/environment";
+import {Room} from "../../interface/Room";
 
 /**
  * The RoomService makes API calls to the RoomController in the back-end.
@@ -35,10 +35,11 @@ export class RoomService {
 	 * @param date - the date
 	 * @param start - the start time
 	 * @param end - the end time
+	 * @param recurrencePattern - the recurrence pattern
 	 * @returns - An observable of the rooms array
 	 */
-	getAvailableFullRooms(locationId: number, date: string, start: string, end: string): Observable<Room[]> {
-		const url = `${this.apiUrl}/availability?locationId=${locationId}&date=${date}&start=${start}&end=${end}`;
+	getAvailableFullRooms(locationId: number, date: string, start: string, end: string, recurrencePattern: string): Observable<Room[]> {
+		const url = `${this.apiUrl}/availability?locationId=${locationId}&date=${date}&start=${start}&end=${end}&recurrencePattern=${recurrencePattern}`;
 
 		return this.http.get<Room[]>(url).pipe(catchError(error => throwError(error)));
 	}
@@ -50,10 +51,12 @@ export class RoomService {
 	 * @param date - the date
 	 * @param start - the start time
 	 * @param end - the end time
+	 * @param amount - the amount
+	 * @param recurrencePattern - the recurrence pattern
 	 * @returns - An observable of the rooms array
 	 */
-	getAvailableWorkplacesInRooms(locationId: number, date: string, start: string, end: string): Observable<Room[]> {
-		const url = `${this.apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${start}&end=${end}`;
+	getAvailableWorkplacesInRooms(locationId: number, date: string, start: string, end: string, amount: number, recurrencePattern: string): Observable<Room[]> {
+		const url = `${this.apiUrl}/availability/workplaces?locationId=${locationId}&date=${date}&start=${start}&end=${end}&amount=${amount}&recurrencePattern=${recurrencePattern}`;
 		return this.http.get<Room[]>(url).pipe(catchError(error => throwError(error)));
 	}
 }
