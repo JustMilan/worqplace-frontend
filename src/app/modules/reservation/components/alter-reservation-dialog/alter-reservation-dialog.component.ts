@@ -89,6 +89,7 @@ export class AlterReservationDialogComponent implements OnInit {
 			date: this.selectedDate.toISOString().slice(0, 10),
 			startTime: this.selectedStartTime,
 			endTime: this.selectedEndTime,
+			employeeId: this.processedData.employeeId,
 			roomId: this.processedData.roomId,
 			workplaceAmount: this.processedData.workplaceAmount,
 			recurrence: {

@@ -115,6 +115,6 @@ export class ReservationService {
 	 * @param reservation {@link Reservation}
 	 */
 	updateReservation(reservation: Reservation): Observable<Reservation> {
-		return this.http.post<Reservation>(`${this.apiUrl}/update/${reservation.id}`, reservation, this.httpOptions)
+		return this.http.post<Reservation>(`${this.apiUrl}/update`, reservation, this.httpOptions)
 	}
 }
