@@ -42,7 +42,7 @@ export class ReservationComponent implements OnInit {
 	 * @param roomService - The room service
 	 * @param locationService - The location service
 	 * @param reservationService - The reservation service
-	 * @param dialog - The dialog from angular material dialog
+	 * @param dialog - The reservation-dialog from angular material reservation-dialog
 	 * @param notificationService - The notification service
 	 * @param uiService - The ui service
 	 *
@@ -234,6 +234,7 @@ export class ReservationComponent implements OnInit {
 			date: this.reservationResponse.date,
 			startTime: this.reservationResponse.time.start,
 			endTime: this.reservationResponse.time.end,
+			employeeId: null,
 			roomId: room.id,
 			recurrence: roomRecurrence
 		};
@@ -254,6 +255,7 @@ export class ReservationComponent implements OnInit {
 			startTime: this.reservationResponse.time.start,
 			endTime: this.reservationResponse.time.end,
 			roomId: room.id,
+			employeeId: null,
 			workplaceAmount: workplaceAmount,
 			recurrence: roomRecurrence
 		};

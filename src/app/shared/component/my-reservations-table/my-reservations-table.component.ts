@@ -179,7 +179,7 @@ export class MyReservationsTableComponent implements OnInit {
 					selectedReservation.startTime === result.reservation.startTime &&
 					selectedReservation.endTime === result.reservation.endTime &&
 					selectedReservation.recurrence.recurrencePattern === result.reservation.recurrence.recurrencePattern)) {
-					this.requestUpdateReservation(result);
+					this.requestUpdateReservation(result.reservation);
 				}
 			}
 		});

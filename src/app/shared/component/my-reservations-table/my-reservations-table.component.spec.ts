@@ -27,6 +27,7 @@ describe('MyReservationsTableComponent', () => {
 			startTime: '12:00',
 			endTime: '13:30',
 			roomId: 1,
+			employeeId: 1,
 			recurrence: {
 				active: false,
 				recurrencePattern: 'NONE'
@@ -37,6 +38,7 @@ describe('MyReservationsTableComponent', () => {
 			startTime: '12:00',
 			endTime: '13:30',
 			roomId: 1,
+			employeeId: 1,
 			recurrence: {
 				active: false,
 				recurrencePattern: 'NONE'
@@ -47,6 +49,7 @@ describe('MyReservationsTableComponent', () => {
 			startTime: '12:00',
 			endTime: '13:30',
 			roomId: 1,
+			employeeId: 1,
 			recurrence: {
 				active: false,
 				recurrencePattern: 'NONE'
