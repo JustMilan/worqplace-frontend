@@ -48,3 +48,6 @@ test-reports/
 
 # Test reports
 /reports/
+
+# stryker temp files
+/.stryker-tmp
