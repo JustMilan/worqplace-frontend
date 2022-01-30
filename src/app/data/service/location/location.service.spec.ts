@@ -51,6 +51,10 @@ describe('LocationService', () => {
 		expect(service).toBeTruthy();
 	});
 
+	it('should use the correct api url for the locations',  () =>  {
+		expect(apiUrl).toEqual('http://localhost:8080/locations');
+	});
+
 	it('should be able to retrieve locations from the API via GET', () => {
 
 		// Run the getLocations method and expect the response to match the expectations

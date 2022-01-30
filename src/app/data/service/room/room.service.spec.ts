@@ -70,6 +70,10 @@ describe('RoomService', () => {
 		expect(service).toBeTruthy();
 	});
 
+	it('should use the correct api url for the reservations',  () =>  {
+		expect(apiUrl).toEqual('http://localhost:8080/rooms');
+	});
+
 	it('should be able to retrieve all the available workplaces from the API via GET', () => {
 		// Run the getAvailableWorkplacesInRooms method and expect the response to match the expectations
 		// (when the observable resolves)

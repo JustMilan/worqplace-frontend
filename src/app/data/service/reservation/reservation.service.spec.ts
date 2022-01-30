@@ -67,6 +67,16 @@ describe('ReservationService', () => {
 		expect(service).toBeTruthy();
 	});
 
+	it('should use the correct api url for the reservations',  () =>  {
+		expect(apiUrl).toEqual('http://localhost:8080/reservations');
+	});
+
+	it('should have valid http options', () => {
+		expect(service.httpOptions).toBeDefined();
+		expect(service.httpOptions.headers).toBeDefined();
+		expect(service.httpOptions.headers.get('Content-Type')).toEqual('application/json');
+	});
+
 	it('should be able to retrieve all reservations by employeeId from the API via GET', () => {
 		// Run the getAllReservationsByEmployeeId method and expect the response to match the expectations
 		// (when the observable resolves)
