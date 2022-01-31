@@ -45,6 +45,11 @@ describe('LoginPageComponent', () => {
 		fixture.detectChanges();
 	});
 
+	afterEach(() => {
+		localStorage.removeItem('token');
+		localStorage.removeItem('username');
+	})
+
 	it('should create ', () => {
 		expect(component).toBeTruthy();
 	});

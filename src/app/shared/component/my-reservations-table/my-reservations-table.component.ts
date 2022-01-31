@@ -167,19 +167,19 @@ export class MyReservationsTableComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
+			result = result.data.reservation;
+
 			// 	check if there are any changed values
 			/* istanbul ignore else */
-			if (result != undefined) {
-				result = JSON.parse(JSON.stringify(result));
-
+			if (result) {
 				// Check if values have changed
 				/* istanbul ignore next */
-				if (!(selectedReservation.id === result.reservation.id &&
-					selectedReservation.date === result.reservation.date &&
-					selectedReservation.startTime === result.reservation.startTime &&
-					selectedReservation.endTime === result.reservation.endTime &&
-					selectedReservation.recurrence.recurrencePattern === result.reservation.recurrence.recurrencePattern)) {
-					this.requestUpdateReservation(result.reservation);
+				if (!(selectedReservation.id === result.id &&
+					selectedReservation.date === result.date &&
+					selectedReservation.startTime === result.startTime &&
+					selectedReservation.endTime === result.endTime &&
+					selectedReservation.recurrence.recurrencePattern === result.recurrence.recurrencePattern)) {
+					this.requestUpdateReservation(result);
 				}
 			}
 		});

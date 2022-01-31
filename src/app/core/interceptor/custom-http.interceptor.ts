@@ -29,7 +29,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 			// Add session header to the request.
 			req = req.clone({
 				setHeaders: {
-					Authorization: localStorage.getItem('token') ?? ''
+					Authorization: localStorage.getItem('token')!
 				}
 			})
 		}
