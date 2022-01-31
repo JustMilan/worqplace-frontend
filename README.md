@@ -88,6 +88,22 @@ To Do In progress Done
 We have added all the different types of User Stories located in our backlog, however, each different User Story also
 has Sub Tasks related to that particular User Story. This way, we can assign different team members to the sub tasks.
 
+## Folder Structure
+
+In this project we use the standard Angular Folder Structure as defined here:
+
+https://angular-folder-structure.readthedocs.io/en/latest/ 
+
+By doing this, we ensure our code is easily findable and more understandable for contributors that are already familiar with Angular.
+
+In the src/app folder you can find various subsections, such as:
+- [Core Section](https://git.quintor.nl/SG-HogeschoolUtrecht/worqplace-frontend/-/tree/development/src/app/core)
+- [Data Section](https://git.quintor.nl/SG-HogeschoolUtrecht/worqplace-frontend/-/tree/development/src/app/data)
+- [Layout Section](https://git.quintor.nl/SG-HogeschoolUtrecht/worqplace-frontend/-/tree/development/src/app/layout)
+- [Modules Section](https://git.quintor.nl/SG-HogeschoolUtrecht/worqplace-frontend/-/tree/development/src/app/modules)
+- [Shared Section](https://git.quintor.nl/SG-HogeschoolUtrecht/worqplace-frontend/-/tree/development/src/app/shared)
+
+
 ## Git
 
 This has been discussed many times by other people, thus it is only natural to link a clear and concise article about
