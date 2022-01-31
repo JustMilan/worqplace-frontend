@@ -7,7 +7,7 @@
 - [Team](#team)
 - [Git Strategy](#git-strategy)
 - [Agile](#agile)
-- [Coding Standards](#coding-standards)
+- [Folder Structure](#folder-structure)
 - [Git](#git)
 
 ## Documentation
