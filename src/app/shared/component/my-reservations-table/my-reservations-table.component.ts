@@ -167,7 +167,7 @@ export class MyReservationsTableComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			result = result.data.reservation;
+			result = result.reservation;
 
 			// 	check if there are any changed values
 			/* istanbul ignore else */
