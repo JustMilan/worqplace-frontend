@@ -98,12 +98,6 @@ describe('MyReservationsTableComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	describe('getting data', () => {
-		beforeEach(() => {
-
-		});
-	});
-
 	it('should call getAllReservationsByEmployeeId method', () => {
 		let spy = spyOn(component, 'getAllReservationsByEmployeeId').and.callThrough();
 

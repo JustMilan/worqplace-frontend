@@ -2,9 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { Reservation } from "../../../../../data/interface/Reservation";
 import { ReservationService } from "../../../../../data/service/reservation/reservation.service";
-import { Subscription } from "rxjs";
-import { UiService } from "../../../../reservation/service/ui.service";
-import { Router } from "@angular/router";
 import { LocationService } from "../../../../../data/service/location/location.service";
 import { Location } from "../../../../../data/interface/Location";
 import { MatSelectChange } from "@angular/material/select";
@@ -24,18 +21,8 @@ export class AdminLocationReservationsTableComponent implements OnInit {
 	locations: Location[];
 	location: number;
 
-	showAddTask: boolean;
-	subscription: Subscription;
-
 	constructor(private reservationService: ReservationService,
-				private locationService: LocationService,
-				private uiService: UiService, private router: Router) {
-
-		this.subscription = this.uiService.onToggle().subscribe(value => this.showAddTask = value);
-	}
-
-	hasRoute(route: string) {
-		return this.router.url === route;
+				private locationService: LocationService) {
 	}
 
 	getAllReservationsByLocationId(locationId: number) {
