@@ -13,6 +13,7 @@
       <mat-form-field appearance="fill">
         <mat-label class="location-label">Locatie</mat-label>
         <mat-select class="location-filter" [(value)]="location" (selectionChange)="refreshLocation($event)">
+          <mat-option>- Geen Locatie -</mat-option>
           <mat-option *ngFor="let loc of locations" [value]="loc.id">
             {{loc.name}}
           </mat-option>
