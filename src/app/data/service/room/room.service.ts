@@ -14,7 +14,7 @@ import {Room} from "../../interface/Room";
 export class RoomService {
 	apiUrl = `${environment.baseUrl}/rooms`;
 
-	private httpOptions = {
+	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json'
 		})

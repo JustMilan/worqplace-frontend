@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import {Router} from "@angular/router";
 
 describe('AppComponent', () => {
 	let fixture: ComponentFixture<AppComponent>;
 	let app: AppComponent;
+	let routerMock = { navigate: jasmine.createSpy('navigate') };
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [
-				RouterTestingModule
-			],
-			declarations: [
-				AppComponent
-			],
+			imports: [],
+			declarations: [ AppComponent ],
+			providers: [ { provide: Router, useValue: { url: '/login' } } ]
 		}).compileComponents();
 	});
 
@@ -32,11 +30,19 @@ describe('AppComponent', () => {
 		expect(app.title).toEqual('worqplace');
 	});
 
-	it(`should call hasRoute method`, () => {
+	it(`should return true when hasRoute method is called on the correct route`, () => {
 		let spy = spyOn(app, 'hasRoute').and.callThrough();
-
-		app.hasRoute('/login');
+		let hasRoute = app.hasRoute('/login')
 
 		expect(spy).toHaveBeenCalled();
+		expect(hasRoute).toBeTruthy();
+	});
+
+	it(`should return false when hasRoute method is called on the wrong route`, () => {
+		let spy = spyOn(app, 'hasRoute').and.callThrough();
+		let hasRoute = app.hasRoute('/reserve')
+
+		expect(spy).toHaveBeenCalled();
+		expect(hasRoute).toBeFalsy();
 	});
 });

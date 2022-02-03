@@ -13,7 +13,7 @@ import { Reservation } from "../../interface/Reservation";
 export class ReservationService {
 	apiUrl = `${environment.baseUrl}/reservations`;
 
-	private httpOptions = {
+	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json',
 		})

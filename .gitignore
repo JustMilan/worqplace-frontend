@@ -48,3 +48,7 @@ test-reports/
 
 # Test reports
 /reports/
+
+# Stryker files
+/.stryker-tmp
+/stryker.log

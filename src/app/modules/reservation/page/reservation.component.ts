@@ -93,7 +93,9 @@ export class ReservationComponent implements OnInit {
 	getAvailableRooms(locationId: number, date: string, start: string, end: string, recurrence: Recurrence): void {
 		this.roomService.getAvailableFullRooms(locationId, date, start, end, recurrence.recurrencePattern)
 			.subscribe(rooms => {
-				this.rooms = rooms
+				if (rooms) {
+					this.rooms = rooms
+				}
 
 				if (this.rooms.length == 0) {
 					this.notificationService.handleWarning("There are no rooms available!")
@@ -115,7 +117,9 @@ export class ReservationComponent implements OnInit {
 								  recurrence: Recurrence): void {
 		this.roomService.getAvailableWorkplacesInRooms(locationId, date, start, end, amount, recurrence.recurrencePattern)
 			.subscribe(rooms => {
-				this.rooms = rooms
+				if (rooms) {
+					this.rooms = rooms
+				}
 
 				if (this.rooms.length == 0) {
 					this.notificationService.handleWarning("There are no workplaces available!")

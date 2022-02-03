@@ -26,6 +26,8 @@ describe('AuthenticationService', () => {
 	afterEach(() => {
 		// After every test, check that there are no more pending requests.
 		httpMock.verify();
+
+		localStorage.removeItem('token');
 	});
 
 	it('should be created', () => {
@@ -55,7 +57,6 @@ describe('AuthenticationService', () => {
 	it('should return false if not authenticated with token', () => {
 		let spy = spyOn(authenticationService, 'isAuthenticated').and.callThrough();
 
-		localStorage.removeItem('token');
 		let isAuthenticated = authenticationService.isAuthenticated();
 
 		expect(spy).toHaveBeenCalled();

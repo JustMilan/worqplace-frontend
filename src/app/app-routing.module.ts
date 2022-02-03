@@ -6,7 +6,7 @@ import { LoginComponent } from "./modules/login/page/login.component";
 import { AuthGuard } from "./core/guard/auth.guard";
 import { AdminAuthGuard } from "./core/guard/admin-auth.guard";
 
-const routes: Routes = [
+export const routes: Routes = [
 	{path: '', redirectTo: '/reserve', pathMatch: 'full'},
 	{path: 'reserve', component: ReservationComponent, canActivate: [AuthGuard]},
 	{
