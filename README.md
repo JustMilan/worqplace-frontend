@@ -4,6 +4,7 @@
 
 - [Documentation](#documentation)
     - [Angular](#Angular)
+    - [Transfer Documentation](#transfer-documentation)
 - [Team](#team)
 - [Git Strategy](#git-strategy)
 - [Agile](#agile)
@@ -43,6 +44,10 @@ package that implements end-to-end testing capabilities.
 
 To get more help on the Angular CLI use `ng help` or go check out
 the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+### Transfer Documentation
+The transfer documentation can be found here [Transfer document](development/Overdrachts%20document.pdf)
+
 
 ## Team
 
@@ -92,7 +97,7 @@ has Sub Tasks related to that particular User Story. This way, we can assign dif
 
 In this project we use the standard Angular Folder Structure as defined here:
 
-https://angular-folder-structure.readthedocs.io/en/latest/ 
+https://angular-folder-structure.readthedocs.io/en/latest/
 
 By doing this, we ensure our code is easily findable and more understandable for contributors that are already familiar with Angular.
 
